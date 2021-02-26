@@ -1,5 +1,16 @@
-<header class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-body border-bottom shadow-sm">
-  <p class="h5 my-0 me-md-auto fw-normal">Social Network</p>
-  <nav class="my-2 my-md-0 me-md-3"> </nav>
-  <a class="btn btn-outline-primary" href="#">Sign up</a>
-</header>
+<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-body border-bottom shadow-sm">
+  <h5 class="my-0 me-md-auto font-weight-normal">Social Network</h5>
+
+  <% if account_signed_in? %>
+    <nav class="my-2 my-md-0 mr-md-3">
+      <%= link_to 'My Profile', '#', class: 'p-2 text-dark' %>
+      <%= link_to 'Friends', '#', class: 'p-3 text-dark' %>
+    </nav>
+    
+    <%= link_to 'Sign Out', destroy_account_session_path, method: :delete, class: 'btn btn-secondary' %>
+    <% else %>
+
+    <%= link_to 'Sign In', new_account_session_path, class: 'btn btn-lg btn-primary me-3' %>
+    <%= link_to 'Sign Up', new_account_registration_path, class: 'btn btn-secondary btn-lg' %>
+  <% end %>
+</div>
