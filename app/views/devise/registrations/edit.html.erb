@@ -1,7 +1,7 @@
 <div class="container">
   <div class="row">
     <div class="col-lg-6 mt-4">
-      <h2>Edit Account <%= link_to "Back to Main Page", root_path, class: 'float-right btn btn-secondary' %></h2>
+      <h2>Edit user <%= link_to "Back to Main Page", root_path, class: 'float-right btn btn-secondary' %></h2>
 
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
         <%= render "devise/shared/error_messages", resource: resource %>
@@ -42,7 +42,7 @@
         </div>
       <% end %>
 
-      <p class="mt-2">What to close your account?<%= link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'ms-1' %></p>
+      <p class="mt-2">What to close your user?<%= link_to "Cancel my user", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'ms-1' %></p>
     </div>
   </div>
 </div>
