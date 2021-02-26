@@ -3,7 +3,7 @@
 
   <% if account_signed_in? %>
     <nav class="my-2 my-md-0 mr-md-3">
-      <%= link_to 'My Profile', '#', class: 'p-2 text-dark' %>
+      <%= link_to 'My Profile', edit_account_registration_path, class: 'p-2 text-dark' %>
       <%= link_to 'Friends', '#', class: 'p-3 text-dark' %>
     </nav>
     
