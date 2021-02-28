@@ -3,3 +3,6 @@ AllCops:
 
 Style/Documentation:
   Enabled: false
+
+Style/IdenticalConditionalBranches:
+  Enabled: false
