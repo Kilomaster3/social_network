@@ -2,7 +2,7 @@
 
 class Account::ProfilesController < AccountBaseAuthController
   def show
-    @account = Account.find(params[:id])
+    @posts = current_account.posts
   end
 
   def new
