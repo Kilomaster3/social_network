@@ -1,12 +1,21 @@
 class ApplicationController < ActionController::Base
-  before_action :configure_devise, if: :devise_controller?
 
-  def after_sign_in_path_for(resource)
-    stored_location_for(resource) || dashboard_index_path
+  helper_method :resource_name, :resource, :devise_mapping, :resource_class
+
+  def resource_name
+    :account
   end
-  private
 
-  def configure_devise
-    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, images: [] ])
+  def resource
+    @resource ||= Account.new
+  end
+
+  def resource_class
+    Account
+  end
+
+  def devise_mapping
+    @devise_mapping ||= Devise.mappings[:account]
   end
 end
+

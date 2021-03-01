@@ -93,6 +93,7 @@ GEM
     ffi (1.14.2)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    gravatar_image_tag (1.2.0)
     i18n (1.8.9)
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.2)
@@ -257,6 +258,7 @@ DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
   devise
+  gravatar_image_tag
   jbuilder (~> 2.7)
   listen (~> 3.2)
   pg (>= 0.18, < 2.0)

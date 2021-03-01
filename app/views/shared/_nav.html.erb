@@ -4,9 +4,9 @@
   <% if account_signed_in? %>
     <nav class="my-2 my-md-0 mr-md-3">
       <%= link_to 'Friends', '#', class: 'text-dark' %>
-      <%= link_to 'Settings', edit_account_registration_path, class: 'p-4 text-dark' %>
+      <%= link_to 'Settings', edit_account_profile_path(current_account), class: 'p-4 text-dark' %>
     </nav>
-    
+
     <%= link_to 'Sign Out', destroy_account_session_path, method: :delete, class: 'btn btn-secondary' %>
     <% else %>
 
