@@ -5,4 +5,6 @@ Rails.application.routes.draw do
   namespace :account do
     resources :profiles
   end
+  resources :posts
+  get 'tags/:tag', to: 'posts#index', as: :tag
 end
