@@ -10,7 +10,7 @@ class Account::ProfilesController < AccountBaseAuthController
   end
 
   def update
-    if current_account.update_attributes(user_params)
+    if current_account.update_attributes(account_params)
       flash[:success] = 'Profile complete'
       redirect_url = account_profile_path(current_account)
     else
@@ -25,7 +25,7 @@ class Account::ProfilesController < AccountBaseAuthController
 
   private
 
-  def user_params
-    params.require(:account).permit(:email, :password, :password_confirmation, :first_name, :last_name, :avatar)
+  def account_params
+    params.require(:account).permit(:email, :first_name, :last_name, :avatar)
   end
 end
