@@ -23,6 +23,6 @@ class PostsController < AccountBaseAuthController
   private
 
   def post_params
-    params.require(:post).permit(:title, :content, :tag_list, :tag, { tag_ids: [] }, :tag_ids)
+    params.require(:post).permit(:title, :content, :tag_list, :tag, { tag_ids: [] }, :tag_ids).merge(account: current_account)
   end
 end
