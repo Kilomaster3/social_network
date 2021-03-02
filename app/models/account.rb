@@ -5,7 +5,7 @@ class Account < ApplicationRecord
          :recoverable, :rememberable, :validatable,
          :confirmable
 
-  
+
   has_one_attached :avatar
   has_many :posts
   mount_uploader :avatar, AvatarUploader
