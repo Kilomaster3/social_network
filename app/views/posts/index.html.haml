@@ -1,0 +1,11 @@
+.col-md-8.offset-2
+  %h1.text-center Blog Posts
+  = link_to 'Add a Blog Post', new_post_path, class: 'btn btn-primary'
+  %br/
+  - @posts.each do |post|
+    %h2= post.title
+    %p= truncate(post.content, length: 50)
+    %p
+      %small
+        Tags: #{raw post.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ')}
+    %p= link_to "Read Post", post_path(post)
