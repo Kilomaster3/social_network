@@ -10,7 +10,7 @@
             .col-sm-4
               = f.file_field :avatar
               = image_tag @account.avatar.url(:thumb) if @account.avatar?
-        .form-group.mb-3
+        .form-group.mb-3.is-valid
           = f.label :first_name
           = f.text_field :first_name, autofocus: true, class: 'form-control'
         .form-group.mb-3

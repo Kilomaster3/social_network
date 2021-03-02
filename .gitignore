@@ -40,3 +40,6 @@ yarn-debug.log*
 
 # Ignore public folder
 public/uploads
+
+# Ignore package-log
+package-lock.json
