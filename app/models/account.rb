@@ -8,5 +8,7 @@ class Account < ApplicationRecord
 
   has_one_attached :avatar
   has_many :posts
+  has_many :likes, dependent: :destroy
+  has_many :dislikes
   mount_uploader :avatar, AvatarUploader
 end
