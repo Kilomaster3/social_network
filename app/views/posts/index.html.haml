@@ -13,3 +13,5 @@
           = render partial: 'posts/comment', collection: post.comments.reverse
           = button_to "Like #{post.likes.count}", post_likes_path(post), method: :post
           = button_to ("Dislike #{post.dislikes.count}"), post_dislike_index_path(post), method: :post
+          = button_to 'Delete', post, method: :delete
+          = button_to 'Edit', edit_post_path(post)
