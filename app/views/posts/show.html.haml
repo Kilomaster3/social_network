@@ -1,0 +1,5 @@
+.col-md-8.offset-2
+  %h1= @post.title
+  %p= @post.content
+= button_to "Like #{@post.likes.count}", post_likes_path(@post), method: :post
+= button_to "Dislike #{@post.dislikes.count}", post_dislike_index_path(@post), method: :post
