@@ -1,0 +1,15 @@
+.modal-body
+  - object.each do |n|
+    - if n.notice_type == "friendRequest"
+      - user = notification_find(n, 'friendRequest')
+      = "Friend Request sent from #{user.full_name}"
+    - if n.notice_type == "comment"
+      = link_to post_path(notification_find(n, 'comment')) do
+        Someone commented on your post
+    - if n.notice_type == "like-post"
+      = link_to post_path(notification_find(n, 'like-post')) do
+        Someone liked your post
+    - if n.notice_type == "like-comment"
+      = link_to post_path(notification_find(n, 'like-comment')) do
+        Someone liked your comment under this post
+    %br/

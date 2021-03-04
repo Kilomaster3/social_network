@@ -1,13 +1,63 @@
-.row.mb-3.text-center
-  .col
-    .card.mb-4.shadow-sm
-      .card-header
-        %h4.my-0.font-weight-normal News
-      .card-body
-  .col
-    .card.mb-4.shadow-sm
-      .card-header
-        %h4.my-0.font-weight-normal Sign Up Today
-      .card-body
-        %p Click here to get start
-        = link_to 'Sign Up Now', new_account_registration_path, class: "btn btn-lg btn-block btn-primary"
+- if account_signed_in?
+  %h2.text-center Who do you want To have Friends?
+  .container.col-md-8
+    - unless @friends.empty?
+      .card.my-5.py-3.bg-light.shadow
+        %h2.center.pb-3.text-dark.border-bottom My Friends
+        - @friends.each do |account|
+          .d-flex.align-items-center.mb-2.border-bottom.py-2
+            .col-auto.p-0.pl-5.text-capitalize
+              = link_to account_profiles_path(account) do
+                = account.full_name
+            .col-auto.p-0.px-1 |
+              .col-auto.p-0
+              %button.btn.btn-friend.shadow
+                Friend
+    - unless @pending_request.empty?
+      .card.my-5.py-3.bg-light.shadow
+        %h2.center.pb-3.text-dark.border-bottom Sent Friend Requests
+        - @pending_request.each do |account|
+          .d-flex.align-items-center.mb-2.border-bottom.py-2
+            .col-auto.p-0.pl-5.text-capitalize
+              = link_to account_profiles_path(account) do
+                = account.full_name
+            .col-auto.p-0.px-1 |
+              .col-auto.p-0
+              %button.btn.btn-secondary.shadow{disabled: "disabled"}
+                Friend Request pending...
+          %br/
+          %br/
+    - unless @friend_requests.empty?
+      .card.my-5.py-3.bg-light.shadow
+        %h2.center.pb-3.text-dark.border-bottom Pending Friend Requests
+        - @friend_requests.each do |account|
+          .d-flex.align-items-center.mb-2.border-bottom.py-2
+            .text-capitalize
+              = link_to account_profiles_path(account) do
+                = account.full_name
+            .col-auto.p-0.px-1 |
+              .col-auto.p-0
+              %button.btn.btn-pending.shadow{"data-target" => "#decisionModal", "data-toggle" => "modal"}
+                Pending Friend Request...
+          = render 'friendships/decisionModal', object: user
+          %br/
+          %br/
+    .card.my-5.py-3.bg-light.shadow
+      %h2.center.pb-3.text-dark.border-bottom Other Users
+      - @accounts.each do |account|
+        - if current_account.id != account.id
+          - unless possible_friend?(account)
+            .d-flex.align-items-center.mb-2.border-bottom.pb-2
+              .text-dark
+                = link_to account_profiles_path(account) do
+                  = account.full_name
+              .col-auto.p-0.px-1 |
+                .col-auto.p-0
+                = link_to account_friendships_path(account), method: :post do
+                  %button.btn.btn-user.shadow
+                    Send Friend Request?
+            %br/
+            %br/
+- else
+  = render 'public/home'
+

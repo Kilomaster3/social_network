@@ -2,7 +2,7 @@
   %h5.my-0.me-md-auto.font-weight-normal Social Network
   - if account_signed_in?
     %nav.my-2.my-md-0.mr-md-3
-      = link_to 'Friends', '#', class: 'text-dark'
+      = link_to 'Friends', account_profiles_path, class: 'text-dark'
       = link_to 'Settings', edit_account_profile_path(current_account), class: 'p-4 text-dark'
     = link_to 'Posts', posts_path, class: 'p-2 text-dark'
     = link_to 'Sign Out', destroy_account_session_path, method: :delete, class: 'btn btn-secondary'
