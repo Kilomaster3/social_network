@@ -5,6 +5,12 @@ Rails.application.routes.draw do
 
   namespace :account do
     resources :profiles
+    resource :friendships, only: %i[create] do
+      collection do
+        get 'accept_friend'
+        get 'decline_friend'
+      end
+    end
   end
 
   resources :posts do
