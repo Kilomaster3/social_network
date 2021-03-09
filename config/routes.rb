@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :accounts
+  devise_for :accounts, controllers: { omniauth_callbacks: 'account/omniauth_callbacks' }
   root to: 'public#home'
   resources :dashboard, only: %i[index create]
 

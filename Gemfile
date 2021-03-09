@@ -26,7 +26,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'image_processing', '~> 1.2'
 
 gem 'aws-sdk-s3', require: false
-gem 'devise'
+gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
 gem 'gravatar_image_tag'
 
 gem 'carrierwave', '~> 2.0'
@@ -34,12 +34,17 @@ gem 'haml'
 gem 'mini_magick'
 gem 'simple_form'
 
+gem 'omniauth'
+gem 'omniauth-facebook'
+gem 'omniauth-rails_csrf_protection'
+
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.2', require: false
+gem 'bootsnap', require: false
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'dotenv-rails', groups: [:development, :test]
   gem 'pry'
   gem 'rspec-rails', '~> 4.0.2'
   gem 'rubocop-rails'
