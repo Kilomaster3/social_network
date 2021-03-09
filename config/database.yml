@@ -80,6 +80,6 @@ test:
 #
 production:
   <<: *default
-  database: social_network_production
-  username: social_network
-  password: <%= ENV['SOCIAL_NETWORK_DATABASE_PASSWORD'] %>
+  database: dk3967sttsvrq
+  username: qupqfimzgdzmmi
+  password: 1c6590a492c7b182f873afd78639f58099737a9a713c8f9e9d468249546b162d
