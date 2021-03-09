@@ -5,7 +5,7 @@ class Account < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
-         :confirmable
+         :confirmable, :omniauthable, omniauth_providers: %i[facebook]
 
   has_one_attached :avatar
   has_many :posts
@@ -49,5 +49,23 @@ class Account < ApplicationRecord
       our_posts << p
     end
     our_posts
+  end
+
+  def self.from_omniauth(auth)
+    where(provider: auth.provider, uid: auth.uid).first_or_create do |account|
+      account.email = auth.info.email
+      account.password = Devise.friendly_token[0, 20]
+      account.first_name = auth.info.first_name
+      account.last_name = auth.info.last_name
+      account.skip_confirmation!
+    end
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |account|
+      if (data = session['devise.facebook_data'] && session['devise.facebook_data']['extra']['raw_info'])
+        account.email = data['email'] if account.email.blank?
+      end
+    end
   end
 end
