@@ -39,7 +39,7 @@
               .col-auto.p-0
               %button.btn.btn-pending.shadow{"data-target" => "#decisionModal", "data-toggle" => "modal"}
                 Pending Friend Request...
-          = render 'friendships/decisionModal', object: user
+          = render 'friendships/decisionModal', object: account
           %br/
           %br/
     .card.my-5.py-3.bg-light.shadow
@@ -48,14 +48,12 @@
         - if current_account.id != account.id
           - unless possible_friend?(account)
             .d-flex.align-items-center.mb-2.border-bottom.pb-2
-              .text-dark
+              %h4.text-dark.border-bottom
                 = link_to account_profiles_path(account) do
                   = account.full_name
               .col-auto.p-0.px-1 |
                 .col-auto.p-0
-                = link_to account_friendships_path(account), method: :post do
-                  %button.btn.btn-user.shadow
-                    Send Friend Request?
+                = button_to 'Add to Friends', account_friendships_path(account_id: account.id), method: :post, class: 'btn btn-shadow'
             %br/
             %br/
 - else

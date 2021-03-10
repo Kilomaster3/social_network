@@ -1,6 +1,10 @@
 # frozen_string_literal: true
 
 class Account::ProfilesController < AccountBaseAuthController
+  def index
+    @account = current_account
+  end
+
   def show
     @posts = current_account.posts
   end

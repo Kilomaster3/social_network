@@ -2,7 +2,6 @@ class Account::FriendshipsController < ApplicationController
   include FriendshipsHelper
   before_action :find_account
   before_action :find_friendship, only: :create
-  before_action :check_accept?
 
   def create
     if send?
@@ -48,7 +47,7 @@ class Account::FriendshipsController < ApplicationController
   end
 
   def send?
-    current_account.id == params[:account_id] || friend_request_sent? || friend_request_received?
+    current_account.id != params[:account_id] || friend_request_sent? || friend_request_received?
   end
 
   def check_accept?
