@@ -37,20 +37,6 @@ class Account < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  def friends_and_own_posts
-    myfriends = friends
-    our_posts = []
-    myfriends.each do |f|
-      f.posts.each do |p|
-        our_posts << p
-      end
-    end
-    posts.each do |p|
-      our_posts << p
-    end
-    our_posts
-  end
-
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |account|
       account.email = auth.info.email

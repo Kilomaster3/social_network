@@ -2,7 +2,8 @@
 
 class Account::ProfilesController < AccountBaseAuthController
   def index
-    @account = current_account
+    @account ||= current_account
+    @friends = current_account.friends
   end
 
   def show

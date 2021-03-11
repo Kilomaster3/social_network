@@ -1,18 +1,6 @@
 - if account_signed_in?
   %h2.text-center Who do you want To have Friends?
   .container.col-md-8
-    - unless @friends.empty?
-      .card.my-5.py-3.bg-light.shadow
-        %h2.center.pb-3.text-dark.border-bottom My Friends
-        - @friends.each do |account|
-          .d-flex.align-items-center.mb-2.border-bottom.py-2
-            .col-auto.p-0.pl-5.text-capitalize
-              = link_to account_profiles_path(account) do
-                = account.full_name
-            .col-auto.p-0.px-1 |
-              .col-auto.p-0
-              %button.btn.btn-friend.shadow
-                Friend
     - unless @pending_request.empty?
       .card.my-5.py-3.bg-light.shadow
         %h2.center.pb-3.text-dark.border-bottom Sent Friend Requests
