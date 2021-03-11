@@ -30,6 +30,7 @@ gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
 gem 'gravatar_image_tag'
 
 gem 'carrierwave', '~> 2.0'
+gem 'faker'
 gem 'haml'
 gem 'mini_magick'
 gem 'simple_form'
