@@ -8,8 +8,6 @@ class Account::FriendshipsController < ApplicationController
       # Установить I18n и вынести строки
       if @friendship.save
         flash[:success] = 'Friend Request Sent!'
-        @notification = new_notification(@account, current_account.id, 'friendRequest')
-        @notification.save
       else
         flash[:danger] = 'Friend Request Failed!'
       end
