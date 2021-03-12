@@ -20,4 +20,5 @@ Rails.application.routes.draw do
   end
 
   get 'tags/:tag', to: 'posts#index', as: :tag
+  get '/saw_notification', to: 'accounts#saw_notification', as: 'saw_notice'
 end
