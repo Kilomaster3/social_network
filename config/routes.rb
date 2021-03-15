@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :chat_messages
+  resources :messages
   devise_for :accounts, controllers: { omniauth_callbacks: 'account/omniauth_callbacks' }
   root to: 'public#home'
   resources :dashboard, only: %i[index create]

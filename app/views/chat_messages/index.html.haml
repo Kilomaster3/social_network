@@ -1,0 +1,22 @@
+%h1 Messages
+.row
+  .col-12.col-md-3
+    .mb-3
+      = link_to new_chat_message_path, class: "btn btn-primary" do
+        Create a chat
+    - if @chats.present?
+      %nav.nav.flex-column
+        - @chats.each do |chat|
+          = link_to chat.message.name, chat_messages_path(chat), class: "nav-link room-nav-link"
+    - else
+      .text-muted
+        The are no rooms
+  .col
+    .alert.alert-primary
+      %h4.alert-heading
+        Welcome to the RailsChatTutorial!
+      %p
+        We need to talk.
+      %hr/
+      %p
+        You can create or join a room from the sidebar.
