@@ -6,7 +6,16 @@
   .col
     .chat
       - @chat_messages.each do |chat_message|
-        = chat_message
+        .chat-message-container
+          .row.no-gutters
+            .col-auto.text-center
+            .col
+              .message-content
+                %p.mb-1
+                  = chat_message.message
+                .text-right
+                  %small
+                    = chat_message.created_at
     = simple_form_for @chat_message, remote: true do |form|
       .input-group.mb-3
         = form.input :message, as: :string, |

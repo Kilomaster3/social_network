@@ -93,11 +93,11 @@ ActiveRecord::Schema.define(version: 2021_03_16_074039) do
 
   create_table "room_messages", force: :cascade do |t|
     t.bigint "room_id", null: false
-    t.bigint "accounts_id", null: false
+    t.bigint "account_id", null: false
     t.text "message"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["accounts_id"], name: "index_room_messages_on_accounts_id"
+    t.index ["account_id"], name: "index_room_messages_on_account_id"
     t.index ["room_id"], name: "index_room_messages_on_room_id"
   end
 
@@ -131,7 +131,7 @@ ActiveRecord::Schema.define(version: 2021_03_16_074039) do
   add_foreign_key "likes", "accounts"
   add_foreign_key "likes", "posts"
   add_foreign_key "notifications", "accounts"
-  add_foreign_key "room_messages", "accounts", column: "accounts_id"
+  add_foreign_key "room_messages", "accounts"
   add_foreign_key "room_messages", "rooms"
   add_foreign_key "taggings", "posts"
   add_foreign_key "taggings", "tags"
