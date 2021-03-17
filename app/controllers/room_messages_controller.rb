@@ -6,6 +6,7 @@ class RoomMessagesController < ApplicationController
     @chart_message = RoomMessage.create(account: current_account,
                                         room: @chat,
                                         message: params.dig(:room_message, :message))
+    RoomChanel.broadcast_to @chat, @chart_message
   end
 
   private
