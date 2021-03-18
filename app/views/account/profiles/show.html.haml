@@ -1,0 +1,28 @@
+.container
+  .main-body
+    - @accounts.each do |account|
+      .row.gutters-sm
+        .col-md-4.mb-3
+          .card
+            .card-body
+              .d-flex.flex-column.align-items-center.text-center
+                %img.rounded-circle{alt: "Admin", src: "https://bootdey.com/img/Content/avatar/avatar7.png", width: "150"}/
+                .mt-3
+                  %h4
+                    = account.full_name
+                  = link_to "Message", rooms_path, class: 'btn btn-outline-primary'
+                  = link_to "Edit Account", edit_account_profile_path(current_account), class: 'btn btn-outline-primary'
+        .col-md-8
+          .card.mb-3
+            .card-body
+              .row
+                .col-sm-3
+                  %h6.mb-0 Full Name
+                .col-sm-9.text-secondary
+                  = account.full_name
+              %hr/
+              .row
+                .col-sm-3
+                  %h6.mb-0 Email
+                .col-sm-9.text-secondary
+                  = account.email

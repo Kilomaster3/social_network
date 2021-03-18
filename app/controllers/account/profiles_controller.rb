@@ -7,7 +7,7 @@ class Account::ProfilesController < AccountBaseAuthController
   end
 
   def show
-    @posts = current_account.posts
+    @accounts = Account.where.not(id: current_account.id)
   end
 
   def new
