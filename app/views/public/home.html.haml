@@ -33,17 +33,16 @@
     .card.my-5.py-3.bg-light.shadow
       %h2.center.pb-3.text-dark.border-bottom Other Users
       - @accounts.each do |account|
-        - if current_account.id != account.id
-          - unless possible_friend?(account)
-            .d-flex.align-items-center.mb-2.border-bottom.pb-2
-              %h4.text-dark.border-bottom
-                = link_to account_profiles_path(account) do
-                  = account.full_name
-              .col-auto.p-0.px-1 |
-                .col-auto.p-0
-                = button_to 'Add to Friends', account_friendships_path(account_id: account.id), method: :post, class: 'btn btn-shadow'
-            %br/
-            %br/
+        - unless possible_friend?(account)
+          .d-flex.align-items-center.mb-2.border-bottom.pb-2
+            %h4.text-dark.border-bottom
+              = link_to account_profile_path(account) do
+                = account.full_name
+            .col-auto.p-0.px-1 |
+              .col-auto.p-0
+              = button_to 'Add to Friends', account_friendships_path(account_id: account.id), method: :post, class: 'btn btn-shadow'
+          %br/
+          %br/
 - else
   = render 'public/home'
 
