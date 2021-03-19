@@ -35,6 +35,7 @@ gem 'haml'
 gem 'mini_magick'
 gem 'simple_form'
 
+gem 'cable_ready'
 gem 'redis'
 
 gem 'omniauth'

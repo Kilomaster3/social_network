@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   root to: 'public#home'
   resources :dashboard, only: %i[index create]
 
+  resources :messages, only: %i[index create]
   namespace :account do
     resources :profiles
     resource :friendships, only: %i[create] do

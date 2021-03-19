@@ -10,6 +10,7 @@
                 .mt-3
                   %h4
                     = account.full_name
+                  = link_to 'Messages', messages_path, class: 'btn btn-outline-primary'
                   = link_to "Edit Account", edit_account_profile_path(current_account), class: 'btn btn-outline-primary'
         .col-md-8
           .card.mb-3
