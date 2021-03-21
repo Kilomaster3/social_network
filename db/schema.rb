@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_12_071826) do
+ActiveRecord::Schema.define(version: 2021_03_19_100703) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -74,6 +74,14 @@ ActiveRecord::Schema.define(version: 2021_03_12_071826) do
     t.index ["post_id"], name: "index_likes_on_post_id"
   end
 
+  create_table "messages", force: :cascade do |t|
+    t.text "body"
+    t.bigint "account_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_messages_on_account_id"
+  end
+
   create_table "notifications", force: :cascade do |t|
     t.integer "notice_id"
     t.string "notice_type"
@@ -113,6 +121,7 @@ ActiveRecord::Schema.define(version: 2021_03_12_071826) do
   add_foreign_key "friendships", "accounts", column: "sent_to_id"
   add_foreign_key "likes", "accounts"
   add_foreign_key "likes", "posts"
+  add_foreign_key "messages", "accounts"
   add_foreign_key "notifications", "accounts"
   add_foreign_key "taggings", "posts"
   add_foreign_key "taggings", "tags"

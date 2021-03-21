@@ -1,0 +1,27 @@
+.chat {
+  border: 1px solid #edeff7;
+  background: #edeff7;
+  height: 50vh;
+  border-radius: 5px 5px 0 0;
+  overflow-y: auto;
+  .chat-message-container {
+    padding: 5px;
+
+    .message-content {
+      padding: 5px;
+      border: 1px solid #0D6EFD;
+      border-radius: 5px;
+      background: #0D6EFD;
+      color: white;
+    }
+
+    & + .chat-message-container {
+      margin-top: 10px;
+    }
+  }
+}
+
+.chat-input {
+  border-top: 0 none;
+  border-radius: 0 0 5px 5px;
+}
