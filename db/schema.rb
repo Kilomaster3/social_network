@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_19_100703) do
+ActiveRecord::Schema.define(version: 2021_03_22_134530) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,17 +54,6 @@ ActiveRecord::Schema.define(version: 2021_03_19_100703) do
     t.index ["post_id"], name: "index_dislikes_on_post_id"
   end
 
-  create_table "friendships", force: :cascade do |t|
-    t.bigint "sent_to_id", null: false
-    t.bigint "sent_by_id", null: false
-    t.boolean "status", default: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["sent_by_id"], name: "index_friendships_on_sent_by_id"
-    t.index ["sent_to_id", "sent_by_id"], name: "index_friendships_on_sent_to_id_and_sent_by_id", unique: true
-    t.index ["sent_to_id"], name: "index_friendships_on_sent_to_id"
-  end
-
   create_table "likes", force: :cascade do |t|
     t.bigint "post_id", null: false
     t.bigint "account_id", null: false
@@ -82,21 +71,22 @@ ActiveRecord::Schema.define(version: 2021_03_19_100703) do
     t.index ["account_id"], name: "index_messages_on_account_id"
   end
 
-  create_table "notifications", force: :cascade do |t|
-    t.integer "notice_id"
-    t.string "notice_type"
-    t.bigint "account_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["account_id"], name: "index_notifications_on_account_id"
-  end
-
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.text "content"
     t.integer "account_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "relationships", force: :cascade do |t|
+    t.integer "follower_id"
+    t.integer "followed_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["followed_id"], name: "index_relationships_on_followed_id"
+    t.index ["follower_id", "followed_id"], name: "index_relationships_on_follower_id_and_followed_id", unique: true
+    t.index ["follower_id"], name: "index_relationships_on_follower_id"
   end
 
   create_table "taggings", force: :cascade do |t|
@@ -117,12 +107,9 @@ ActiveRecord::Schema.define(version: 2021_03_19_100703) do
   add_foreign_key "comments", "posts"
   add_foreign_key "dislikes", "accounts"
   add_foreign_key "dislikes", "posts"
-  add_foreign_key "friendships", "accounts", column: "sent_by_id"
-  add_foreign_key "friendships", "accounts", column: "sent_to_id"
   add_foreign_key "likes", "accounts"
   add_foreign_key "likes", "posts"
   add_foreign_key "messages", "accounts"
-  add_foreign_key "notifications", "accounts"
   add_foreign_key "taggings", "posts"
   add_foreign_key "taggings", "tags"
 end

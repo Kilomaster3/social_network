@@ -5,14 +5,14 @@ Rails.application.routes.draw do
 
   resources :messages, only: %i[index create]
   namespace :account do
-    resources :profiles
-    resource :friendships, only: %i[create] do
-      collection do
-        get 'accept_friend'
-        get 'decline_friend'
+    resources :profiles do
+      member do
+        get :following, :followers
       end
     end
   end
+
+  resources :relationships, only: %i[create destroy]
 
   resources :posts do
     resource :comments

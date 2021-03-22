@@ -11,27 +11,17 @@ class Account < ApplicationRecord
   has_many :posts
   has_many :likes, dependent: :destroy
   has_many :dislikes
-  has_many :notifications, dependent: :destroy
   mount_uploader :avatar, AvatarUploader
+  has_many :active_relationships, class_name: 'Relationship',
+                                  foreign_key: 'follower_id',
+                                  dependent: :destroy
 
-  has_many :friend_sent, class_name: 'Friendship',
-                         foreign_key: 'sent_by_id',
-                         inverse_of: 'sent_by',
-                         dependent: :destroy
+  has_many :passive_relationships, class_name: 'Relationship',
+                                   foreign_key: 'followed_id',
+                                   dependent: :destroy
 
-  has_many :friend_request, class_name: 'Friendship',
-                            foreign_key: 'sent_to_id',
-                            inverse_of: 'sent_to',
-                            dependent: :destroy
-
-  has_many :friends, -> { merge(Friendship.friends) },
-           through: :friend_sent, source: :sent_to
-
-  has_many :pending_requests, -> { merge(Friendship.not_friends) },
-           through: :friend_sent, source: :sent_to
-
-  has_many :received_requests, -> { merge(Friendship.not_friends) },
-           through: :friend_request, source: :sent_by
+  has_many :following, through: :active_relationships, source: :followed
+  has_many :followers, through: :passive_relationships, source: :follower
 
   def full_name
     "#{first_name} #{last_name}"
@@ -45,6 +35,19 @@ class Account < ApplicationRecord
       account.last_name = auth.info.last_name
       account.skip_confirmation!
     end
+  end
+
+
+  def follow(other_user)
+    following << other_user
+  end
+
+  def unfollow(other_user)
+    following.delete(other_user)
+  end
+
+  def following?(other_user)
+    following.include?(other_user)
   end
 
   def self.new_with_session(params, session)
