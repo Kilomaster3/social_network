@@ -38,7 +38,7 @@ class Account::ProfilesController < AccountBaseAuthController
     @accounts = @account.followers
     render 'account/follows/show_followers'
   end
-  
+
   private
 
   def account_params
