@@ -3,7 +3,6 @@
 class Account::ProfilesController < AccountBaseAuthController
   def index
     @account ||= current_account
-    @friends = current_account.friends
   end
 
   def show
@@ -28,6 +27,18 @@ class Account::ProfilesController < AccountBaseAuthController
     @account = Account.find(params[:id])
   end
 
+  def following
+    @account = Account.find(params[:id])
+    @accounts = @account.following
+    render 'account/follows/show_friends'
+  end
+
+  def followers
+    @account = Account.find(params[:id])
+    @accounts = @account.followers
+    render 'account/follows/show_followers'
+  end
+  
   private
 
   def account_params
