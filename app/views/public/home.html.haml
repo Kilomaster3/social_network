@@ -1,5 +1,8 @@
 - if account_signed_in?
-  ff
+  %h1
+  Account Online
+  %ul#online-account
+    = render partial: 'account/online', collection: Account.online, as: :account
 - else
   = render 'public/home'
 

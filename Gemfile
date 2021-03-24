@@ -43,6 +43,7 @@ gem 'omniauth-facebook'
 gem 'omniauth-rails_csrf_protection'
 
 gem "haml-rails"
+gem 'paper_trail'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false

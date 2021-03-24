@@ -6,6 +6,7 @@ class CommentsController < ApplicationController
 
   def create
     @comment = Comment.new(comment_params)
+    @comment.account = current_account
     @comment.post_id = params[:post_id]
 
     if @comment.save

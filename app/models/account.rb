@@ -11,6 +11,7 @@ class Account < ApplicationRecord
   has_many :posts
   has_many :likes, dependent: :destroy
   has_many :dislikes
+  has_many :comments
   mount_uploader :avatar, AvatarUploader
   has_many :active_relationships, class_name: 'Relationship',
                                   foreign_key: 'follower_id',
@@ -22,6 +23,13 @@ class Account < ApplicationRecord
 
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
+
+  # scope :online, ->{ where('last_seen_at > ?', 40.minutes.ago) }
+
+  def self.online
+    ids = ActionCable.server.pubsub.redis_connection_for_subscriptions.smembers 'online'
+    where(id: ids)
+  end
 
   def full_name
     "#{first_name} #{last_name}"
