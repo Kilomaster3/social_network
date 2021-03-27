@@ -15,4 +15,6 @@
             = button_to "Like #{post.likes.count}", post_likes_path(post), method: :post, class: 'btn btn-sm btn-primary'
             = button_to ("Dislike #{post.dislikes.count}"), post_dislike_index_path(post), method: :post, class: 'btn btn-sm btn-primary'
             = button_to 'Delete', post, method: :delete, class: 'btn btn-sm btn-primary'
-            = button_to 'Edit', edit_post_path(post), class: 'btn btn-sm btn-primary'
+            = link_to 'Edit', edit_post_path(post), class: 'btn btn-sm btn-primary'
+      %small
+        #{time_ago_in_words(post.created_at)} ago

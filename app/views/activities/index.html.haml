@@ -1,0 +1,21 @@
+%h1.text-center Resent Activity
+%tbody
+  - @versions.each do |version|
+    - account = version.keys.first
+    - changes = version.values.first
+    = link_to account.full_name, account_profile_path(account)
+    = "#{time_ago_in_words(changes.created_at)} changed"
+    = link_to changes.item_type.downcase, post_path(changes.item)
+    %br
+
+  - @comments.each do |comment|
+    = link_to comment.account.full_name
+    = "#{time_ago_in_words(comment.created_at)} commented"
+    = link_to comment.post.title, post_path(comment.post)
+    %br
+
+  - @likes.each do |like|
+    = like.account.full_name
+    = "#{time_ago_in_words(like.created_at)} liked"
+    = link_to like.post.title, post_path(like.post)
+    %br
