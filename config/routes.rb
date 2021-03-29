@@ -22,6 +22,6 @@ Rails.application.routes.draw do
     resources :dislike, only: %i[create destroy]
   end
 
-  get 'tags/:tag', to: 'posts#index', as: :tag
+  get 'tags/:tag', to: 'posts_activities#index', as: :tag
   get '/saw_notification', to: 'accounts#saw_notification', as: 'saw_notice'
 end

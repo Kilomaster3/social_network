@@ -6,7 +6,8 @@ class Post < ApplicationRecord
   has_many :likes, dependent: :destroy
   has_many :dislikes
 
-  has_paper_trail
+  include PublicActivity::Model
+  tracked owner: ->(controller, model) { controller&.current_account }
 
   def self.tagged_with(name)
     Tag.find_by!(name: name).posts
