@@ -18,5 +18,13 @@ class ApplicationController < ActionController::Base
   def devise_mapping
     @devise_mapping ||= Devise.mappings[:account]
   end
+
+  def after_sign_in_path_for(resource)
+    if resource.interests.any?
+      root_path
+    else
+      interests_root_path
+    end
+  end
 end
 

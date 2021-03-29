@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_29_081640) do
+ActiveRecord::Schema.define(version: 2021_03_31_144445) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -38,6 +38,15 @@ ActiveRecord::Schema.define(version: 2021_03_29_081640) do
     t.index ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true
   end
 
+  create_table "accounts_interests", force: :cascade do |t|
+    t.bigint "account_id", null: false
+    t.bigint "interest_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_accounts_interests_on_account_id"
+    t.index ["interest_id"], name: "index_accounts_interests_on_interest_id"
+  end
+
   create_table "activities", force: :cascade do |t|
     t.string "trackable_type"
     t.bigint "trackable_id"
@@ -57,6 +66,12 @@ ActiveRecord::Schema.define(version: 2021_03_29_081640) do
     t.index ["trackable_type", "trackable_id"], name: "index_activities_on_trackable_type_and_trackable_id"
   end
 
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "comments", force: :cascade do |t|
     t.text "body"
     t.bigint "post_id", null: false
@@ -74,6 +89,23 @@ ActiveRecord::Schema.define(version: 2021_03_29_081640) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_dislikes_on_account_id"
     t.index ["post_id"], name: "index_dislikes_on_post_id"
+  end
+
+  create_table "interestings", force: :cascade do |t|
+    t.bigint "interest_id", null: false
+    t.bigint "account_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_interestings_on_account_id"
+    t.index ["interest_id"], name: "index_interestings_on_interest_id"
+  end
+
+  create_table "interests", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_interests_on_category_id"
   end
 
   create_table "likes", force: :cascade do |t|
@@ -126,10 +158,15 @@ ActiveRecord::Schema.define(version: 2021_03_29_081640) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "accounts_interests", "accounts"
+  add_foreign_key "accounts_interests", "interests"
   add_foreign_key "comments", "accounts"
   add_foreign_key "comments", "posts"
   add_foreign_key "dislikes", "accounts"
   add_foreign_key "dislikes", "posts"
+  add_foreign_key "interestings", "accounts"
+  add_foreign_key "interestings", "interests"
+  add_foreign_key "interests", "categories"
   add_foreign_key "likes", "accounts"
   add_foreign_key "likes", "posts"
   add_foreign_key "messages", "accounts"

@@ -42,6 +42,6 @@ class Account::ProfilesController < AccountBaseAuthController
   private
 
   def account_params
-    params.require(:account).permit(:email, :first_name, :last_name, :avatar)
+    params.require(:account).permit(:email, :first_name, :last_name, :avatar, { interest_ids: [] }, :interest_ids)
   end
 end

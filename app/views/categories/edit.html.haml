@@ -1,0 +1,9 @@
+.container
+  .row
+    .col-lg-6.mt-4
+      %h2
+      = form_for(@category, url: category_path(@category), html: { method: :patch }) do |f|
+        = f.label :name
+        = f.text_field :name, autofocus: true, class: 'form-control'
+        .form-group.mt-4
+          = f.submit "Update", class: 'btn btn-success btn-lg'
