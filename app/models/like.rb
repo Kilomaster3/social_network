@@ -1,4 +1,5 @@
 class Like < ApplicationRecord
   include Reaction
-  has_paper_trail
+  include PublicActivity::Model
+  tracked owner: ->(controller, model) { controller&.current_account }
 end
