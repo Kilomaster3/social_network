@@ -10,6 +10,7 @@
                 %h4
                   = @account.full_name
                 = link_to "Edit Account", edit_account_profile_path(current_account), class: 'btn btn-outline-primary'
+                = link_to "Update Categories", categories_path, class: 'btn btn-outline-primary'
       .col-md-8
         .card.mb-3
           .card-body
@@ -24,6 +25,13 @@
                 %h6.mb-0 Email
               .col-sm-9.text-secondary
                 = @account.email
+            %hr/
+            .row
+              .col-sm-3
+                %h6.mb-0 Interests
+              .col-sm-9.text-secondary
+                #{raw @account.interests.map(&:name).map { |t| t }.join(', ')}
+
         - @account ||= current_account
         .stats
           %a{href: "#{following_account_profile_path(@account)}"}

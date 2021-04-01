@@ -14,6 +14,10 @@ Rails.application.routes.draw do
 
   resources :relationships, only: %i[create destroy]
 
+  resources :interests, only: %i[update]
+
+  resources :categories
+
   resources :activities, only: %i[index]
 
   resources :posts do
@@ -23,5 +27,5 @@ Rails.application.routes.draw do
   end
 
   get 'tags/:tag', to: 'posts_activities#index', as: :tag
-  get '/saw_notification', to: 'accounts#saw_notification', as: 'saw_notice'
+  get '/interests' => 'interests#index', as: :interests_root
 end

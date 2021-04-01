@@ -1,0 +1,10 @@
+.col-md-8.col-md-offset-2
+  %h1 Please check your interests
+  = form_for(@account, url: account_profile_path(@account), html: { method: :patch }) do |f|
+    %strong Interests:
+    = f.collection_check_boxes :interest_ids, Interest.all, :id, :name do |cb|
+      = cb.label(class: "checkbox-inline input_checkbox") {cb.check_box(class: "checkbox") + cb.text}
+    %br/
+    %br/
+    .form-group
+      = f.submit "Update Interests", class: "button button_flat button_block"

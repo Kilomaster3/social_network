@@ -1,0 +1,8 @@
+%h1 Сategories
+- @categories.each do |category|
+  = link_to category.name, edit_category_path(category)
+  %br
+  = link_to 'Delete Category', category_path(category), method: :delete
+  %br
+  - category.interests.each do |interest|
+    = interest.name
