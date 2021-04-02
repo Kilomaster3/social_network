@@ -2,6 +2,7 @@
   %h5.my-0.me-md-auto.font-weight-normal Social Network
   - if account_signed_in?
     = link_to 'Resent Activity', activities_path
+    = link_to 'Maps', maps_path
     .dropdown
     %button#dropdownMenuButton1.btn.btn-secondary.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", type: "button"}
       Menu
