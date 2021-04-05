@@ -844,6 +844,11 @@
   resolved "https://registry.npmjs.org/@fortawesome/fontawesome-free/-/fontawesome-free-5.15.2.tgz"
   integrity sha512-7l/AX41m609L/EXI9EKH3Vs3v0iA8tKlIOGtw+kgcoanI7p+e4I4GYLqW3UXWiTnjSFymKSmTTPKYrivzbxxqA==
 
+"@googlemaps/markerclustererplus@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.npmjs.org/@googlemaps/markerclustererplus/-/markerclustererplus-1.1.0.tgz#7f48a2fafca14b68f300b0b34d437b57cf2188f5"
+  integrity sha512-Y5jiaoMzhUQ8tCyJzvV5/+6VYF154eeczPZKqQ6kdINoL6Jui4DzVPNPitWFjXmPL9UDkBoxu0PLxOQQGvNWug==
+
 "@npmcli/move-file@^1.0.1":
   version "1.1.2"
   resolved "https://registry.npmjs.org/@npmcli/move-file/-/move-file-1.1.2.tgz"
