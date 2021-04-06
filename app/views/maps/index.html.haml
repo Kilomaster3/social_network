@@ -1,36 +1,16 @@
 %body
- #map
-  %script{async: "", src: "https://maps.googleapis.com/maps/api/js?key=#{ ENV['GOOGLE_MAP_API']}&callback=initMap&libraries=&v=weekly"}
-
-:javascript
-
-  function initMap() {
-    const map = new google.maps.Map(document.getElementById("map"), {
-      zoom: 12,
-      center: { lat: 34.84555, lng: -111.8035 },
-    });
-    const tourStops = [
-      [{ lat: 34.8791806, lng: -111.8265049 }, "Boynton Pass"],
-      [{ lat: 34.8559195, lng: -111.7988186 }, "Airport Mesa"],
-      [{ lat: 34.832149, lng: -111.7695277 }, "Chapel of the Holy Cross"],
-      [{ lat: 34.823736, lng: -111.8001857 }, "Red Rock Crossing"],
-      [{ lat: 34.800326, lng: -111.7665047 }, "Bell Rock"],
-    ];
-
-    const infoWindow = new google.maps.InfoWindow();
-    tourStops.forEach(([position, title], i) => {
-      const marker = new google.maps.Marker({
-        position,
-        map,
-        title: `${i + 1}. ${title}`,
-        label: `${i + 1}`,
-        optimized: false,
-      });
-
-      marker.addListener("click", () => {
-        infoWindow.close();
-        infoWindow.setContent(marker.getTitle());
-        infoWindow.open(marker.getMap(), marker);
-      });
-    });
-  }
+  %form
+    %section
+      .container
+        %h2 Maps
+        %input{name: "tour", type: "hidden", value: "false"}/
+        .container
+          .form-check-inline
+            %label.form-check-label
+              %input.form-check-input{name: "tour", type: "radio", value: "gaudi"}
+              Online
+          .form-check-inline
+            %label.form-check-label
+              %input.form-check-input{name: "tour", type: "radio", value: "gothic"}
+              Max Connection
+        .container#map

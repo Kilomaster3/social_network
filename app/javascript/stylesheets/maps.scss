@@ -1,0 +1,16 @@
+#map {
+  width: 1500px;
+  height: 1000px;
+}
+
+#map-canvas {
+  width: 1500px;
+  height: 1000px;
+}
+#map-canvas img {
+  max-width: none;
+}
+
+#map-canvas div {
+  -webkit-transform: translate3d(0, 0, 0);
+}
