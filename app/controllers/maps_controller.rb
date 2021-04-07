@@ -1,3 +1,5 @@
 class MapsController < ApplicationController
-  def index; end
+  def index
+    gon.locations = Account.all
+  end
 end
