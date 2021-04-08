@@ -1,8 +1,12 @@
-%h1 Сategories
-- @categories.each do |category|
-  = link_to category.name, edit_category_path(category)
-  %br
-  = link_to 'Delete Category', category_path(category), method: :delete
-  %br
-  - category.interests.each do |interest|
-    = interest.name
+%h1.mt-auto Сategories
+.card-deck
+  .col-sm-6
+    .card.bg-light.mb-3{style: "max-width: 18rem;"}
+      - @categories.each do |category|
+        .card{style: "width: 18rem;"}
+          .card-body
+            %h5.card-title= link_to category.name, edit_category_path(category)
+            - category.interests.each do |interest|
+              = interest.name
+            %br
+            = link_to 'Delete Category', category_path(category), method: :delete

@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   resources :relationships, only: %i[create destroy]
 
-  resources :interests, only: %i[update]
+  resources :account_interests, only: %i[index update]
 
   resources :categories
 
