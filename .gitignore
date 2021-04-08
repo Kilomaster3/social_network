@@ -45,4 +45,4 @@ public/uploads
 package-lock.json
 
 # Ignore .env file
-.env
+/.env

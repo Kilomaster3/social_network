@@ -44,6 +44,7 @@ gem 'omniauth-rails_csrf_protection'
 
 gem "haml-rails"
 gem 'public_activity'
+gem 'gon'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false

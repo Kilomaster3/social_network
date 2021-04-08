@@ -18,6 +18,8 @@ Rails.application.routes.draw do
 
   resources :categories
 
+  resources :maps, only: %i[index]
+
   resources :activities, only: %i[index]
 
   resources :posts do

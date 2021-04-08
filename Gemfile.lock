@@ -124,6 +124,11 @@ GEM
     ffi (1.15.0)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
+    gon (6.4.0)
+      actionpack (>= 3.0.20)
+      i18n (>= 0.7)
+      multi_json
+      request_store (>= 1.0)
     gravatar_image_tag (1.2.0)
     haml (5.2.1)
       temple (>= 0.8.0)
@@ -246,6 +251,8 @@ GEM
       ffi (~> 1.0)
     redis (4.2.5)
     regexp_parser (2.1.1)
+    request_store (1.5.0)
+      rack (>= 1.4)
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
@@ -353,6 +360,7 @@ DEPENDENCIES
   devise!
   dotenv-rails
   faker
+  gon
   gravatar_image_tag
   haml
   haml-rails
