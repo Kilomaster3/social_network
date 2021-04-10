@@ -2,7 +2,7 @@ class CategoriesController < ApplicationController
   before_action :find_category, only: %i[edit update destroy]
 
   def index
-    @categories = Category.joins(:interests).all
+    @categories = Category.includes(:interests).all
   end
 
   def new

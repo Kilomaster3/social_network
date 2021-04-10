@@ -1,0 +1,19 @@
+%h1.mt-auto Select your interests
+.row
+  - account_id = "current_account_id_#{current_account.id}"
+  %div{id: account_id}
+  - @categories.each do |category|
+    .col-md-3
+      .card
+        .card-body
+          %h5.card-title= category.name
+          %p.card-text
+            - category.interests.each do |interest|
+              .form-check.form-check
+                - checkbox_id = "interestCheckbox#{interest.id}"
+                - account_interests = current_account.interests
+                %input.form-check-input{type: "checkbox",
+                                        id: checkbox_id,
+                                        remote: true,
+                                        checked: account_interests.include?(interest) ? "checked" : nil}/
+                %label.form-check-label{for: checkbox_id}=interest.name

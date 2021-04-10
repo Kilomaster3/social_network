@@ -15,6 +15,7 @@ import '../stylesheets/application.scss'
 
 import '../src/send'
 import '../src/map'
+import '../src/interest'
 
 import $ from 'jquery';
 global.$ = jQuery;

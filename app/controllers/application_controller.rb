@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
     if resource.interests.any?
       root_path
     else
-      interests_root_path
+      account_interest_path
     end
   end
 end
