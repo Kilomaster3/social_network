@@ -2,8 +2,7 @@
 
 class Account::ProfilesController < AccountBaseAuthController
   def index
-    @account ||= Account.find_by(id: params[:id])
-    @account_interests = @account.interests.all
+    @accounts = Account.where.not(id: current_account.id)
   end
 
   def show
