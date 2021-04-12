@@ -3,6 +3,7 @@
 class Account::ProfilesController < AccountBaseAuthController
   def index
     @account ||= current_account
+    @account_interests = current_account.interests.all
   end
 
   def show
