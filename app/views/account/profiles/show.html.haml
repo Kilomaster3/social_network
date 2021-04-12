@@ -26,4 +26,15 @@
                   %h6.mb-0 Email
                 .col-sm-9.text-secondary
                   = account.email
+              %hr/
+              .row
+                .col-sm-3
+                  %h6.mb-0 Interests
+                .col-sm-9.text-secondary
+                  - account.interests.map do |interest|
+                    - if current_account.interest_ids.include?(interest.id)
+                      %mark
+                        = interest.name
+                    - else
+                      = interest.name
 = render 'account/form/follow_form' if current_account
