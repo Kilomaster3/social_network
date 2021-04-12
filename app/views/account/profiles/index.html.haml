@@ -12,8 +12,6 @@
                 = link_to "Edit Account", edit_account_profile_path(current_account), class: 'btn btn-outline-primary'
                 = link_to "Update Categories", categories_path, class: 'btn btn-outline-primary'
       .col-md-8
-        - @account_interests.each do |interest|
-          -  interest.in?(current_account.interests.all)
         .card.mb-3
           .card-body
             .row

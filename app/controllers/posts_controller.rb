@@ -2,7 +2,7 @@ class PostsController < AccountBaseAuthController
   before_action :find_post, only: %i[show edit update destroy]
 
   def index
-    @posts = params[:tag] ? Post.tagged_with(params[:tag]) : Post.all
+    @posts = params[:tag] ? Post.includes(:account).tagged_with(params[:tag]) : Post.includes(:account).all
   end
 
   def show; end
