@@ -2,11 +2,12 @@
 
 class Account::ProfilesController < AccountBaseAuthController
   def index
-    @account ||= current_account
+    @accounts = Account.where.not(id: current_account.id)
   end
 
   def show
-    @accounts = Account.where.not(id: current_account.id)
+    @account = Account.find_by(id: params[:id])
+    @interests_match_percentage = (@account.interests & current_account.interests).count.to_f / (@account.interests | current_account.interests).count * 100
   end
 
   def new

@@ -1,29 +1,42 @@
 .container
   .main-body
-    - @accounts.each do |account|
-      .row.gutters-sm
-        .col-md-4.mb-3
-          .card
-            .card-body
-              .d-flex.flex-column.align-items-center.text-center
-                %img.rounded-circle{alt: "Admin", src: "https://bootdey.com/img/Content/avatar/avatar7.png", width: "150"}/
-                .mt-3
-                  %h4
-                    = account.full_name
-                  = link_to 'Messages', messages_path, class: 'btn btn-outline-primary'
-                  = link_to "Edit Account", edit_account_profile_path(current_account), class: 'btn btn-outline-primary'
-        .col-md-8
-          .card.mb-3
-            .card-body
-              .row
-                .col-sm-3
-                  %h6.mb-0 Full Name
-                .col-sm-9.text-secondary
-                  = account.full_name
-              %hr/
-              .row
-                .col-sm-3
-                  %h6.mb-0 Email
-                .col-sm-9.text-secondary
-                  = account.email
+    .row.gutters-sm
+      .col-md-4.mb-3
+        .card
+          .card-body
+            .d-flex.flex-column.align-items-center.text-center
+              %img.rounded-circle{alt: "Admin", src: "https://bootdey.com/img/Content/avatar/avatar7.png", width: "150"}/
+              .mt-3
+                %h4
+                  = @account.full_name
+                = link_to 'Messages', messages_path, class: 'btn btn-outline-primary'
+                - if @account == current_account
+                  = link_to "Edit account", edit_account_profile_path(@account), class: 'btn btn-outline-primary'
+      .col-md-8
+        - if @account != current_account
+          = "Interests match: #{@interests_match_percentage} %"
+        .card.mb-3
+          .card-body
+            .row
+              .col-sm-3
+                %h6.mb-0 Full Name
+              .col-sm-9.text-secondary
+                = @account.full_name
+            %hr/
+            .row
+              .col-sm-3
+                %h6.mb-0 Email
+              .col-sm-9.text-secondary
+                = @account.email
+            %hr/
+            .row
+              .col-sm-3
+                %h6.mb-0 Interests
+              .col-sm-9.text-secondary
+                - @account.interests.map do |interest|
+                  - if @account != current_account && current_account.interest_ids.include?(interest.id)
+                    %mark
+                      = interest.name
+                  - else
+                    = interest.name
 = render 'account/form/follow_form' if current_account

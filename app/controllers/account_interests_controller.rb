@@ -3,6 +3,7 @@ class AccountInterestsController < ApplicationController
 
   def index
     @categories = Category.includes(:interests).all
+    @account_interests = current_account.interests.all
   end
 
   def edit; end

@@ -1,45 +1,44 @@
 .container
   .main-body
-    .row.gutters-sm
-      .col-md-4.mb-3
-        .card
-          .card-body
-            .d-flex.flex-column.align-items-center.text-center
-              %img.rounded-circle{alt: "Admin", src: "https://bootdey.com/img/Content/avatar/avatar7.png", width: "150"}/
-              .mt-3
-                %h4
-                  = @account.full_name
-                = link_to "Edit Account", edit_account_profile_path(current_account), class: 'btn btn-outline-primary'
-                = link_to "Update Categories", categories_path, class: 'btn btn-outline-primary'
-      .col-md-8
-        .card.mb-3
-          .card-body
-            .row
-              .col-sm-3
-                %h6.mb-0 Full Name
-              .col-sm-9.text-secondary
-                = @account.full_name
-            %hr/
-            .row
-              .col-sm-3
-                %h6.mb-0 Email
-              .col-sm-9.text-secondary
-                = @account.email
-            %hr/
-            .row
-              .col-sm-3
-                %h6.mb-0 Interests
-              .col-sm-9.text-secondary
-                #{raw @account.interests.map(&:name).map { |t| t }.join(', ')}
-
-        - @account ||= current_account
-        .stats
-          %a{href: "#{following_account_profile_path(@account)}"}
-            %strong#following.stat
-              = @account.following.count
-            Friends
-          %a{href: "#{followers_account_profile_path(@account)}"}
-            %strong#followers.stat
-              = @account.followers.count
-            Followers
-  = link_to "Back to Main Page", root_path, class: 'float-right btn btn-secondary'
+    - @accounts.each do |account|
+      .row.gutters-sm
+        .col-md-4.mb-3
+          .card
+            .card-body
+              .d-flex.flex-column.align-items-center.text-center
+                %img.rounded-circle{alt: "Admin", src: "https://bootdey.com/img/Content/avatar/avatar7.png", width: "150"}/
+                .mt-3
+                  %h4
+                    = account.full_name
+                  = link_to "Edit Account", edit_account_profile_path(current_account), class: 'btn btn-outline-primary'
+                  = link_to "Update Categories", categories_path, class: 'btn btn-outline-primary'
+        .col-md-8
+          .card.mb-3
+            .card-body
+              .row
+                .col-sm-3
+                  %h6.mb-0 Full Name
+                .col-sm-9.text-secondary
+                  = account.full_name
+              %hr/
+              .row
+                .col-sm-3
+                  %h6.mb-0 Email
+                .col-sm-9.text-secondary
+                  = account.email
+              %hr/
+              .row
+                .col-sm-3
+                  %h6.mb-0 Interests
+                .col-sm-9.text-secondary
+                  #{raw account.interests.map(&:name).map { |t| t }.join(', ')}
+          .stats
+            %a{href: "#{following_account_profile_path(account)}"}
+              %strong#following.stat
+                = account.following.count
+              Friends
+            %a{href: "#{followers_account_profile_path(account)}"}
+              %strong#followers.stat
+                = account.followers.count
+              Followers
+    = link_to "Back to Main Page", root_path, class: 'float-right btn btn-secondary'
