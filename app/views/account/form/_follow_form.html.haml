@@ -1,7 +1,6 @@
-- @accounts.each do |account|
-  - unless current_account?(account)
-    #follow_form
-      - if current_account.following?(account)
-        = render 'account/form/unfollow'
-      - else
-        = render 'account/form/follow'
+- unless current_account?(@account)
+  #follow_form
+    - if current_account.following?(@account)
+      = render 'account/form/unfollow'
+    - else
+      = render 'account/form/follow'
