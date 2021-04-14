@@ -1,16 +1,20 @@
 %body
   %form
     %section
-      .container
+      .container#myForm
         %h2 Maps
-        %input{name: "tour", type: "hidden", value: "false"}/
+        %input{type: "hidden", value: "false"}/
         .container
           .form-check-inline
             %label.form-check-label
-              %input.form-check-input{name: "tour", type: "radio", value: "gaudi"}
+              %input.form-check-input{name: "tour", type: "radio", value: "online"}
               Online
           .form-check-inline
             %label.form-check-label
-              %input.form-check-input{name: "tour", type: "radio", value: "gothic"}
+              %input.form-check-input{name: "tour", type: "radio", value: "max connection"}
               Max Connection
+          .form-check-inline
+            %label.form-check-label
+              %input.form-check-input{name: "tour", type: "radio", value: "connection"}
+              Connection
         .container#map
