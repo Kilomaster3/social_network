@@ -11,11 +11,13 @@ require("channels");
 
 require('popper.js');
 require('bootstrap');
+require("jquery-ui");
 import '../stylesheets/application.scss'
 
 import '../src/send'
 import '../src/map'
 import '../src/interest'
+import '../src/menu'
 
 import $ from 'jquery';
 global.$ = jQuery;

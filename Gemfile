@@ -42,9 +42,10 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'omniauth-rails_csrf_protection'
 
-gem "haml-rails"
-gem 'public_activity'
 gem 'gon'
+gem "haml-rails"
+gem 'jquery-rails'
+gem 'public_activity'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false

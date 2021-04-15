@@ -1,8 +1,15 @@
 - if account_signed_in?
-  %h1
-  Account Online
-  %ul#online-account
-    = render partial: 'account/online', collection: Account.online, as: :account
+  .d-flex.align-items-start
+  #pillsTab.nav.flex-column.nav-pills.me-3{"aria-orientation" => "vertical", role: "tablist"}
+    %li.nav-item{role: "presentation"}
+      %a.nav-link{"data-toggle" => "tab", href: "/posts"} Post
+    %li.nav-item{role: "presentation"}
+      %a.nav-link{"data-toggle" => "tab", href: "/posts"} My Friends Post
+    %li.nav-item{role: "presentation"}
+      %a.nav-link{"data-toggle" => "tab", href: "/activities"} Resent Activity
+  #tabContent.tab-content
+    #post.tab-pane.active{"aria-labelledby" => "home-tab", role: "tabpanel"}
+    #mypost.tab-pane{"aria-labelledby" => "profile-tab", role: "tabpanel"}
+    #resentactivity.tab-pane{"aria-labelledby" => "messages-tab", role: "tabpanel"}
 - else
   = render 'public/home'
-
