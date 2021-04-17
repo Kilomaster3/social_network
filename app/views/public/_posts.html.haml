@@ -1,0 +1,22 @@
+.col-md-8.offset-2
+  %h1.text-center Blog Posts
+- posts.each do |post|
+  .card
+    .card-body
+      %h3.card-title= post.title
+      %p.card-text= truncate(post.content, length: 60)
+      %p
+        %small
+          Tags: #{raw post.tags.map(&:name).map { |t| link_to t, tag_path(t) }.join(', ')}
+          %h5 Comments (#{post.comments.size}) #{link_to 'Add Comment', new_post_comments_path(current_account), class: 'btn btn-sm btn-primary'}
+          = render partial: 'posts/comment', collection: post.comments.reverse
+          .btn-group
+            = button_to "Like #{post.likes.count}", post_likes_path(post), method: :post, class: 'btn btn-sm btn-primary'
+            = button_to ("Dislike #{post.dislikes.count}"), post_dislike_index_path(post), method: :post, class: 'btn btn-sm btn-primary'
+            = button_to 'Delete', post, method: :delete, class: 'btn btn-sm btn-primary'
+            = link_to 'Edit', edit_post_path(post), class: 'btn btn-sm btn-primary'
+      %small
+        #{time_ago_in_words(post.created_at)} ago
+        %br
+        created_by
+        = link_to post.account.full_name, account_profile_path(post.account)
