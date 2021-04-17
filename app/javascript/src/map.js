@@ -24,21 +24,6 @@ loader.load().then(() => {
     }, "Alex Hrom"],
   ];
 
-  const maxConnection = [
-    [{
-      lat: gon.locations[0].latitude,
-      lng: gon.locations[0].longitude
-    }, "Alex Hrom"],
-    [{
-      lat: gon.locations[2].latitude,
-      lng: gon.locations[2].longitude
-    }, "Rufina Hintz 90 %"],
-    [{
-      lat: gon.locations[3].latitude,
-      lng: gon.locations[3].longitude
-    }, "Curt Legos 100 %"],
-  ];
-
   const Connection = [
     [{
       lat: gon.locations[0].latitude,
@@ -71,21 +56,42 @@ loader.load().then(() => {
       });
     } else if (event.target.value === 'max connection') {
       const infoWindow = new google.maps.InfoWindow();
+      let maxConnection = [{}];
 
-      maxConnection.forEach(([position, name], title) => {
-        let markerMaxConnection = new google.maps.Marker({
-          position,
-          map,
-          draggable: true,
-          title: `${title + 1}. ${name}`,
-          optimized: false,
-          icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
-        });
-        markerMaxConnection.addListener("click", () => {
-          infoWindow.close();
-          infoWindow.setContent(markerMaxConnection.getTitle());
-          infoWindow.open(markerMaxConnection.getMap(), markerMaxConnection);
-        });
+      $.ajax({
+        type: 'GET',
+        dataType: 'json',
+        url: '/account_interests/max_connection',
+        success: data => {
+          let accountLocation;
+          maxConnection = data.map(item => {
+            accountLocation = gon.locations.filter(tempLocation => tempLocation.id === item.account_id)[0];
+            item['lat'] = accountLocation.latitude;
+            item['lng'] = accountLocation.longitude;
+            return item;
+          });
+
+          maxConnection.forEach(account => {
+            let position = {
+              lat: account.lat,
+              lng: account.lng
+            };
+
+            let markerMaxConnection = new google.maps.Marker({
+              position,
+              map,
+              draggable: true,
+              title: account.full_name_path,
+              optimized: false,
+              icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+            });
+            markerMaxConnection.addListener("click", () => {
+              infoWindow.close();
+              infoWindow.setContent(markerMaxConnection.getTitle());
+              infoWindow.open(markerMaxConnection.getMap(), markerMaxConnection);
+            });
+          });
+        }
       });
     } else if (event.target.value === 'connection') {
       const infoWindow = new google.maps.InfoWindow();
