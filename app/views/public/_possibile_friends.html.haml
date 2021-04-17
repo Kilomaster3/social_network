@@ -1,0 +1,16 @@
+%link{href: "https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css", rel: "stylesheet"}/
+.container
+  .row
+    .col-md-12
+      #profile-friends.tab-pane.fade.in.active.show
+        %h4.m-t-0.m-b-20 Possible Friends
+        - @possibile_friends.each do |possibile_friend|
+          .row.row-space-2
+            .col-md-6.m-b-2
+              .p-10.bg-white
+                .media.media-xs.overflow-visible
+                  %img.media-object.img-circle{alt: "", src: "https://bootdey.com/img/Content/avatar/avatar1.png"}/
+                  .media-body.valign-middle
+                    %b.text-inverse
+                  .media-body.valign-middle.text-right.overflow-visible
+                    = render 'account/form/follow_form', account: possibile_friend if current_account
