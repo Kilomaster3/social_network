@@ -18,6 +18,7 @@ import '../src/send'
 import '../src/map'
 import '../src/interest'
 import '../src/menu'
+import '../src/like'
 
 import $ from 'jquery';
 global.$ = jQuery;

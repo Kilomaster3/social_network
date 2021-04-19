@@ -9,7 +9,9 @@
       %li
         %a.dropdown-item{href: account_profile_path(current_account)} My Account
       %li
-        %a.dropdown-item{href: posts_path} Posts
+        %a.dropdown-item{href: posts_path } My Posts
+      %li
+        %a.dropdown-item{href: new_post_path} Create Posts
       %li
         = link_to "Sign Out" , destroy_account_session_path, method: :delete, class: 'dropdown-item'
   - else

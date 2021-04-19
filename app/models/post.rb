@@ -2,9 +2,10 @@ class Post < ApplicationRecord
   belongs_to :account
   has_many :taggings, dependent: :destroy
   has_many :tags, through: :taggings
-  has_many :comments
+  has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_many :dislikes
+  has_many :dislikes, dependent: :destroy
+  mount_uploader :image, ImageUploader
 
   include PublicActivity::Model
   tracked owner: ->(controller, model) { controller&.current_account }

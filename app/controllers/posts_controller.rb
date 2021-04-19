@@ -32,7 +32,12 @@ class PostsController < AccountBaseAuthController
   end
 
   def destroy
-    @post.destroy
+    if @post.destroy
+      flash[:success] = 'Post deleted'
+      redirect_back(fallback_location: root_path)
+    else
+      flash[:danger] = 'Post were not deleted'
+    end
   end
 
   private
@@ -42,6 +47,6 @@ class PostsController < AccountBaseAuthController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :tag_list, :tag, { tag_ids: [] }, :tag_ids).merge(account: current_account)
+    params.require(:post).permit(:title, :content, :image, :tag_list, :tag, { tag_ids: [] }, :tag_ids).merge(account: current_account)
   end
 end
