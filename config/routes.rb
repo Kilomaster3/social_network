@@ -14,7 +14,11 @@ Rails.application.routes.draw do
 
   resources :relationships, only: %i[create destroy]
 
-  resources :account_interests, only: %i[index update]
+  resources :account_interests, only: %i[index update] do
+    collection do
+      get :max_connection
+    end
+  end
 
   resources :categories
 
@@ -30,4 +34,5 @@ Rails.application.routes.draw do
 
   get 'tags/:tag', to: 'posts_activities#index', as: :tag
   get '/interests' => 'interests#index', as: :interests_root
+
 end

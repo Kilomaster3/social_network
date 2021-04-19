@@ -39,4 +39,4 @@
                       = interest.name
                   - else
                     = interest.name
-= render 'account/form/follow_form' if current_account
+= render 'account/form/follow_form', account: @account if current_account
