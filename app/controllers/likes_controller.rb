@@ -3,13 +3,20 @@ class LikesController < ApplicationController
   before_action :find_like, only: [:destroy]
   include State
 
+  def index
+    @like = Like.includes(:account).all
+  end
+
   def create
     if already_state?
       flash[:notice] = "You can't like more than once"
     else
       @post.likes.create(account_id: current_account.id)
     end
-    redirect_to post_path(@post)
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   def destroy
