@@ -7,6 +7,10 @@ class Post < ApplicationRecord
   has_many :dislikes, dependent: :destroy
   mount_uploader :image, ImageUploader
 
+  scope :recent, -> { order(created_at: :desc) }
+  scope :oldest, -> { order(created_at: :asc) }
+  scope :search_last_post, -> { where('created_at > ?', 24.hours.ago).order(id: :asc) }
+
   include PublicActivity::Model
   tracked owner: ->(controller, model) { controller&.current_account }
 

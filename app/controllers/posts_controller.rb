@@ -40,6 +40,21 @@ class PostsController < AccountBaseAuthController
     end
   end
 
+  def recent
+    @posts = Post.recent
+    render action: :index
+  end
+
+  def oldest
+    @posts = Post.oldest
+    render action: :index
+  end
+
+  def search_last
+    @posts = Post.search_last_post
+    render action: :index
+  end
+
   private
 
   def find_post

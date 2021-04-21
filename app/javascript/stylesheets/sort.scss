@@ -1,0 +1,44 @@
+.categories ul {
+  list-style:none;
+  padding:0;
+  margin:0;
+  margin-bottom:20px;
+  text-align:center;
+
+}
+
+.categories ul li{
+  display:inline-block;
+  padding:0;
+  line-height:24px;
+  background:transparent;
+  margin:0;
+  margin-left:5px;
+  margin-bottom:10px;
+}
+
+.categories ul li a{
+  display:block;
+  font-size:18px;
+  font-weight:500;
+  padding:10px 20px;
+  border-radius:5px;
+  border:2px solid transparent;
+  -webkit-transition:all .2s ease-out;
+  transition:all .2s ease-out;
+}
+
+.categories ul li a,
+.categories ul li a:active,
+.categories ul li a:hover{
+  line-height:24px;
+  background:#fff;
+  color:#4E5961;
+  text-decoration:none;
+}
+
+.categories ul li a:hover,
+.categories ul li.active a{
+  color:#fff;
+  background:#5cc9df;
+}
