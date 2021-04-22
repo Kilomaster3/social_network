@@ -1,4 +1,12 @@
 .col-md-8.offset-2
+.categories
+  %ul
+    %li.active
+      = link_to "Recent", recent_posts_path, class: "nav-link"
+    %li.active
+      = link_to "Oldest", oldest_posts_path, class: "nav-link"
+    %li.active
+      = link_to "Search last posts", search_last_posts_path, class: "nav-link"
   %br
 - posts.each do |post|
   .row
