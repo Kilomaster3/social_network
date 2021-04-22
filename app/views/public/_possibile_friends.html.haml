@@ -3,14 +3,19 @@
   .row
     .col-md-12
       #profile-friends.tab-pane.fade.in.active.show
-        %h4.m-t-0.m-b-20 Possible Friends
+        %h2.text-center Possible Friends
         - @possibile_friends.each do |possibile_friend|
-          .row.row-space-2
-            .col-md-6.m-b-2
-              .p-10.bg-white
-                .media.media-xs.overflow-visible
-                  %img.media-object.img-circle{alt: "", src: "https://bootdey.com/img/Content/avatar/avatar1.png"}/
-                  .media-body.valign-middle
-                    %b.text-inverse
-                  .media-body.valign-middle.text-right.overflow-visible
-                    = render 'account/form/follow_form', account: possibile_friend if current_account
+          .container
+            .row
+              .col-md-8
+                .people-nearby
+                  .nearby-user.panel-white
+                    .row
+                      .col-md-2.col-sm-2
+                        %img.profile-photo-lg{alt: "user", src: "https://bootdey.com/img/Content/avatar/avatar7.png"}/
+                      .col-md-7.col-sm-7
+                        %h5
+                          %a.profile-link{href: account_profile_path(possibile_friend)}
+                            = possibile_friend.full_name
+                      .col-md-3.col-sm-3
+                        = render 'account/form/follow_form', account: possibile_friend if current_account
