@@ -19,3 +19,4 @@
                             = possibile_friend.full_name
                       .col-md-3.col-sm-3
                         = render 'account/form/follow_form', account: possibile_friend if current_account
+                        = link_to 'Write message', messages_path, class: 'btn btn-success'
