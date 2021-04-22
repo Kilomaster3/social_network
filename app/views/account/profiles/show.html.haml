@@ -9,7 +9,7 @@
               .mt-3
                 %h4
                   = @account.full_name
-                = link_to 'Messages', messages_path, class: 'btn btn-outline-primary'
+                = link_to "Update Interests", account_interests_path, class: 'btn btn-outline-primary'
                 - if @account == current_account
                   = link_to "Edit account", edit_account_profile_path(@account), class: 'btn btn-outline-primary'
       .col-md-8
