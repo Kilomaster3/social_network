@@ -1,0 +1,4 @@
+= form_for :term, url: search_last_posts_path, method: :get do
+  %p
+    = text_field_tag :term, params[:term]
+    = submit_tag "Search", name: nil

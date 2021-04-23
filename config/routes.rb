@@ -27,6 +27,8 @@ Rails.application.routes.draw do
   resources :activities, only: %i[index]
 
   resources :posts do
+    get 'search', to: 'search#search'
+    get 'search/typeahead/:term', to: 'search#typeahead'
     resource :comments
     resources :likes, only: %i[create destroy]
     resources :dislike, only: %i[create destroy]
