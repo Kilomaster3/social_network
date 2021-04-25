@@ -1,6 +1,9 @@
 .d-flex.flex-column.flex-md-row.align-items-center.p-3.px-md-4.mb-3.bg-body.border-bottom.shadow-sm
   %h5.my-0.me-md-auto.font-weight-normal Social Network
   - if account_signed_in?
+    - if current_account.admin?
+      .span
+        Admin
     = link_to 'Maps', maps_path
     .dropdown
     %button#dropdownMenuButton1.btn.btn-secondary.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", type: "button"}
@@ -12,6 +15,9 @@
         %a.dropdown-item{href: posts_path } My Posts
       %li
         %a.dropdown-item{href: new_post_path} Create Posts
+      - if current_account.admin?
+        %li
+          %a.dropdown-item{href: admin_accounts_path} Accounts
       %li
         = link_to "Sign Out" , destroy_account_session_path, method: :delete, class: 'dropdown-item'
   - else

@@ -1,0 +1,21 @@
+%h1 Elastic search for posts
+= form_for :search_posts, url: search_posts_path, method: :get do |form|
+  = form.text_field :query, value: params[:search_posts].presence && params[:search_posts][:query]
+  = form.submit 'Search'
+- unless @posts.nil?
+  - if @posts.empty?
+    %h2 No posts found matching your query.
+  - else
+    %h2 Search results
+    %table{style: "width: 100%;"}
+      %thead
+        %tr
+          %th Title
+          %th Content
+      %tbody
+        - @posts.each do |post|
+          %tr
+            %td= post.title
+            %td= post.content
+            %td= link_to 'View', post_path(post.id)
+      %tbody
