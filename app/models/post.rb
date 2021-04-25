@@ -14,6 +14,16 @@ class Post < ApplicationRecord
   include PublicActivity::Model
   tracked owner: ->(controller, model) { controller&.current_account }
 
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
+  searchkick
+
+  mappings do
+    indexes :title, analyzer: 'english'
+    indexes :content, analyzer: 'english'
+  end
+
   def self.tagged_with(name)
     Tag.find_by!(name: name).posts
   end
@@ -30,5 +40,25 @@ class Post < ApplicationRecord
     self.tags = names.split(',').map do |n|
       Tag.where(name: n.strip).first_or_create!
     end
+  end
+
+  def self.search(query)
+    __elasticsearch__.search({
+                               query: {
+                                 multi_match: {
+                                   query: query,
+                                   fields: %w(title content)
+                                 }
+                               },
+                               highlight: {
+                                 pre_tags: ['<em>'],
+                                 post_tags: ['</em>'],
+                                 fields: {
+                                   title: {},
+                                   text: {}
+                                 }
+                               }
+                             }
+    )
   end
 end

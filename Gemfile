@@ -47,6 +47,11 @@ gem "haml-rails"
 gem 'jquery-rails'
 gem 'public_activity'
 
+gem 'bootstrap-typeahead-rails'
+gem 'elasticsearch-model'
+gem 'elasticsearch-rails'
+gem 'searchkick'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 

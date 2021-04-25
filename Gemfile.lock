@@ -91,6 +91,8 @@ GEM
     bindex (0.8.1)
     bootsnap (1.7.3)
       msgpack (~> 1.0)
+    bootstrap-typeahead-rails (0.10.5.1)
+      railties (>= 3.0)
     builder (3.2.4)
     byebug (11.1.3)
     cable_ready (4.5.0)
@@ -112,6 +114,19 @@ GEM
     dotenv-rails (2.7.6)
       dotenv (= 2.7.6)
       railties (>= 3.2)
+    elasticsearch (7.12.0)
+      elasticsearch-api (= 7.12.0)
+      elasticsearch-transport (= 7.12.0)
+    elasticsearch-api (7.12.0)
+      multi_json
+    elasticsearch-model (7.1.1)
+      activesupport (> 3)
+      elasticsearch (> 1)
+      hashie
+    elasticsearch-rails (7.1.1)
+    elasticsearch-transport (7.12.0)
+      faraday (~> 1)
+      multi_json
     erubi (1.10.0)
     erubis (2.7.0)
     faker (2.17.0)
@@ -309,6 +324,10 @@ GEM
       sprockets (> 3.0)
       sprockets-rails
       tilt
+    searchkick (4.4.4)
+      activemodel (>= 5)
+      elasticsearch (>= 6)
+      hashie
     sexp_processor (4.15.2)
     simple_form (5.1.0)
       actionpack (>= 5.2)
@@ -358,11 +377,14 @@ PLATFORMS
 DEPENDENCIES
   aws-sdk-s3
   bootsnap
+  bootstrap-typeahead-rails
   byebug
   cable_ready
   carrierwave (~> 2.0)
   devise!
   dotenv-rails
+  elasticsearch-model
+  elasticsearch-rails
   faker
   gon
   gravatar_image_tag
@@ -384,6 +406,7 @@ DEPENDENCIES
   rspec-rails (~> 4.0.2)
   rubocop-rails
   sass-rails (>= 6)
+  searchkick
   simple_form
   spring
   spring-watcher-listen (~> 2.0.0)
