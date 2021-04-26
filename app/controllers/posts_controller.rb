@@ -55,6 +55,16 @@ class PostsController < AccountBaseAuthController
     render action: :index
   end
 
+  def most_comments
+    @posts = Post.most_comments
+    render action: :index
+  end
+
+  def most_likes
+    @posts = Post.most_likes
+    render action: :index
+  end
+
   def search
     query = params[:search_posts].presence && params[:search_posts][:query]
     @posts = Post.search_post(query) if query

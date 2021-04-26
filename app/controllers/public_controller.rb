@@ -7,9 +7,6 @@ class PublicController < ApplicationController
       @activities = PublicActivity::Activity.order('created_at desc').where(owner_id: current_account.followers, owner_type: 'Account')
       @likes = Like.where(id: PublicActivity::Activity.where(trackable_type: 'Like').pluck(:trackable_id))
       @possibile_friends = Account.where.not(id: current_account.followers.pluck(:id))
-      @recent_posts = Post.recent
-      @oldest_posts = Post.oldest
-      @search_last_posts = Post.search_last_post
     end
   end
 end
