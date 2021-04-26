@@ -38,9 +38,9 @@ Rails.application.routes.draw do
     resources :likes, only: %i[create destroy]
     resources :dislike, only: %i[create destroy]
     collection do
-      get :recent
-      get :oldest
       get :search_last
+      get :most_comments
+      get :most_likes
     end
   end
 
