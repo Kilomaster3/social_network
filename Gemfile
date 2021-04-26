@@ -52,6 +52,7 @@ gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 gem 'searchkick'
 
+gem 'devise_masquerade'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 

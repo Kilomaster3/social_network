@@ -4,7 +4,7 @@ class Account < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :validatable,
+         :masqueradable, :recoverable, :rememberable, :validatable,
          :confirmable, :omniauthable, omniauth_providers: %i[facebook]
 
   has_one_attached :avatar
@@ -37,6 +37,8 @@ class Account < ApplicationRecord
   def full_name
     "#{first_name} #{last_name}"
   end
+
+  enum role: %i[account admin]
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |account|

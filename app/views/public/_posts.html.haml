@@ -1,37 +1,19 @@
-= render 'search/form'
-.col-md-8.offset-2
-.categories
-  %ul
-    %li.active
-      = link_to "Recent", recent_posts_path, class: "nav-link"
-    %li.active
-      = link_to "Oldest", oldest_posts_path, class: "nav-link"
-    %li.active
-      = link_to "Search last posts", search_last_posts_path, class: "nav-link"
-  %br
-- posts.each do |post|
-  .row
-  .col-sm-12
-    .panel.panel-white.post
-      .post-heading
-        .pull-left.image
-          %img.img-circle.avatar{alt: "user profile image", src: "https://bootdey.com/img/Content/avatar/avatar1.png"}/
-        .pull-left.meta
-          .title.h5
-            %a{href: account_profile_path(post.account)}
-              %b= post.account.full_name
-            create post.
-          %h6.text-muted.time #{time_ago_in_words(post.created_at)} ago
-      .post-image
-        = link_to(image_tag(post.image.thumb.url, alt: 'Image'), post.image.url, target: '_blank') if post.image?
-      .post-description
-        %h4.card-title= post.title
-        %p.card-text= truncate(post.content, length: 60)
-        .stats
-          %a.btn.btn-default#like_button{id: post.id}
-            %i.fa.fa-thumbs-up.icon#like_count{id: post.id}
-              = post.likes.count
-          %a.btn.btn-default.stat-item{href: edit_post_path(post)}
-            %i.fa.fa-pencil.icon
-      .post-footer
-        = link_to 'Delete', post_path(post), method: :delete, class: 'btn fa fa-times'
+.container
+  %p
+    Press #{link_to 'here', search_posts_path} to search for posts.
+  .row.justify-content-md-center
+    .col.col-lg-2
+      #v-pills-tab.nav.flex-column.nav-pills.me-3{"aria-orientation" => "vertical", role: "tablist"}
+        %button#v-pills-home-tab.nav-link.active{"aria-controls" => "v-pills-home", "aria-selected" => "true", "data-bs-target" => "#v-pills-home", "data-bs-toggle" => "pill", role: "tab", type: "button"} All
+        %button#v-pills-profile-tab.nav-link{"aria-controls" => "v-pills-profile", "aria-selected" => "false", "data-bs-target" => "#v-pills-profile", "data-bs-toggle" => "pill", role: "tab", type: "button"} Recent
+        %button#v-pills-messages-tab.nav-link{"aria-controls" => "v-pills-messages", "aria-selected" => "false", "data-bs-target" => "#v-pills-messages", "data-bs-toggle" => "pill", role: "tab", type: "button"} Oldest
+        %button#v-pills-settings-tab.nav-link{"aria-controls" => "v-pills-settings", "aria-selected" => "false", "data-bs-target" => "#v-pills-settings", "data-bs-toggle" => "pill", role: "tab", type: "button"} Search last posts
+    #v-pills-tabContent.tab-content.col.col-lg-10
+      #v-pills-home.tab-pane.fade.show.active{"aria-labelledby" => "v-pills-home-tab", role: "tabpanel"}
+        = render 'posts_detalies', posts: @posts
+      #v-pills-profile.tab-pane.fade{"aria-labelledby" => "v-pills-profile-tab", role: "tabpanel"}
+        = render 'posts_detalies', recent_post: @recent_posts
+      #v-pills-messages.tab-pane.fade{"aria-labelledby" => "v-pills-messages-tab", role: "tabpanel"}
+        = render 'posts_detalies', oldest_post: @oldest_posts
+      #v-pills-settings.tab-pane.fade{"aria-labelledby" => "v-pills-settings-tab", role: "tabpanel"}
+        = render 'posts_detalies', search_last_post: @search_last_posts

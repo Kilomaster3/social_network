@@ -12,6 +12,10 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :admin do
+    resources :accounts
+  end
+
   resources :relationships, only: %i[create destroy]
 
   resources :account_interests, only: %i[index update] do
@@ -27,8 +31,9 @@ Rails.application.routes.draw do
   resources :activities, only: %i[index]
 
   resources :posts do
-    get 'search', to: 'search#search'
-    get 'search/typeahead/:term', to: 'search#typeahead'
+    collection do
+      get :search
+    end
     resource :comments
     resources :likes, only: %i[create destroy]
     resources :dislike, only: %i[create destroy]

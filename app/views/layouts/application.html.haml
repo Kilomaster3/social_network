@@ -1,0 +1,22 @@
+!!!
+%html
+  %head
+    %meta{content: "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title SocialNetwork
+    = csrf_meta_tags
+    = csp_meta_tag
+    = include_gon
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag '//ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/le-frog/jquery-ui.min.css'
+    = stylesheet_pack_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application', 'data-turbolinks-track': 'reload'
+  %body
+    = render 'shared/nav'
+    - if account_masquerade?
+      %nav
+        = link_to "Reverse masquerade", back_masquerade_path(current_account)
+    %p.notice= notice
+    %p.alert= alert
+    .container
+      = yield
+    = render 'shared/footer'

@@ -19,9 +19,9 @@ class Post < ApplicationRecord
 
   searchkick
 
-  mappings do
-    indexes :title, analyzer: 'english'
-    indexes :content, analyzer: 'english'
+  mappings dynamic: false do
+    indexes :title, type: :text, analyzer: 'english'
+    indexes :content, type: :text, analyzer: 'english'
   end
 
   def self.tagged_with(name)
@@ -42,12 +42,12 @@ class Post < ApplicationRecord
     end
   end
 
-  def self.search(query)
+  def self.search_post(query)
     __elasticsearch__.search({
                                query: {
                                  multi_match: {
                                    query: query,
-                                   fields: %w(title content)
+                                   fields: %w[title content]
                                  }
                                },
                                highlight: {
@@ -58,7 +58,6 @@ class Post < ApplicationRecord
                                    text: {}
                                  }
                                }
-                             }
-    )
+                             })
   end
 end

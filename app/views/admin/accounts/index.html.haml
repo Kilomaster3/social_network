@@ -1,0 +1,16 @@
+.container
+  .row
+    .col-12
+      %table.table.table-bordered
+        %thead
+          %tr
+            %th{scope: "col"} Article Name
+            %th{scope: "col"} Author
+            %th{scope: "col"} Actions
+        %tbody
+          - @accounts.each do |account|
+            %tr
+              %td= account.full_name
+              %td= account.role
+              %td
+                = link_to 'Impersonate', masquerade_path(account), class: 'btn btn-primary'
