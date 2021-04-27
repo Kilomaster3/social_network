@@ -1,4 +1,4 @@
-class CommentsController < ApplicationController
+class CommentsController < AccountBaseAuthController
 
   def new
     @comment = Comment.new

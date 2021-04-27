@@ -3,6 +3,7 @@
 class Account::ProfilesController < AccountBaseAuthController
   def index
     @accounts = Account.where.not(id: current_account.id)
+    authorize @accounts
   end
 
   def show
@@ -26,6 +27,7 @@ class Account::ProfilesController < AccountBaseAuthController
 
   def edit
     @account = Account.find(params[:id])
+    authorize @account
   end
 
   def following

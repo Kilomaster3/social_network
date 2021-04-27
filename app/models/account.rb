@@ -50,6 +50,13 @@ class Account < ApplicationRecord
     end
   end
 
+  def admin?
+    role == 'admin'
+  end
+
+  def account?
+    role == 'account'
+  end
 
   def follow(other_user)
     following << other_user

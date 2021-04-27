@@ -53,6 +53,7 @@ gem 'elasticsearch-rails'
 gem 'searchkick'
 
 gem 'devise_masquerade'
+gem 'pundit'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 

@@ -1,4 +1,4 @@
-class MapsController < ApplicationController
+class MapsController < AccountBaseAuthController
   def index
     gon.locations = Account.all
   end

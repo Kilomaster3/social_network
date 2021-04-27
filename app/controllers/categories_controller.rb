@@ -1,4 +1,4 @@
-class CategoriesController < ApplicationController
+class CategoriesController < AccountBaseAuthController
   before_action :find_category, only: %i[edit update destroy]
 
   def index

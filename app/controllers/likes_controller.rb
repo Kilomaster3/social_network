@@ -1,4 +1,4 @@
-class LikesController < ApplicationController
+class LikesController < AccountBaseAuthController
   before_action :find_post
   before_action :find_like, only: [:destroy]
   include State

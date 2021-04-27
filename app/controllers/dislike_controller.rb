@@ -1,4 +1,4 @@
-class DislikeController < ApplicationController
+class DislikeController < AccountBaseAuthController
   before_action :find_post
   before_action :find_dislike, only: [:destroy]
   include State
