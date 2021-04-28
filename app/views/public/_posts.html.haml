@@ -33,8 +33,10 @@
                 %a.btn.btn-default#like_button{id: post.id}
                   %i.fa.fa-thumbs-up.icon#like_count{id: post.id}
                     = post.likes.count
-                %a.btn.btn-default.stat-item{href: edit_post_path(post)}
-                  %i.fa.fa-pencil.icon
+                - if policy(post).edit?
+                  %a.btn.btn-default.stat-item{href: edit_post_path(post)}
+                    %i.fa.fa-pencil.icon
             .post-footer
-              = link_to 'Delete', post_path(post), method: :delete, class: 'btn fa fa-times'
+              - if policy(post).destroy?
+                = link_to 'Delete', post_path(post), method: :delete, class: 'btn fa fa-times'
 

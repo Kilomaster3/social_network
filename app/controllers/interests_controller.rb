@@ -1,2 +1,2 @@
-class InterestsController < ApplicationController
+class InterestsController < AccountBaseAuthController
 end

@@ -1,4 +1,4 @@
-class AccountInterestsController < ApplicationController
+class AccountInterestsController < AccountBaseAuthController
   before_action :find_user
 
   def index

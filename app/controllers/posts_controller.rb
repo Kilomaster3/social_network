@@ -3,16 +3,19 @@ class PostsController < AccountBaseAuthController
 
   def index
     @posts = params[:tag] ? Post.includes(:account).tagged_with(params[:tag]) : Post.includes(:account).all
+    authorize @posts
   end
 
   def show; end
 
   def new
     @post = Post.new
+    authorize @post
   end
 
   def create
     @post = Post.new(post_params)
+    authorize @post
     if @post.save
       redirect_to posts_path
     else
@@ -20,7 +23,7 @@ class PostsController < AccountBaseAuthController
     end
   end
 
-  def edit; end
+  def edit ;end
 
   def update
     if @post.update_attributes(post_params)
@@ -74,6 +77,7 @@ class PostsController < AccountBaseAuthController
 
   def find_post
     @post = Post.find(params[:id])
+    authorize @post
   end
 
   def post_params

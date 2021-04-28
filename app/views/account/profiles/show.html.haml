@@ -9,8 +9,9 @@
               .mt-3
                 %h4
                   = @account.full_name
-                = link_to "Update Interests", account_interests_path, class: 'btn btn-outline-primary'
-                - if @account == current_account
+                - if policy(@account).update?
+                  = link_to "Update Interests", account_interests_path, class: 'btn btn-outline-primary'
+                - if policy(@account).edit?
                   = link_to "Edit account", edit_account_profile_path(@account), class: 'btn btn-outline-primary'
       .col-md-8
         - if @account != current_account
