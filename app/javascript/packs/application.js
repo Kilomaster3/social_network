@@ -19,7 +19,7 @@ import '../src/map'
 import '../src/interest'
 import '../src/menu'
 import '../src/like'
-import '../src/search'
+import '../src/flash'
 
 import $ from 'jquery';
 global.$ = jQuery;
