@@ -1,26 +1,28 @@
 .d-flex.flex-column.flex-md-row.align-items-center.p-3.px-md-4.mb-3.bg-body.border-bottom.shadow-sm
-  %h5.my-0.me-md-auto.font-weight-normal Social Network
+  %a.navbar-brand.my-0.me-md-auto.font-weight-normal.h3{href: root_path, style: 'color: black;'} Social Network
   - if account_signed_in?
     - if current_account.admin?
       .span
         Admin
-    = link_to 'Maps', maps_path
-    .dropdown
-    %button#dropdownMenuButton1.btn.btn-secondary.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", type: "button"}
-      Menu
-    %ul.dropdown-menu{"aria-labelledby" => "dropdownMenuButton1"}
-      %li
-        %a.dropdown-item{href: account_profile_path(current_account)} My Account
-      %li
-        %a.dropdown-item{href: posts_path } My Posts
-      - if policy(Post).new?
+    %ul.nav-item
+      .nav-item
+        - if policy(Post).new?
+          %a.nav-link.active{href: new_post_path, style: 'color: black;'} Create Posts
+      .nav-item
+        %a.nav-link{href: maps_path, style: 'color: black;'} Map
+    .nav-item.dropdown
+      %button#dropdownMenuButton1.btn.btn-secondary.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", type: "button"}
+        Menu
+      %ul.dropdown-menu{"aria-labelledby" => "dropdownMenuButton1"}
         %li
-          %a.dropdown-item{href: new_post_path} Create Posts
-      - if current_account.admin?
+          %a.dropdown-item{href: account_profile_path(current_account)} My Account
         %li
-          %a.dropdown-item{href: admin_accounts_path} Accounts
-      %li
-        = link_to "Sign Out" , destroy_account_session_path, method: :delete, class: 'dropdown-item'
+          %a.dropdown-item{href: posts_path } My Posts
+        - if policy(Account).index?
+          %li
+            %a.dropdown-item{href: admin_accounts_path} Accounts
+        %li
+          = link_to "Sign Out" , destroy_account_session_path, method: :delete, class: 'dropdown-item'
   - else
     = link_to 'Login', new_account_session_path, class: 'btn btn-lg btn-primary me-3'
     = link_to 'Sign Up', new_account_registration_path, class: 'btn btn-secondary btn-lg'
