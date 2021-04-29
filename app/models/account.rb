@@ -5,7 +5,7 @@ class Account < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :masqueradable, :recoverable, :rememberable, :validatable,
-         :confirmable, :omniauthable, omniauth_providers: %i[facebook]
+         :confirmable, :omniauthable, omniauth_providers: [:google_oauth2]
 
   has_one_attached :avatar
   has_many :posts
@@ -40,14 +40,17 @@ class Account < ApplicationRecord
 
   enum role: %i[account admin]
 
-  def self.from_omniauth(auth)
-    where(provider: auth.provider, uid: auth.uid).first_or_create do |account|
-      account.email = auth.info.email
-      account.password = Devise.friendly_token[0, 20]
-      account.first_name = auth.info.first_name
-      account.last_name = auth.info.last_name
-      account.skip_confirmation!
+  def self.from_omniauth(access_token)
+    data = access_token.info
+    account = Account.where(email: data['email']).first
+
+    unless account
+      account ||= Account.create(name: data['name'],
+                               email: data['email'],
+                               password: Devise.friendly_token[0,20]
+      )
     end
+    account
   end
 
   def admin?
@@ -68,13 +71,5 @@ class Account < ApplicationRecord
 
   def following?(other_user)
     following.include?(other_user)
-  end
-
-  def self.new_with_session(params, session)
-    super.tap do |account|
-      if (data = session['devise.facebook_data'] && session['devise.facebook_data']['extra']['raw_info'])
-        account.email = data['email'] if account.email.blank?
-      end
-    end
   end
 end
