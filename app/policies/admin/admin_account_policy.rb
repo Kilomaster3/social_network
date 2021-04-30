@@ -1,5 +1,7 @@
-class AdminAccountsPolicy < ApplicationPolicy
-  def index?
-    account.admin?
+module Admin
+  class AccountsPolicy < ApplicationPolicy
+    def index?
+      account.admin?
+    end
   end
 end
