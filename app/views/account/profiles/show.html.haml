@@ -40,4 +40,13 @@
                       = interest.name
                   - else
                     = interest.name
+        .stats
+          %a{href: "#{following_account_profile_path(@account)}"}
+            %strong#following.stat
+              = @account.following.count
+            Friends
+            %a{href: "#{followers_account_profile_path(@account)}"}
+              %strong#followers.stat
+                = @account.followers.count
+              Followers
 = render 'account/form/follow_form', account: @account if current_account

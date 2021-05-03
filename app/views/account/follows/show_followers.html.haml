@@ -1,4 +1,2 @@
 %h1 Followers
-- @accounts.each do |account|
-  = link_to account.full_name, account_profile_path
-
+= render partial: 'account/follows/form'
