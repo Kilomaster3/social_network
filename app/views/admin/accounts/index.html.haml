@@ -12,6 +12,7 @@
                     = account.full_name
                   = link_to "Edit Account", edit_account_profile_path(current_account), class: 'btn btn-outline-primary'
                   = link_to 'Impersonate', masquerade_path(account), class: 'btn btn-outline-primary'
+                  = render partial: 'account/online', locals: {account: account}
         .col-md-8
           .card.mb-3
             .card-body

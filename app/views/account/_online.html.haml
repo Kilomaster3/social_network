@@ -1,1 +1,4 @@
-= tag.li account.full_name, data: { id: account.id }
+- if account.last_seen_at && account.last_seen_at > 1.minutes.ago
+  online
+- else
+  offline
