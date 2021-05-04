@@ -13,6 +13,7 @@ require('popper.js');
 require('bootstrap');
 require("jquery-ui");
 import '../stylesheets/application.scss'
+require("@fortawesome/fontawesome-free");
 
 import '../src/send'
 import '../src/map'
@@ -20,6 +21,7 @@ import '../src/interest'
 import '../src/menu'
 import '../src/like'
 import '../src/flash'
+import '../src/dislike'
 
 import $ from 'jquery';
 global.$ = jQuery;

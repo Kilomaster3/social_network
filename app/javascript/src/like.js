@@ -1,5 +1,5 @@
-$(document).ready(function() {
-  $('[id*="like_button_"]').click((like) =>{
+$(document).on('turbolinks:load', function() {
+  $('.like-button').click((like) =>{
     let postId = like.target.id.replace('like_count_', '');
     let newLikesCount = parseInt($(like.target).text()) + 1;
     $(like.target).text(newLikesCount);

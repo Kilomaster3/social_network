@@ -30,9 +30,12 @@
               %h4.card-title= post.title
               %p.card-text= truncate(post.content, length: 60)
               .stats
-                %a.btn.btn-default#like_button{id: post.id}
+                %a.btn.btn-default.like-button#like_button{id: post.id}
                   %i.fa.fa-thumbs-up.icon#like_count{id: post.id}
                     = post.likes.count
+                %a.btn.btn-default.dislike-button#dislike_button{id: post.id}
+                  %i.fa.fa-thumbs-down.icon#dislike_count{id: post.id}
+                    = post.dislikes.count
                 - if policy(post).edit?
                   %a.btn.btn-default.stat-item{href: edit_post_path(post)}
                     %i.fa.fa-pencil.icon

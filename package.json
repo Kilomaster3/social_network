@@ -2,7 +2,7 @@
   "name": "social_network",
   "private": true,
   "dependencies": {
-    "@fortawesome/fontawesome-free": "^5.15.2",
+    "@fortawesome/fontawesome-free": "^5.15.3",
     "@googlemaps/js-api-loader": "^1.11.3",
     "@googlemaps/markerclustererplus": "^1.1.0",
     "@popperjs/core": "^2.9.1",

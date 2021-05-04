@@ -9,7 +9,7 @@ class LikesController < AccountBaseAuthController
 
   def create
     if already_state?
-      flash[:notice] = "You can't like more than once"
+      flash[:alert] = "You can't like more than once"
     else
       @post.likes.create(account_id: current_account.id)
     end

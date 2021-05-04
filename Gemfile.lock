@@ -145,6 +145,8 @@ GEM
     faraday-net_http (1.0.1)
     faraday-net_http_persistent (1.1.0)
     ffi (1.15.0)
+    font_awesome5_rails (1.4.0)
+      railties (>= 4.2)
     globalid (0.4.2)
       activesupport (>= 4.2.0)
     gon (6.4.0)
@@ -400,6 +402,7 @@ DEPENDENCIES
   elasticsearch-model
   elasticsearch-rails
   faker
+  font_awesome5_rails
   gon
   gravatar_image_tag
   haml
