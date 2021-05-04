@@ -1,15 +1,22 @@
-class DislikeController < AccountBaseAuthController
+class DislikesController < AccountBaseAuthController
   before_action :find_post
   before_action :find_dislike, only: [:destroy]
   include State
 
+  def index
+    @dislike = Dislike.includes(:account).all
+  end
+
   def create
     if already_state?
-      flash[:notice] = "You can't dislike more than once"
+      flash[:alert] = "You can't dislike more than once"
     else
       @post.dislikes.create(account_id: current_account.id)
     end
-    redirect_to post_path(@post)
+
+    respond_to do |format|
+      format.js
+    end
   end
 
   def destroy
@@ -27,7 +34,7 @@ class DislikeController < AccountBaseAuthController
     @post = Post.find(params[:post_id])
   end
 
-  def find_like
+  def find_dislike
     @dislike = @post.likes.find(params[:id])
   end
 end

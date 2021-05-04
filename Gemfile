@@ -42,8 +42,9 @@ gem 'omniauth'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-rails_csrf_protection'
 
+gem 'font_awesome5_rails'
 gem 'gon'
-gem "haml-rails"
+gem 'haml-rails'
 gem 'jquery-rails'
 gem 'public_activity'
 

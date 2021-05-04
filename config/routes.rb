@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     end
     resource :comments
     resources :likes, only: %i[create destroy]
-    resources :dislike, only: %i[create destroy]
+    resources :dislikes, only: %i[create destroy]
     collection do
       get :search_last
       get :most_comments
