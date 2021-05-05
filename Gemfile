@@ -49,9 +49,11 @@ gem 'jquery-rails'
 gem 'public_activity'
 
 gem 'bootstrap-typeahead-rails'
+gem 'bootstrap-will_paginate'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 gem 'searchkick'
+gem 'will_paginate'
 
 gem 'devise_masquerade'
 gem 'pundit'

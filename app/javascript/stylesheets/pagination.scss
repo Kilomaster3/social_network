@@ -1,0 +1,16 @@
+.pagination > li > a, .pagination > li > span {
+  background-color: #ccc;
+  padding: 8px 16px;
+  color: #fff;
+  text-decoration: none;
+}
+
+.pagination > li > a {
+  margin-right: 5px;
+  text-decoration: none;
+}
+
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
+  background-color: #FFD700;
+  text-decoration: none;
+}
