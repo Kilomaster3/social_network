@@ -43,28 +43,18 @@ class PostsController < AccountBaseAuthController
     end
   end
 
-  def recent
-    @posts = Post.recent
-    render action: :index
-  end
-
-  def oldest
-    @posts = Post.oldest
-    render action: :index
-  end
-
   def search_last
-    @posts = Post.search_last_post
+    @posts = Post.search_last_post.includes([:account])
     render action: :index
   end
 
   def most_comments
-    @posts = Post.most_comments
+    @posts = Post.most_comments.includes([:account])
     render action: :index
   end
 
   def most_likes
-    @posts = Post.most_likes
+    @posts = Post.most_likes.includes([:account])
     render action: :index
   end
 

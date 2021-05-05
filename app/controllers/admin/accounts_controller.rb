@@ -1,6 +1,6 @@
 class Admin::AccountsController < AccountBaseAuthController
   def index
-    @accounts = Account.all
+    @accounts = Account.includes([:interests]).all
     authorize @accounts
   end
 end

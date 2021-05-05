@@ -10,7 +10,7 @@ const loader = new Loader({
 loader.load().then(() => {
   const map = new google.maps.Map(document.getElementById("map"), {
     center: {lat: 53.90339315536, lng: 27.56036829948},
-    zoom: 10,
+    zoom: 12,
   });
 
   const Online = [
