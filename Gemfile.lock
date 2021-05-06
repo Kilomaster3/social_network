@@ -93,6 +93,8 @@ GEM
       msgpack (~> 1.0)
     bootstrap-typeahead-rails (0.10.5.1)
       railties (>= 3.0)
+    bootstrap-will_paginate (1.0.0)
+      will_paginate
     builder (3.2.4)
     bullet (6.1.4)
       activesupport (>= 3.0.0)
@@ -388,6 +390,7 @@ GEM
     websocket-driver (0.7.3)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
+    will_paginate (3.1.8)
     zeitwerk (2.4.2)
 
 PLATFORMS
@@ -397,6 +400,7 @@ DEPENDENCIES
   aws-sdk-s3
   bootsnap
   bootstrap-typeahead-rails
+  bootstrap-will_paginate
   bullet
   byebug
   cable_ready
@@ -437,6 +441,7 @@ DEPENDENCIES
   tzinfo-data
   web-console (>= 3.3.0)
   webpacker (~> 4.0)
+  will_paginate
 
 RUBY VERSION
    ruby 2.7.1p83

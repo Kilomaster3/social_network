@@ -43,3 +43,5 @@
                 = account.followers.count
               Followers
     = link_to "Back to Main Page", root_path, class: 'float-right btn btn-secondary'
+.pagination.justify-content-center
+  = will_paginate @accounts

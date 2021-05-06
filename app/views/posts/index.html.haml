@@ -33,4 +33,5 @@
           .post-footer
             - if policy(post).destroy?
               = link_to 'Delete', post_path(post), method: :delete, class: 'btn fa fa-times'
-
+.pagination.justify-content-center
+  = will_paginate @posts

@@ -2,7 +2,7 @@ class PostsController < AccountBaseAuthController
   before_action :find_post, only: %i[show edit update destroy]
 
   def index
-    @posts = params[:tag] ? Post.includes(:account).tagged_with(params[:tag]) : Post.includes(:account).all
+    @posts = Post.paginate(page: params[:page], per_page: 4).includes(:account).all
     authorize @posts
   end
 
@@ -23,7 +23,7 @@ class PostsController < AccountBaseAuthController
     end
   end
 
-  def edit ;end
+  def edit; end
 
   def update
     if @post.update_attributes(post_params)
@@ -44,17 +44,17 @@ class PostsController < AccountBaseAuthController
   end
 
   def search_last
-    @posts = Post.search_last_post.includes([:account])
+    @posts = Post.paginate(page: params[:page], per_page: 4).search_last_post.includes([:account])
     render action: :index
   end
 
   def most_comments
-    @posts = Post.most_comments.includes([:account])
+    @posts = Post.paginate(page: params[:page], per_page: 4).most_comments.includes([:account])
     render action: :index
   end
 
   def most_likes
-    @posts = Post.most_likes.includes([:account])
+    @posts = Post.paginate(page: params[:page], per_page: 4).most_likes.includes([:account])
     render action: :index
   end
 
