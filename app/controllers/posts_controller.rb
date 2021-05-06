@@ -2,7 +2,7 @@ class PostsController < AccountBaseAuthController
   before_action :find_post, only: %i[show edit update destroy]
 
   def index
-    @posts = Post.paginate(page: params[:page], per_page: 4).includes(:account).all
+    @posts = Post.paginate(page: params[:page], per_page: 4).includes(:account).published
     authorize @posts
   end
 
@@ -71,6 +71,6 @@ class PostsController < AccountBaseAuthController
   end
 
   def post_params
-    params.require(:post).permit(:title, :content, :image, :tag_list, :tag, { tag_ids: [] }, :tag_ids).merge(account: current_account)
+    params.require(:post).permit(:title, :content, :image, :published_at, :status, :tag_list, :tag, { tag_ids: [] }, :tag_ids).merge(account: current_account)
   end
 end

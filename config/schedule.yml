@@ -1,0 +1,5 @@
+daliy_not_seen_account:
+  cron: "0 0 * * *"
+  class: "NotificationMailerJob"
+
+

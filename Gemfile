@@ -53,7 +53,11 @@ gem 'bootstrap-will_paginate'
 gem 'elasticsearch-model'
 gem 'elasticsearch-rails'
 gem 'searchkick'
+gem 'whenever'
 gem 'will_paginate'
+
+gem 'sidekiq'
+gem 'sidekiq-cron'
 
 gem 'devise_masquerade'
 gem 'pundit'
