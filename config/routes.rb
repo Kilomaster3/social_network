@@ -1,3 +1,6 @@
+require 'sidekiq/web'
+require 'sidekiq/cron/web'
+
 Rails.application.routes.draw do
   devise_for :accounts, controllers: { omniauth_callbacks: 'account/omniauth_callbacks' }
   root to: 'public#home'
@@ -46,5 +49,5 @@ Rails.application.routes.draw do
 
   get 'tags/:tag', to: 'posts_activities#index', as: :tag
   get '/interests' => 'interests#index', as: :interests_root
-
+  mount Sidekiq::Web => '/sidekiq'
 end

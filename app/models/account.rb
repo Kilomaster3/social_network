@@ -28,6 +28,7 @@ class Account < ApplicationRecord
   has_many :interests, through: :accounts_interests
 
   # scope :online, ->{ where('last_seen_at > ?', 40.minutes.ago) }
+  scope :last_seen, -> { where('last_seen_at > ?', 7.days.ago) }
 
   def self.online
     ids = ActionCable.server.pubsub.redis_connection_for_subscriptions.smembers 'online'
@@ -45,9 +46,8 @@ class Account < ApplicationRecord
     account = Account.where(email: data['email']).first
 
     unless account
-      account ||= Account.create(name: data['name'],
-                               email: data['email'],
-                               password: Devise.friendly_token[0,20]
+      account ||= Account.create(email: data['email'],
+                                 password: Devise.friendly_token[0,20]
       )
     end
     account

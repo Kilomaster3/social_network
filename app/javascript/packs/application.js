@@ -22,6 +22,7 @@ import '../src/menu'
 import '../src/like'
 import '../src/flash'
 import '../src/dislike'
+import '../src/status'
 
 import $ from 'jquery';
 global.$ = jQuery;

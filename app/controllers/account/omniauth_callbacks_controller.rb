@@ -7,7 +7,7 @@ class Account::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       sign_in_and_redirect @account, event: :authentication
     else
       session['devise.google_data'] = request.env['omniauth.auth'].except('extra')
-      redirect_to new_account_registration_url, alert: @account.errors.full_messages.join("\n")
+      redirect_to root_path, alert: @account.errors.full_messages.join("\n")
     end
   end
 end
