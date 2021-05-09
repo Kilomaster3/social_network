@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Post < ApplicationRecord
   belongs_to :account
   has_many :taggings, dependent: :destroy
@@ -17,7 +19,7 @@ class Post < ApplicationRecord
   attr_accessor :status
 
   include PublicActivity::Model
-  tracked owner: ->(controller, model) { controller&.current_account }
+  tracked owner: ->(controller, _model) { controller&.current_account }
 
   include Elasticsearch::Model
   include Elasticsearch::Model::Callbacks

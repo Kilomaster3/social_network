@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class Account::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def google_oauth2
-    @account = Account.from_omniauth(request.env["omniauth.auth"])
+    @account = Account.from_omniauth(request.env['omniauth.auth'])
 
     if @account.persisted?
       flash[:notice] = I18n.t 'devise.omniauth_callbacks.success', kind: 'Google'

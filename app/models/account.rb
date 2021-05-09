@@ -39,7 +39,7 @@ class Account < ApplicationRecord
     "#{first_name} #{last_name}"
   end
 
-  enum role: %i[account admin]
+  enum role: { account: 0, admin: 1 }
 
   def self.from_omniauth(access_token)
     data = access_token.info
@@ -47,8 +47,9 @@ class Account < ApplicationRecord
 
     unless account
       account ||= Account.create(email: data['email'],
-                                 password: Devise.friendly_token[0,20]
-      )
+                                 password: Devise.friendly_token[0, 20])
+      account.skip_confirmation!
+      account.save!
     end
     account
   end

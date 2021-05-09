@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class PostsController < AccountBaseAuthController
   before_action :find_post, only: %i[show edit update destroy]
 
@@ -26,7 +28,7 @@ class PostsController < AccountBaseAuthController
   def edit; end
 
   def update
-    if @post.update_attributes(post_params)
+    if @post.update(post_params)
       flash[:success] = 'Post updated'
       redirect_to activities_path
     else
@@ -65,12 +67,13 @@ class PostsController < AccountBaseAuthController
 
   private
 
-  def find_post
-    @post = Post.find(params[:id])
-    authorize @post
-  end
+    def find_post
+      @post = Post.find(params[:id])
+      authorize @post
+    end
 
-  def post_params
-    params.require(:post).permit(:title, :content, :image, :published_at, :status, :tag_list, :tag, { tag_ids: [] }, :tag_ids).merge(account: current_account)
-  end
+    def post_params
+      params.require(:post).permit(:title, :content, :image, :published_at, :status, :tag_list, :tag,
+                                   { tag_ids: [] }, :tag_ids).merge(account: current_account)
+    end
 end

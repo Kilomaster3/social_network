@@ -1,8 +1,108 @@
+require:
+  - rubocop-rails
+  - rubocop-rspec
+
 AllCops:
   NewCops: enable
+  TargetRubyVersion: 2.7.1
+  Exclude:
+    - db/schema.rb
+    - bin/**/*
+    - tmp/**/*
+    - vendor/assets/**/*
+    - node_modules/**/*
+
+Layout/IndentationConsistency:
+  EnforcedStyle: indented_internal_methods
+
+Lint/Debugger:
+  AutoCorrect: False
+
+Style/ClassAndModuleChildren:
+  Exclude:
+    - test/test_helper.rb
+    - app/controllers/account/profiles_controller.rb
+    - app/controllers/account/omniauth_callbacks_controller.rb
 
 Style/Documentation:
   Enabled: false
 
 Style/IdenticalConditionalBranches:
+  Enabled: false
+
+Style/StructInheritance:
+  Exclude:
+    - app/policies/**/*
+
+Metrics/AbcSize:
+  Max: 20
+  Exclude:
+    - db/migrate/*
+    - app/controllers/account/omniauth_callbacks_controller.rb
+    - app/controllers/account_interests_controller.rb
+    - app/controllers/public_controller.rb
+
+Metrics/BlockLength:
+  IgnoredMethods: ['describe', 'context']
+  Exclude:
+    - lib/tasks/*.rake
+    - config/routes.rb
+    - config/**/*
+    - test/**/*
+    - db/seeds/**/*
+
+Layout/LineLength:
+  Max: 140
+  Exclude:
+    - Rakefile
+    - Gemfile
+    - config/**/*
+    - lib/tasks/**/*
+    - test/test_helper.rb
+    - db/migrate/*
+    - spec/**/*
+  IgnoredPatterns:
+    - (\A|\s)#
+
+Metrics/MethodLength:
+  Max: 20
+  Exclude:
+    - db/seeds.rb
+    - db/migrate/*
+    - test/test_helpers/*
+
+Metrics/ClassLength:
+  Exclude:
+    - db/migrate/*
+
+Metrics/ModuleLength:
+  Max: 120
+
+Rails:
+  Enabled: true
+
+Rails/BulkChangeTable:
+  Enabled: false
+
+Rails/HasAndBelongsToMany:
+  Enabled: false
+
+Rails/OutputSafety:
+  Exclude:
+    - test/**/*
+    - spec/**/*
+
+Rails/InverseOf:
+  Enabled: false
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
+Rails/SkipsModelValidations:
+  Enabled: false
+
+Rails/FilePath:
+  Enabled: false
+
+Rails/FindBy:
   Enabled: false

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class OnlineChannel < ApplicationCable::Channel
   def subscribed
     ActionCable.server.pubsub.redis_connection_for_subscriptions.sadd 'online', current_account.id

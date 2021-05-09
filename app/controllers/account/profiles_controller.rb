@@ -8,7 +8,8 @@ class Account::ProfilesController < AccountBaseAuthController
 
   def show
     @account = Account.find_by(id: params[:id])
-    @interests_match_percentage = (@account.interests & current_account.interests).count.to_f / (@account.interests | current_account.interests).count * 100
+    @interests_match_percentage = (@account.interests & current_account.interests).count.to_f / (@account.interests |
+      current_account.interests).count * 100
   end
 
   def new
@@ -16,8 +17,8 @@ class Account::ProfilesController < AccountBaseAuthController
   end
 
   def update
-    if current_account.update_attributes(account_params)
-      flash[:success] = 'Profile complete'
+    if current_account.update(account_params)
+      flash[:notice] = 'Profile complete'
       redirect_url = account_profile_path(current_account)
     else
       redirect_url = account_profile_path(current_account)
@@ -44,7 +45,8 @@ class Account::ProfilesController < AccountBaseAuthController
 
   private
 
-  def account_params
-    params.require(:account).permit(:email, :first_name, :last_name, :avatar, { interest_ids: [] }, :interest_ids)
-  end
+    def account_params
+      params.require(:account).permit(:email, :first_name, :last_name, :avatar, { interest_ids: [] },
+                                      :interest_ids)
+    end
 end

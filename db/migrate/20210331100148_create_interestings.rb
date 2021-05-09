@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CreateInterestings < ActiveRecord::Migration[6.0]
   def change
     create_table :interestings do |t|

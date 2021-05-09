@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class MessagesController < AccountBaseAuthController
   def index
     @message = Message.new
@@ -12,7 +14,7 @@ class MessagesController < AccountBaseAuthController
 
   private
 
-  def message_params
-    params.require(:message).permit(:body)
-  end
+    def message_params
+      params.require(:message).permit(:body)
+    end
 end

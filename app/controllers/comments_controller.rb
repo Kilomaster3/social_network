@@ -1,5 +1,6 @@
-class CommentsController < AccountBaseAuthController
+# frozen_string_literal: true
 
+class CommentsController < AccountBaseAuthController
   def new
     @comment = Comment.new
   end
@@ -18,7 +19,7 @@ class CommentsController < AccountBaseAuthController
 
   private
 
-  def comment_params
-    params.require(:comment).permit(:body)
-  end
+    def comment_params
+      params.require(:comment).permit(:body)
+    end
 end

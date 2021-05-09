@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ApplicationController < ActionController::Base
   include PublicActivity::StoreController
   include Pundit
@@ -34,4 +36,3 @@ class ApplicationController < ActionController::Base
     end
   end
 end
-
