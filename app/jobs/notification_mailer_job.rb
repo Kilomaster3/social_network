@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class NotificationMailerJob < ApplicationJob
   queue_as :default
 

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class LikesController < AccountBaseAuthController
   before_action :find_post
   before_action :find_like, only: [:destroy]
@@ -21,7 +23,7 @@ class LikesController < AccountBaseAuthController
 
   def destroy
     if already_state?
-      flash[:notice] = "Cannot unlike"
+      flash[:notice] = 'Cannot unlike'
     else
       @like.destroy
     end
@@ -30,11 +32,11 @@ class LikesController < AccountBaseAuthController
 
   private
 
-  def find_post
-    @post = Post.find(params[:post_id])
-  end
+    def find_post
+      @post = Post.find(params[:post_id])
+    end
 
-  def find_like
-    @like = @post.likes.find(params[:id])
-  end
+    def find_like
+      @like = @post.likes.find(params[:id])
+    end
 end

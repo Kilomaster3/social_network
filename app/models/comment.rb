@@ -1,6 +1,8 @@
+# frozen_string_literal: true
+
 class Comment < ApplicationRecord
   include PublicActivity::Model
-  tracked owner: ->(controller, model) { controller&.current_account }
+  tracked owner: ->(controller, _model) { controller&.current_account }
 
   belongs_to :post
   belongs_to :account

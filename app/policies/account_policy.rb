@@ -1,5 +1,6 @@
-class AccountPolicy < ApplicationPolicy
+# frozen_string_literal: true
 
+class AccountPolicy < ApplicationPolicy
   def index?
     owner? || account.admin?
   end

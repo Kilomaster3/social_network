@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class CategoriesController < AccountBaseAuthController
   before_action :find_category, only: %i[edit update destroy]
 
@@ -40,11 +42,11 @@ class CategoriesController < AccountBaseAuthController
 
   private
 
-  def find_category
-    @category = Category.find(params[:id])
-  end
+    def find_category
+      @category = Category.find(params[:id])
+    end
 
-  def category_params
-    params.require(:category).permit(:id, :name)
-  end
+    def category_params
+      params.require(:category).permit(:id, :name)
+    end
 end
