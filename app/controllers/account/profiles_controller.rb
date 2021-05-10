@@ -33,13 +33,13 @@ class Account::ProfilesController < AccountBaseAuthController
 
   def following
     @account = Account.find(params[:id])
-    @accounts = @account.following
+    @accounts = @account.following.paginate(page: params[:page], per_page: 6)
     render 'account/follows/show_friends'
   end
 
   def followers
     @account = Account.find(params[:id])
-    @accounts = @account.followers
+    @accounts = @account.followers.paginate(page: params[:page], per_page: 6)
     render 'account/follows/show_followers'
   end
 

@@ -1,8 +1,8 @@
 .container
   .main-body
-    .row.gutters-sm
-      .col-md-4.mb-3
-        - @accounts.each do |account|
+    .row
+      - @accounts.each do |account|
+        .col-md-4.mb-3
           .card
             .card-body
               .d-flex.flex-column.align-items-center.text-center
@@ -12,3 +12,4 @@
                     = link_to account.full_name, account_profile_path(account)
                     = render partial: 'account/online', locals: {account: account}
                   = link_to 'Write Message', messages_path, class: 'btn btn-outline-primary'
+= will_paginate @accounts

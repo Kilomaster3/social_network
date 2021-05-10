@@ -1,3 +1,3 @@
 = form_with(model: current_account.active_relationships.build, remote: true) do |f|
-  %div= hidden_field_tag :followed_id, account.id
+  %div= hidden_field_tag :followed_id, @account.id
   = f.submit "Follow", class: "btn btn-primary"
