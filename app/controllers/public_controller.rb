@@ -5,7 +5,7 @@ class PublicController < ApplicationController
     return unless current_account
 
     @accounts = Account.where.not(id: current_account.id)
-    @posts = Post.paginate(page: params[:page], per_page: 4).includes([:account])
+    @posts = Post.paginate(page: params[:page], per_page: 4).includes([:account]).includes([:comments])
     @friends_posts = Post.paginate(page: params[:page],
                                    per_page: 4).where(account_id: current_account.following.pluck(:id)).includes([:account])
     @activities = PublicActivity::Activity.order('created_at desc').where(owner_id: current_account.followers,

@@ -7,9 +7,6 @@ class CommentsController < AccountBaseAuthController
 
   def create
     @comment = Comment.new(comment_params)
-    @comment.account = current_account
-    @comment.post_id = params[:post_id]
-
     if @comment.save
       redirect_to posts_path(@comment.post)
     else
@@ -20,6 +17,6 @@ class CommentsController < AccountBaseAuthController
   private
 
     def comment_params
-      params.require(:comment).permit(:body)
+      params.require(:comment).permit(:body, :account_id, :post_id)
     end
 end

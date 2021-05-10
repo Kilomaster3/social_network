@@ -29,6 +29,8 @@
             .post-description
               %h4.card-title= post.title
               %p.card-text= truncate(post.content, length: 60)
+              - if policy(post).destroy?
+                = link_to 'Delete', post_path(post), method: :delete, class: 'btn fa fa-times'
               .stats
                 %a.btn.btn-default.like-button#like_button{id: post.id}
                   %i.fa.fa-thumbs-up.icon#like_count{id: post.id}
@@ -40,7 +42,23 @@
                   %a.btn.btn-default.stat-item{href: edit_post_path(post)}
                     %i.fa.fa-pencil.icon
             .post-footer
-              - if policy(post).destroy?
-                = link_to 'Delete', post_path(post), method: :delete, class: 'btn fa fa-times'
+              - post.comments.each do |comment|
+                .row
+                  .col-sm-3
+                    %img.img-circle{alt: "", src: "https://bootdey.com/img/Content/avatar/avatar6.png", width: "30"}/
+                    %p.card-text= comment.account.full_name
+                    %br/
+                  .col-sm-9
+                    %p.card-text= comment.body
+            .row
+              .col-sm-3
+                %img.pull-right{src: "https://bootdey.com/img/Content/avatar/avatar3.png", width: "30"}/
+              .col-sm-9
+                .input
+                  %form{action: ""}
+                  .input-group
+                    %input.form-control.rounded-corner.comment-body#commentBody{placeholder: "Write a comment...", type: "text", id: post.id}/
+                    %span.input-group-btn.p-l-10
+                      %button.btn.btn-primary.f-s-12.rounded-corner.comment-button#commentButton{id: "#{post.id}_#{current_account.id}"} Comment
 .pagination.justify-content-center
   = will_paginate posts
