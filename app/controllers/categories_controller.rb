@@ -24,7 +24,7 @@ class CategoriesController < AccountBaseAuthController
 
   def update
     if @category.update(category_params)
-      flash[:success] = 'Categories were updated'
+      flash[:notice] = 'Categories were updated'
       redirect_to root_path
     else
       render 'edit'
@@ -33,10 +33,10 @@ class CategoriesController < AccountBaseAuthController
 
   def destroy
     if @category.destroy
-      flash[:success] = 'Categories were deleted'
+      flash[:notice] = 'Categories were deleted'
       redirect_to categories_path
     else
-      flash[:success] = 'Categories were not deleted'
+      flash[:alert] = 'Categories were not deleted'
     end
   end
 
