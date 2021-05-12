@@ -17,10 +17,11 @@
         %li
           %a.dropdown-item{href: account_profile_path(current_account)} My Account
         %li
-          %a.dropdown-item{href: posts_path } My Posts
+          %a.dropdown-item{href: posts_path} My Posts
         - if policy(Account).index?
           %li
             %a.dropdown-item{href: admin_accounts_path} Accounts
+        - if policy(Category).index?
           %li
             %a.dropdown-item{href: categories_path} Update Categories
         %li

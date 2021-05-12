@@ -46,7 +46,7 @@ class PostsController < AccountBaseAuthController
   end
 
   def search_last
-    @posts = Post.paginate(page: params[:page], per_page: 4).search_last_post.includes([:account])
+    @posts = Post.paginate(page: params[:page], per_page: 4).search_last_post.includes([:account]).includes([:comments])
     render action: :index
   end
 
@@ -56,7 +56,7 @@ class PostsController < AccountBaseAuthController
   end
 
   def most_likes
-    @posts = Post.paginate(page: params[:page], per_page: 4).most_likes.includes([:account])
+    @posts = Post.paginate(page: params[:page], per_page: 4).most_likes.includes([:account]).includes([:comments])
     render action: :index
   end
 

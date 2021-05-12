@@ -5,6 +5,7 @@ class CategoriesController < AccountBaseAuthController
 
   def index
     @categories = Category.includes(:interests).all
+    authorize @categories
   end
 
   def new
@@ -25,7 +26,7 @@ class CategoriesController < AccountBaseAuthController
   def update
     if @category.update(category_params)
       flash[:notice] = 'Categories were updated'
-      redirect_to root_path
+      redirect_to categories_path
     else
       render 'edit'
     end

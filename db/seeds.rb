@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Generate accounts
 10.times do
   account = Account.create(
@@ -8,7 +10,7 @@
     password_confirmation: '123456',
     confirmed_at: Time.now.utc,
     latitude: rand(53.8924818..53.9025719),
-    longitude: rand(27.5782749..27.5474400)
+    longitude: rand(27.5474400..27.5782749)
   )
 
   # Generate posts
@@ -50,8 +52,9 @@ accounts.each_with_index do |account, index|
   end
 end
 
+# Generate Category
 5.times do
-  Category.create!(
+  category = Category.create!(
     name: Faker::Vehicle.manufacture
   )
   Interest.create!(
