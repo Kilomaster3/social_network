@@ -3,7 +3,10 @@
   %h3
     INTERESTING INFO
   %p
-    = @post
+    - @posts.each do |post|
+      = post.title
+      %br/
+      = post.content
     🐈
   %br/
   %br/

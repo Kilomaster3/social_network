@@ -20,6 +20,9 @@
           .post-description
             %h4.card-title= post.title
             %p.card-text= truncate(post.content, length: 60)
+            - post.comments.each do |comment|
+              %p.card-text= comment.account.full_name
+              %p.card-text= comment.body
             .stats
               %a.btn.btn-default.like-button#like_button{id: post.id}
                 %i.fa.fa-thumbs-up.icon#like_count{id: post.id}

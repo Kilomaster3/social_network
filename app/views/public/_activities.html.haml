@@ -5,7 +5,7 @@
     - like = likes.select { |like| like.id == activity.trackable_id }.first
     = link_to activity.owner.full_name, account_profile_path(activity.owner) if activity.owner
     liked
-    = link_to 'Post', post_path(like.post_id)
+    = link_to 'Post', post_path(like&.post_id)
     %br
   - elsif activity.trackable_type == 'Post'
     = link_to activity.owner.full_name, account_profile_path(activity.owner) if activity.owner
