@@ -50,6 +50,15 @@ accounts.each_with_index do |account, index|
   end
 end
 
+5.times do
+  Category.create!(
+    name: Faker::Vehicle.manufacture
+  )
+  Interest.create!(
+    name: Faker::Vehicle.make,
+    category_id: category.id
+  )
+end
 
 # Generate Likes && Dislikes
 accounts.each do |account|

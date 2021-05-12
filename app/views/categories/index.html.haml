@@ -1,12 +1,23 @@
-%h1.mt-auto Сategories
-.row
-  - @categories.each do |category|
+.container
+- @categories.each do |category|
+  .row.row-cols-auto
+    %h1.col-sm-10.col-12 Сategories
+    .col
+      .dropdown
+        %button#dropdownMenuButton2.btn.btn-primary.dropdown-toggle{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", type: "button"}
+          Menu
+        %ul.dropdown-menu{"aria-labelledby" => "dropdownMenuButton2"}
+          %li
+            %a.dropdown-item{href: edit_category_path(category) } Update Category Name
+          %li
+            = link_to 'Delete Category', category_path(category), method: :delete, class: 'btn btn-danger dropdown-item'
+  .row
     .col-md-4
       .card
         .card-body
-          %h5.card-title= link_to category.name, edit_category_path(category)
-          %p.card-text
-            - category.interests.each do |interest|
-              = interest.name
-            %br
-              = link_to 'Delete Category', category_path(category), method: :delete
+          .col-md-auto
+            %h5.card-title= category.name
+            %p.card-text
+              - category.interests.each do |interest|
+                = interest.name
+
