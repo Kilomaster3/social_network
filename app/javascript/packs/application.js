@@ -23,6 +23,7 @@ import '../src/like'
 import '../src/flash'
 import '../src/dislike'
 import '../src/status'
+import '../src/comment'
 
 import $ from 'jquery';
 global.$ = jQuery;

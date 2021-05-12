@@ -1,15 +1,6 @@
-# frozen_string_literal: true
-
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
-2.times do
-  Account.create(
+# Generate accounts
+10.times do
+  account = Account.create(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: Faker::Internet.email,
@@ -19,6 +10,44 @@
     latitude: rand(53.8924818..53.9025719),
     longitude: rand(27.5782749..27.5474400)
   )
+
+  # Generate posts
+  5.times do
+    Post.create(
+      title: Faker::GreekPhilosophers.name,
+      content: Faker::GreekPhilosophers.quote,
+      account_id: account.id
+    )
+  end
+end
+
+# Generate admin account
+Account.create(
+  first_name: 'Admin',
+  last_name: 'Admin',
+  email: 'admin@admin.admin',
+  password: '12345678',
+  password_confirmation: '12345678',
+  confirmed_at: Time.now.utc,
+  latitude: rand(53.8924818..53.9025719),
+  longitude: rand(27.5782749..27.5474400),
+  role: :admin
+)
+
+accounts = Account.all
+
+# Generate Followers
+accounts.each_with_index do |account, index|
+  3.times do |time|
+    followed = accounts[index + time + 1]
+
+    next unless followed
+
+    Relationship.create!(
+      follower_id: account.id,
+      followed_id: followed.id
+    )
+  end
 end
 
 5.times do
@@ -31,12 +60,27 @@ end
   )
 end
 
-# {Tag.create(name: 'Recipe')
-# Tag.create(name: 'Travel')
-# Tag.create(name: 'News')
-# Tag.create(name: 'Humour')
+# Generate Likes && Dislikes
+accounts.each do |account|
+  foreign_posts = Post.where.not(account_id: account.id)
 
-# Interest.create(name: 'Bnw')
-# Interest.create(name: 'Mers')
-# Interest.create(name: 'Subary')
-# Interest.create(name: 'Mazda')
+  liked_posts = foreign_posts.sample(10)
+
+  # Create Like
+  liked_posts.each do |post|
+    Like.create!(
+      post_id: post.id,
+      account_id: account.id
+    )
+  end
+
+  disliked_posts = (foreign_posts - liked_posts).sample(5)
+
+  # Create Dislike
+  disliked_posts.each do |post|
+    Dislike.create!(
+      post_id: post.id,
+      account_id: account.id
+    )
+  end
+end
