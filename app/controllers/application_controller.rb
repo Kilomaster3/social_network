@@ -35,4 +35,10 @@ class ApplicationController < ActionController::Base
       account_interests_path
     end
   end
+
+  def user_not_authorized(exception)
+    flash[:alert] = exception.policy.try(:error_message) || 'You do not have such rights'
+
+    redirect_to root_path
+  end
 end

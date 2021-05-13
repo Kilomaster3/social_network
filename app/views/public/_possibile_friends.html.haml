@@ -1,16 +1,17 @@
 .container
   .main-body
+    %h2.text-center.mb-4 Possible Friends
     .row
-      #profile-friends.tab-pane.fade.in.active.show
-        %h2.text-center Possible Friends
-        - @possibile_friends.each do |possibile_friend|
-          .col-md-4.mb-3
-            .card
-              .card-body
-                .d-flex.flex-column.align-items-center.text-center
-                  %img.rounded-circle{alt: "Admin", src: "https://bootdey.com/img/Content/avatar/avatar7.png", width: "150"}/
-                  .mt-3
-                    %h4
-                      %a.profile-link{href: account_profile_path(possibile_friend)}
-                        = possibile_friend.full_name
-                      = render partial: 'account/online', locals: {account: account}
+      - @possibile_friends.each do |possibile_friend|
+        .col-md-4
+          .card
+            .card-body
+              .d-flex.flex-column.align-items-center.text-center
+                %img.rounded-circle{alt: "Admin", src: "https://bootdey.com/img/Content/avatar/avatar7.png", width: "150"}/
+                .mt-3
+                  %h4
+                    %a.profile-link{href: account_profile_path(possibile_friend)}
+                      = possibile_friend.full_name
+                    = render partial: 'account/online', locals: {account: account}
+.pagination.justify-content-center
+  = will_paginate @possibile_friends
