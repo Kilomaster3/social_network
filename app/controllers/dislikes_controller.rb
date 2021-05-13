@@ -11,13 +11,10 @@ class DislikesController < AccountBaseAuthController
 
   def create
     if already_state?
-      flash[:alert] = "You can't dislike more than once"
+      render json: { error: 'Already Taken' }, status: :unprocessable_entity
     else
       @post.dislikes.create(account_id: current_account.id)
-    end
-
-    respond_to do |format|
-      format.js
+      render json: { dislikes_count: @post.dislikes.count }
     end
   end
 
@@ -37,6 +34,6 @@ class DislikesController < AccountBaseAuthController
     end
 
     def find_dislike
-      @dislike = @post.likes.find(params[:id])
+      @dislike = @post.dislikes.find(params[:id])
     end
 end

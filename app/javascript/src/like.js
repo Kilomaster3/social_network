@@ -1,14 +1,6 @@
 $(document).on('turbolinks:load', function() {
   $('.like-button').click((like) =>{
-    let postId = like.target.id.replace('like_count_', '');
-    let newLikesCount = parseInt($(like.target).text()) + 1;
-    $(like.target).text(newLikesCount);
-
-    $('[id*="like_count_"]').each((index,  like) => {
-      if(like.target){
-        $('[id*="like_button_"]').text(newLikesCount)
-      }
-    });
+    let postId = like.currentTarget.id.replace('like_button_', '');
 
     $.ajax({
       type: 'POST',
@@ -18,6 +10,14 @@ $(document).on('turbolinks:load', function() {
       },
       headers: {
         "X-CSRF-Token": document.getElementsByName('csrf-token')[0].content
+      },
+      success: (data) => {
+        alert('Like added')
+        let counter = $('#like_count_' + postId)[0];
+        $(counter).text(data.likes_count)
+      },
+      error: (xhr) => {
+        alert(xhr.responseJSON.error)
       }
     });
   });

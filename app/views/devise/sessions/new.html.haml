@@ -5,7 +5,7 @@
         .card
           .card-body
             .col-xs-12.col-sm-8.offset-sm-2
-              %h1.mt-3 Login or #{render 'devise/shared/google'}
+              %h1.mt-3= I18n.t('Login')
               = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
                 = f.error_notification
                 .form-inputs.mt-3
@@ -18,5 +18,7 @@
                     input_html: { autocomplete: "current-password", class: 'mb-3' }
                   = f.input :remember_me, as: :boolean if devise_mapping.rememberable?
                 .form-actions
-                  = f.button :submit, "Log in", class: "btn btn-lg btn-primary mt-3"
-                Click here if you forgot your password #{render 'devise/shared/forgot_password'}
+                  = f.button :submit, I18n.t('Login'), class: "btn btn-lg btn-primary mt-3"
+                  #{render 'devise/shared/google_login'}
+                = I18n.t('Click here if you forgot your password')
+                #{render 'devise/shared/forgot_password'}

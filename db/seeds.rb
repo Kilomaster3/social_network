@@ -57,10 +57,12 @@ end
   category = Category.create!(
     name: Faker::Vehicle.manufacture
   )
-  Interest.create!(
-    name: Faker::Vehicle.make,
-    category_id: category.id
-  )
+  5.times do
+    Interest.create!(
+      name: Faker::Vehicle.make,
+      category_id: category.id
+    )
+  end
 end
 
 # Generate Likes && Dislikes
