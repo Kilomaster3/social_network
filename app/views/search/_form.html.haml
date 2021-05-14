@@ -1,0 +1,5 @@
+= form_for :search_posts, url: search_path, method: :get do |form|
+  .container-fluid
+    .d-flex
+      = form.text_field :query, value: params[:search_posts].presence && params[:search_posts][:query], placeholder: "Search", class: 'form-control me-2'
+      = form.submit 'Search', class: 'btn btn-outline-success'

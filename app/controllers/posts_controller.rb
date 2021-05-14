@@ -60,11 +60,6 @@ class PostsController < AccountBaseAuthController
     render action: :index
   end
 
-  def search
-    query = params[:search_posts].presence && params[:search_posts][:query]
-    @posts = Post.search_post(query) if query
-  end
-
   private
 
     def find_post

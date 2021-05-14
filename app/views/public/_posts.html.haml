@@ -1,6 +1,4 @@
 .container
-  %p
-    Press #{link_to 'here', search_posts_path} to search for posts.
   .row.justify-content-md-center
     .col.col-lg-2
       %ul.nav.flex-column
@@ -16,21 +14,21 @@
         .col-sm-12
           .panel.panel-white.post
             .post-heading
+              - if policy(post).destroy?
+                = link_to 'Delete', post_path(post), method: :delete, class: ' btn fa fa-times', style: 'margin-left: 63.5%; color: black; text-decoration: none;'
               .pull-left.image
                 %img.img-circle.avatar{alt: "user profile image", src: "https://bootdey.com/img/Content/avatar/avatar1.png"}/
               .pull-left.meta
                 .title.h5
                   %a{href: account_profile_path(post.account)}
                     %b= post.account.full_name
-                  create post.
+                  create post
                 %h6.text-muted.time #{time_ago_in_words(post.created_at)} ago
             .post-image
               = link_to(image_tag(post.image.thumb.url, alt: 'Image'), post.image.url, target: '_blank') if post.image?
             .post-description
               %h4.card-title= post.title
               %p.card-text= truncate(post.content, length: 60)
-              - if policy(post).destroy?
-                = link_to 'Delete', post_path(post), method: :delete, class: 'btn fa fa-times'
               .stats
                 %a.btn.btn-default.like-button#like_button{id: post.id}
                   %i.fa.fa-thumbs-up.icon#like_count{id: post.id}
@@ -41,6 +39,7 @@
                 - if policy(post).edit?
                   %a.btn.btn-default.stat-item{href: edit_post_path(post)}
                     %i.fa.fa-pencil.icon
+                      Edit
             .post-footer
               - post.comments.each do |comment|
                 .row

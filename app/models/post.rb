@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require 'elasticsearch/model'
+
 class Post < ApplicationRecord
   belongs_to :account
   has_many :taggings, dependent: :destroy
