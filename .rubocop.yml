@@ -23,6 +23,7 @@ Style/ClassAndModuleChildren:
     - test/test_helper.rb
     - app/controllers/account/profiles_controller.rb
     - app/controllers/account/omniauth_callbacks_controller.rb
+    - app/policies/admin/account_policy.rb
 
 Style/Documentation:
   Enabled: false
