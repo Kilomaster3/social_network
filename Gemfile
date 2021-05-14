@@ -63,6 +63,9 @@ gem 'sidekiq-cron'
 
 gem 'devise_masquerade'
 gem 'pundit'
+
+gem 'rails-i18n'
+
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', require: false
 

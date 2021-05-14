@@ -5,7 +5,13 @@ require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
   devise_for :accounts, controllers: { omniauth_callbacks: 'account/omniauth_callbacks' }
+
+  scope '(:locale)', locale: I18n.available_locales.join('|') do
+    get '/interests' => 'interests#index', as: :interests_root
+  end
+
   root to: 'public#home'
+
   resources :dashboard, only: %i[index create]
 
   resources :messages, only: %i[index create]
@@ -50,6 +56,5 @@ Rails.application.routes.draw do
   end
 
   get 'tags/:tag', to: 'posts_activities#index', as: :tag
-  get '/interests' => 'interests#index', as: :interests_root
   mount Sidekiq::Web => '/sidekiq'
 end

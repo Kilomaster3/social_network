@@ -1,0 +1,22 @@
+ru:
+  Sign Up Today: "Зарегистрироваться Сегодня!"
+  Click here: "Нажмите здесь, чтобы начать"
+  Sign Up Now: "Зарегистрироваться сейчас"
+  Login: 'Вход'
+  Sign Up: 'Регестрация'
+  Already have account?: 'Уже есть аккаунт?'
+  Click here if you forgot your password: 'Нажмите сюда, если вы забыли пароль'
+  Reset Password: 'Забыли пароль?'
+
+  simple_form:
+    labels:
+      defaults:
+        email: 'Почта'
+        password: 'Пароль'
+        password_confirmation: 'Подтверждение пароля'
+        remember_me: 'Запомни меня'
+    placeholders:
+      defaults:
+        email: 'example@gmail.com'
+        password: 'Минимум 6 символов'
+

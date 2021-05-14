@@ -11,13 +11,10 @@ class LikesController < AccountBaseAuthController
 
   def create
     if already_state?
-      flash[:alert] = "You can't like more than once"
+      render json: { error: 'Already Taken' }, status: :unprocessable_entity
     else
       @post.likes.create(account_id: current_account.id)
-    end
-
-    respond_to do |format|
-      format.js
+      render json: { likes_count: @post.likes.count }
     end
   end
 

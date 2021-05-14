@@ -5,7 +5,7 @@
         .card
           .card-body
             .col-xs-12.col-sm-8.offset-sm-2
-              %h1.mt-3 Sign up via #{render 'devise/shared/google'}
+              %h1.mt-2= t('Sign Up')
               = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
                 = f.error_notification
                 .form-inputs.mt-3
@@ -13,9 +13,11 @@
                     autofocus: true,
                     input_html: { autocomplete: "email", class: 'mb-3', placeholder: 'example@gmail.com'}
                   = f.input :password,
-                    input_html: { autocomplete: "new-password", class: 'mb-3', placeholder: '6 characters minimum' }
+                    input_html: { autocomplete: "new-password", class: 'mb-3', placeholder: I18n.t('simple_form.placeholders.defaults.password') }
                   = f.input :password_confirmation,
                     input_html: { autocomplete: "new-password", class: 'mb-3' }
                 .form-actions.mt-3
-                  = f.button :submit, "Sign up", class: "btn btn-lg btn-primary"
-                Alredy have account? #{ render "devise/shared/link" }
+                  = f.button :submit, I18n.t('Sign Up'), class: "btn btn-lg btn-primary mb-3"
+                  #{render 'devise/shared/google'}
+                = I18n.t('Already have account?')
+                #{ render "devise/shared/link" }

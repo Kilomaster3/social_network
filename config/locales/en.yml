@@ -30,4 +30,23 @@
 # available at https://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  Sign Up Today: "Sign Up Today!"
+  Click here: "Click here to get start"
+  Sign Up Now: "Sign Up Now"
+  Login: 'Login'
+  Sign Up: 'Sign Up'
+  Already have account?: 'Already have account'
+  Click here if you forgot your password: 'Click here if you forgot your password'
+  Reset Password: 'Reset Password'
+
+  simple_form:
+    labels:
+      defaults:
+        email: 'Email'
+        password: 'Password'
+        password_confirmation: 'Password confirmation'
+        remember_me: 'Remember me'
+    placeholders:
+      defaults:
+        email: 'example@gmail.com'
+        password: '6 characters minimum'

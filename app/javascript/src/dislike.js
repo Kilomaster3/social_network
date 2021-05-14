@@ -1,14 +1,6 @@
 $(document).on('turbolinks:load', function() {
   $('.dislike-button').click((dislike) =>{
-    let postId = dislike.target.id.replace('dislike_count_', '');
-    let newDislikesCount = parseInt($(dislike.target).text()) + 1;
-    $(dislike.target).text(newDislikesCount);
-
-    $('[id*="dislike_count_"]').each((index,  dislike) => {
-      if(dislike.target){
-        $('[id*="dislike_button_"]').text(newDislikesCount)
-      }
-    });
+    let postId = dislike.currentTarget.id.replace('dislike_button_', '');
 
     $.ajax({
       type: 'POST',
@@ -18,6 +10,14 @@ $(document).on('turbolinks:load', function() {
       },
       headers: {
         "X-CSRF-Token": document.getElementsByName('csrf-token')[0].content
+      },
+      success: (data) => {
+        alert('Dislike added')
+        let counter = $('#dislike_count_' + postId)[0];
+        $(counter).text(data.dislikes_count)
+      },
+      error: (xhr) => {
+        alert(xhr.responseJSON.error)
       }
     });
   });
