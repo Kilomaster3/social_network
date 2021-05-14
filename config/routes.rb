@@ -42,9 +42,6 @@ Rails.application.routes.draw do
   resources :activities, only: %i[index]
 
   resources :posts do
-    collection do
-      get :search
-    end
     resource :comments
     resources :likes, only: %i[create destroy]
     resources :dislikes, only: %i[create destroy]
@@ -56,5 +53,6 @@ Rails.application.routes.draw do
   end
 
   get 'tags/:tag', to: 'posts_activities#index', as: :tag
+  get 'search', to: 'search#search'
   mount Sidekiq::Web => '/sidekiq'
 end

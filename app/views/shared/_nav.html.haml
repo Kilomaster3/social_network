@@ -1,11 +1,22 @@
 .d-flex.flex-column.flex-md-row.align-items-center.p-3.px-md-4.mb-3.bg-body.border-bottom.shadow-sm
   %a.navbar-brand.my-0.me-md-auto.font-weight-normal.h3{href: root_path, style: 'color: black;'} Social Network
-  %a.nav-link.active{href: root_path(locale: :en), class: 'me-3', style: 'color: black;'} English
-  %a.nav-link.active{href: root_path(locale: :ru), class: 'me-3', style: 'color: black;'} Русский
+  .btn-group
+    %button.btn.btn-primary.dropdown-toggle.me-4{"aria-expanded" => "false", "data-bs-toggle" => "dropdown", type: "button"}
+      Change language
+    %ul.dropdown-menu
+      %li
+        %a.dropdown-item{href: root_path(locale: :en), style: 'color: black;'}
+          %span.flag-icon.flag-icon-us
+            English
+      %li
+        %a.dropdown-item{href: root_path(locale: :ru), style: 'color: black;'}
+          %span.flag-icon.flag-icon-de
+          Русский
   - if account_signed_in?
     - if current_account.admin?
       .span
         Admin
+      = render 'search/form'
     %ul.nav-item
       .nav-item
         - if policy(Post).new?
