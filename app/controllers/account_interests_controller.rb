@@ -22,7 +22,7 @@ class AccountInterestsController < AccountBaseAuthController
     end
   end
 
-  def max_connection
+  def connection
     @all_accounts = Account.where.not(id: current_account.id)
 
     data = @all_accounts.map do |account|

@@ -7,14 +7,18 @@
         .container
           .form-check-inline
             %label.form-check-label
+              %input.form-check-input{name: "tour", type: "radio", value: "current location"}
+              Current Location
+          .form-check-inline
+            %label.form-check-label
               %input.form-check-input{name: "tour", type: "radio", value: "online"}
               Online
           .form-check-inline
             %label.form-check-label
-              %input.form-check-input{name: "tour", type: "radio", value: "max connection"}
-              Max Connection
-          .form-check-inline
-            %label.form-check-label
               %input.form-check-input{name: "tour", type: "radio", value: "connection"}
               Connection
+          .form-check-inline
+            %label.form-check-label
+              %input.form-check-input{name: "tour", type: "radio", value: "max connection"}
+              Max Connection
         .container#map
