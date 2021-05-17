@@ -4,7 +4,7 @@ class PostsController < AccountBaseAuthController
   before_action :find_post, only: %i[show edit update destroy]
 
   def index
-    @posts = Post.paginate(page: params[:page], per_page: 4).includes(:account).published
+    @posts = Post.paginate(page: params[:page], per_page: 4).includes(:account).includes([:tags]).published
     authorize @posts
   end
 
@@ -12,6 +12,7 @@ class PostsController < AccountBaseAuthController
 
   def new
     @post = Post.new
+    @post.tags.build
     authorize @post
   end
 
@@ -29,7 +30,7 @@ class PostsController < AccountBaseAuthController
 
   def update
     if @post.update(post_params)
-      flash[:success] = 'Post updated'
+      flash[:notice] = 'Post updated'
       redirect_to activities_path
     else
       render 'edit'
@@ -38,10 +39,10 @@ class PostsController < AccountBaseAuthController
 
   def destroy
     if @post.destroy
-      flash[:success] = 'Post deleted'
+      flash[:notice] = 'Post deleted'
       redirect_back(fallback_location: root_path)
     else
-      flash[:danger] = 'Post were not deleted'
+      flash[:alert] = 'Post were not deleted'
     end
   end
 
@@ -68,7 +69,6 @@ class PostsController < AccountBaseAuthController
     end
 
     def post_params
-      params.require(:post).permit(:title, :content, :image, :published_at, :status, :tag_list, :tag,
-                                   { tag_ids: [] }, :tag_ids).merge(account: current_account)
+      params.require(:post).permit(:title, :content, :image, :published_at, :status, tags_attributes: [:name]).merge(account: current_account)
     end
 end

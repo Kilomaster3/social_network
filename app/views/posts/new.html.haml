@@ -1,12 +1,20 @@
 .col-md-8.offset-2
-  %h1.text-center New Blog Post
+  %h1.text-center New Post
   = simple_form_for @post, url: posts_path do |f|
     = f.input :title
-    = f.input :content
-    = f.input :tag_ids, as: :select, collection: Tag.order(:name), label_method: :name, input_html: {multiple: true}
-    = f.label :image
-    = f.file_field :image
-    = f.select :status, ['Publish write now', 'Publish via'], selected: status_for(@post), class: 'form-select'
+    = f.input :content, class: "mb-4"
+    .form-group
+    = f.fields_for :tags do |tf|
+      = tf.label :name, "Tags"
+      = tf.text_field :name, id: "tag-autocomplete", class: "form-control"
+    = f.label :name, 'Post it now or later?'
+    .mt-1
+      = f.select :status, ['Publish write now', 'Publish via'], selected: status_for(@post)
     .published-field
       = f.datetime_select :published_at, discard_year: true, discard_month: true
-    = f.submit "Create Post", class: 'btn btn-lg btn-primary float-right'
+    %label.btn.btn-primary.mt-3
+      Add some photo!
+      %span{style: "display:none;"}
+        = f.file_field :image, required: true, multiple: true, name: 'picture'
+    .mt-3
+      = f.submit "Create Post", class: 'btn btn-lg btn-primary float-right'

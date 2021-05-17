@@ -16,8 +16,8 @@
   # Generate posts
   5.times do
     Post.create(
-      title: Faker::GreekPhilosophers.name,
-      content: Faker::GreekPhilosophers.quote,
+      title: Faker::DcComics.hero,
+      content: Faker::DcComics.title,
       account_id: account.id
     )
   end
@@ -86,6 +86,13 @@ accounts.each do |account|
     Dislike.create!(
       post_id: post.id,
       account_id: account.id
+    )
+  end
+
+  # Generate Tags
+  5.times do
+    Tag.create!(
+      name: Faker::ProgrammingLanguage.name
     )
   end
 end

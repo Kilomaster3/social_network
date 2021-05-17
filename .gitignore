@@ -46,3 +46,6 @@ package-lock.json
 
 # Ignore .env file
 /.env
+
+# Ignore yarn.lock file
+yarn.lock

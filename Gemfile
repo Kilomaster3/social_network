@@ -48,6 +48,7 @@ gem 'font_awesome5_rails'
 gem 'gon'
 gem 'haml-rails'
 gem 'jquery-rails'
+gem 'jquery-ui-rails'
 gem 'public_activity'
 
 gem 'bootstrap-typeahead-rails'
