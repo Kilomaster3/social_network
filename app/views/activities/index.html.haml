@@ -1,19 +1,22 @@
-%h1.text-center Resent Activity
-- @activities.each do |activity|
-  .activity
-  - if activity.trackable_type == 'Like'
-    - like = @likes.select { |like| like.id == activity.trackable_id }.first
-    = link_to activity.owner.full_name, account_profile_path(activity.owner) if activity.owner
-    liked
-    = link_to 'Post', post_path(like.post_id)
-    %br
-  - elsif activity.trackable_type == 'Post'
-    = link_to activity.owner.full_name, account_profile_path(activity.owner) if activity.owner
-    created post
-    = link_to 'Post', post_path(activity.trackable)
-    %br
-  - elsif activity.trackable_type == 'Comment'
-    = link_to activity.owner.full_name, account_profile_path(activity.owner) if activity.owner
-    added comment to
-    = link_to 'Post', post_path(activity.trackable)
-    %br
+= render partial: 'public/menu', locals: { current_page: :resent_activity }
+.container
+  .main-body
+    %h2.text-center.mb-4 Resent Activity
+    - @activities.each do |activity|
+      .activity
+      - if activity.trackable_type == 'Like'
+        - like = @likes.select { |like| like.id == activity.trackable_id }.first
+        = link_to activity.owner.full_name, account_profile_path(activity.owner) if activity.owner
+        liked
+        = link_to 'Post', post_path(like.post_id)
+        %br
+      - elsif activity.trackable_type == 'Post'
+        = link_to activity.owner.full_name, account_profile_path(activity.owner) if activity.owner
+        created post
+        = link_to 'Post', post_path(activity.trackable)
+        %br
+      - elsif activity.trackable_type == 'Comment'
+        = link_to activity.owner.full_name, account_profile_path(activity.owner) if activity.owner
+        added comment to
+        = link_to 'Post', post_path(activity.trackable)
+        %br

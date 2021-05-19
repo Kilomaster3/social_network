@@ -49,8 +49,11 @@ Rails.application.routes.draw do
       get :search_last
       get :most_comments
       get :most_likes
+      get :friends_post
     end
   end
+
+  resources :possibile_friends, only: %i[index]
 
   get 'tags/:tag', to: 'posts#index', as: :tag
   get '/tags' => 'tags#index', as: 'tags'

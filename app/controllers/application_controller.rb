@@ -31,7 +31,7 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     if resource.interests.any?
-      root_path
+      posts_path
     else
       account_interests_path
     end
