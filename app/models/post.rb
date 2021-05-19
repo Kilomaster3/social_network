@@ -11,6 +11,8 @@ class Post < ApplicationRecord
   has_many :dislikes, dependent: :destroy
   mount_uploader :image, ImageUploader
 
+  accepts_nested_attributes_for :tags, reject_if: proc { |att| att[:name].blank? }
+
   scope :search_last_post, -> { where('created_at > ?', 24.hours.ago).order(id: :asc) }
   scope :most_comments, -> { joins(:comments).group('posts.id').having('count(comments.id) > ?', 1) }
   scope :most_likes, -> { joins(:likes).group('posts.id').having('count(likes.id) > ?', 1) }

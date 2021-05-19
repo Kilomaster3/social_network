@@ -52,7 +52,8 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'tags/:tag', to: 'posts_activities#index', as: :tag
+  get 'tags/:tag', to: 'posts#index', as: :tag
+  get '/tags' => 'tags#index', as: 'tags'
   get 'search', to: 'search#search'
   mount Sidekiq::Web => '/sidekiq'
 end

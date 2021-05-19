@@ -15,7 +15,7 @@
           .panel.panel-white.post
             .post-heading
               - if policy(post).destroy?
-                = link_to 'Delete', post_path(post), method: :delete, class: ' btn fa fa-times', style: 'margin-left: 63%; color: black; text-decoration: none;'
+                = link_to 'Delete', post_path(post), method: :delete, class: ' btn fa fa-times', style: 'margin-left: 60%; color: black; text-decoration: none;'
               .pull-left.image
                 %img.img-circle.avatar{alt: "user profile image", src: "https://bootdey.com/img/Content/avatar/avatar1.png"}/
               .pull-left.meta
@@ -29,6 +29,9 @@
             .post-description
               %h4.card-title= post.title
               %p.card-text= truncate(post.content, length: 60)
+              %p
+                %small
+                  Tags: #{raw post.tags.map(&:name).map { |tag| link_to tag, tag_path(tag) , style: 'color: black; text-decoration: none;'}.join(', ') }
               .stats
                 %a.btn.btn-default.like-button#like_button{id: post.id}
                   %i.fa.fa-thumbs-up.icon#like_count{id: post.id}

@@ -7,6 +7,7 @@ require("@rails/ujs").start();
 require("turbolinks").start();
 require("@rails/activestorage").start();
 require("channels");
+//= require jquery-ui/autocomplete
 
 
 require('popper.js');
@@ -24,7 +25,7 @@ import '../src/flash'
 import '../src/dislike'
 import '../src/status'
 import '../src/comment'
-
+import '../src/autocomplite'
 import $ from 'jquery';
 global.$ = jQuery;
 

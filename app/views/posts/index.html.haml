@@ -20,6 +20,9 @@
           .post-description
             %h4.card-title= post.title
             %p.card-text= truncate(post.content, length: 60)
+            %p
+              %small
+                Tags: #{raw post.tags.map(&:name).map { |t| link_to t, tag_path(t), style: 'color: black; text-decoration: none;' }.join(', ')}
             - post.comments.each do |comment|
               %p.card-text= comment.account.full_name
               %p.card-text= comment.body
