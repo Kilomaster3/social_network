@@ -27,6 +27,9 @@ class Account < ApplicationRecord
   has_many :accounts_interests, dependent: :destroy
   has_many :interests, through: :accounts_interests
 
+  has_many :chatroom_accounts
+  has_many :chatrooms, through: :chatroom_accounts
+
   # scope :online, ->{ where('last_seen_at > ?', 40.minutes.ago) }
   scope :last_seen, -> { where('last_seen_at > ?', 7.days.ago) }
 

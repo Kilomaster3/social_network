@@ -15,6 +15,6 @@ class MessagesController < AccountBaseAuthController
   private
 
     def message_params
-      params.require(:message).permit(:body)
+      params.require(:message).permit(:body, :chatroom_id, :account_id)
     end
 end

@@ -1,0 +1,25 @@
+%p
+  %strong Name:
+  = @chatroom.name
+.row.justify-content-center
+  .col-6
+    #messages.col
+      .chat
+        - @messages.each do |message|
+          .chat-message-container
+            .row.no-gutters
+              .col
+                .message-content
+                  %p.mb-1
+                    = message.body
+                  .text-right
+                    %small
+                      = message.created_at
+.row.justify-content-center
+  .col-6
+    = simple_form_for(Message.new) do |form|
+      .input-group
+      = form.text_field :account_id, hidden: true, value: current_account.id
+      = form.text_field :chatroom_id, hidden: true, value: @chatroom.id
+      = form.text_field :body, class: 'form-control'
+      = form.submit 'Send', class: 'btn btn-primary chat-input'
