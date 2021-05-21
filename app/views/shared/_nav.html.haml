@@ -13,10 +13,10 @@
           %span.flag-icon.flag-icon-de
           Русский
   - if account_signed_in?
+    = render 'search/form'
     - if current_account.admin?
       .span
         Admin
-      = render 'search/form'
     %ul.nav-item
       .nav-item
         - if policy(Post).new?
