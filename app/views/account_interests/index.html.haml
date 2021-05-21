@@ -16,4 +16,4 @@
                                         remote: true,
                                         checked: @account_interests.include?(interest) ? "checked" : nil}/
                 %label.form-check-label{for: checkbox_id}=interest.name
-  = link_to "Update interests", root_path, class: 'btn btn-primary'
+  = link_to "Update Interests", posts_path, class: 'btn btn-primary'

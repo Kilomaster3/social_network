@@ -12,9 +12,7 @@
       = f.select :status, ['Publish write now', 'Publish via'], selected: status_for(@post)
     .published-field
       = f.datetime_select :published_at, discard_year: true, discard_month: true
-    %label.btn.btn-primary.mt-3
-      Add some photo!
-      %span{style: "display:none;"}
-        = f.file_field :image, required: true, multiple: true, name: 'picture'
+    = f.file_field :image, class: "inputfile", id: "file"
+    %label{for: "file"} Choose a file
     .mt-3
       = f.submit "Create Post", class: 'btn btn-lg btn-primary float-right'

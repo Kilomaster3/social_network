@@ -10,7 +10,7 @@ class DislikesController < AccountBaseAuthController
   end
 
   def create
-    if already_state?
+    if dislike_already_state?
       render json: { error: 'Already Taken' }, status: :unprocessable_entity
     else
       @post.dislikes.create(account_id: current_account.id)
@@ -19,7 +19,7 @@ class DislikesController < AccountBaseAuthController
   end
 
   def destroy
-    if already_state?
+    if dislike_already_state?
       flash[:notice] = 'Cannot unlike'
     else
       @dislike.destroy

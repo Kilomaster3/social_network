@@ -31,7 +31,7 @@ class ImageUploader < CarrierWave::Uploader::Base
   # end
 
   version :thumb do
-    process resize_to_fit: [400, 200]
+    process resize_to_fit: [500, 500]
   end
 
   # Add an allowlist of extensions which are allowed to be uploaded.

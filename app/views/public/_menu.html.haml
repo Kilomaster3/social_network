@@ -1,0 +1,8 @@
+- if account_signed_in?
+  %nav
+  #nav-tab.nav.nav-tabs{role: "tablist"}
+    = link_to 'News Page', posts_path, class: "nav-link #{'active' if current_page == :posts}"
+    = link_to 'Resent Activity', activities_path, class: "nav-link #{'active' if current_page == :resent_activity}"
+    = link_to 'Possible Friends', possibile_friends_path(@account), class: "nav-link #{'active' if current_page == :possibile_friends}"
+- else
+  = render 'public/home'

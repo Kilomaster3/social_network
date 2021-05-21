@@ -1,3 +1,4 @@
+= render partial: 'public/menu', locals: { current_page: :possibile_friends }
 .container
   .main-body
     %h2.text-center.mb-4 Possible Friends
@@ -10,8 +11,7 @@
                 %img.rounded-circle{alt: "Admin", src: "https://bootdey.com/img/Content/avatar/avatar7.png", width: "150"}/
                 .mt-3
                   %h4
-                    %a.profile-link{href: account_profile_path(possibile_friend)}
+                    %a.profile-link{href: account_profile_path(possibile_friend), style: 'color: black; text-decoration: none;'}
                       = possibile_friend.full_name
-                    = render partial: 'account/online', locals: {account: account}
 .pagination.justify-content-center
   = will_paginate @possibile_friends

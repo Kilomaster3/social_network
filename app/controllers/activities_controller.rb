@@ -2,9 +2,8 @@
 
 class ActivitiesController < AccountBaseAuthController
   def index
-    @activities = PublicActivity::Activity.order('created_at desc').where(
-      owner_id: current_account.followers, owner_type: 'Account'
-    )
+    @activities = PublicActivity::Activity.order('created_at desc').where(owner_id: current_account.followers,
+                                                                          owner_type: 'Account').includes(:owner, :trackable)
     @likes = Like.where(id: PublicActivity::Activity.where(trackable_type: 'Like').select(:trackable_id))
     authorize @activities, policy_class: PublicActivity::ActivitiesPolicy
     authorize @likes, policy_class: PublicActivity::ActivitiesPolicy

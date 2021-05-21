@@ -4,7 +4,7 @@ class PostsController < AccountBaseAuthController
   before_action :find_post, only: %i[show edit update destroy]
 
   def index
-    @posts = Post.paginate(page: params[:page], per_page: 4).includes(:account).includes([:tags]).published
+    @posts = Post.paginate(page: params[:page], per_page: 4).includes(:account, :taggings, :tags, :comments).order('created_at desc')
     authorize @posts
   end
 
@@ -47,17 +47,23 @@ class PostsController < AccountBaseAuthController
   end
 
   def search_last
-    @posts = Post.paginate(page: params[:page], per_page: 4).search_last_post.includes([:account]).includes([:comments])
+    @posts = Post.paginate(page: params[:page], per_page: 4).search_last_post.includes(:account, :comments, :taggings, :tags)
     render action: :index
   end
 
   def most_comments
-    @posts = Post.paginate(page: params[:page], per_page: 4).most_comments.includes([:account])
+    @posts = Post.paginate(page: params[:page], per_page: 4).most_comments.includes(:account, :taggings, :tags)
     render action: :index
   end
 
   def most_likes
-    @posts = Post.paginate(page: params[:page], per_page: 4).most_likes.includes([:account]).includes([:comments])
+    @posts = Post.paginate(page: params[:page], per_page: 4).most_likes.includes(:account, :comments, :taggings, :tags)
+    render action: :index
+  end
+
+  def friends_post
+    @posts = Post.paginate(page: params[:page],
+                           per_page: 4).where(account_id: current_account.following.pluck(:id)).includes(:account, :comments, :taggings, :tags)
     render action: :index
   end
 
@@ -69,6 +75,7 @@ class PostsController < AccountBaseAuthController
     end
 
     def post_params
-      params.require(:post).permit(:title, :content, :image, :published_at, :status, tags_attributes: [:name]).merge(account: current_account)
+      params.require(:post).permit(:title, :content, :image, :published_at, :status,
+                                   tags_attributes: [:name]).merge(account: current_account)
     end
 end

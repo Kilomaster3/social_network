@@ -26,6 +26,7 @@ import '../src/dislike'
 import '../src/status'
 import '../src/comment'
 import '../src/autocomplite'
+import '../src/photo'
 import $ from 'jquery';
 global.$ = jQuery;
 

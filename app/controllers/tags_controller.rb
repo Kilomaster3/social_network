@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class TagsController < AccountBaseAuthController
   def index
     @tags = Tag.search(params[:term])
