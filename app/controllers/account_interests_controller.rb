@@ -2,6 +2,7 @@
 
 class AccountInterestsController < AccountBaseAuthController
   before_action :find_user
+  include AccountInterests
 
   def index
     @categories = Category.includes(:interests).all
@@ -23,7 +24,7 @@ class AccountInterestsController < AccountBaseAuthController
   end
 
   def connection
-    @all_accounts = Account.where.not(id: current_account.id)
+    @all_accounts = Account.where.not(id: current_account.id).includes(:accounts_interests, :interests)
 
     data = @all_accounts.map do |account|
       interests = (account.interests & current_account.interests).count.to_f / (account.interests |
@@ -33,8 +34,7 @@ class AccountInterestsController < AccountBaseAuthController
         full_name_path: full_name_path,
         interests: interests }
     end
-
-    render json: data
+    render json: data.select { |d| d[:interests] >= 40 && d[:interests] < 60 }
   end
 
   private

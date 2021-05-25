@@ -32,6 +32,9 @@ Rails.application.routes.draw do
   resources :account_interests, only: %i[index update] do
     collection do
       get :connection
+      get :max_connection
+      get :online
+      get :current_location
     end
   end
 
