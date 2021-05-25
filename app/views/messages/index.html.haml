@@ -1,20 +1,6 @@
-.row.justify-content-center
-  .col-6
-    #messages.col
-      .chat
-        - @messages.each do |message|
-          .chat-message-container
-            .row.no-gutters
-              .col
-                .message-content
-                  %p.mb-1
-                    = message.body
-                  .text-right
-                    %small
-                      = message.created_at
-.row.justify-content-center
-  .col-6
-    = simple_form_for(@message, remote: true) do |form|
-      .input-group
-      = form.text_field :body, class: 'form-control'
-      = form.submit 'Send', class: 'btn btn-primary chat-input'
+= render partial: 'public/menu', locals: { current_page: :messenger }
+.container
+  .main-body
+    %h2.text-center.mb-4 Messenger
+    - (Account.all - [current_account]).each do |account|
+      %li= link_to account.full_name, direct_message_path(account.id), data: {behavior: "chatroom-link", chatroom_id: "" }

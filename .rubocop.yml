@@ -107,3 +107,6 @@ Rails/FilePath:
 
 Rails/FindBy:
   Enabled: false
+
+Rails/NotNullColumn:
+  Enabled: false

@@ -3,6 +3,8 @@
 class Message < ApplicationRecord
   include CableReady::Broadcaster
   validates :body, presence: true
+  belongs_to :chatroom
+  belongs_to :account
 
   def broadcast
     cable_ready['chat_channel'].insert_adjacent_html(

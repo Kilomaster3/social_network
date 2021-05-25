@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_07_092307) do
+ActiveRecord::Schema.define(version: 2021_05_24_084704) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -75,6 +75,18 @@ ActiveRecord::Schema.define(version: 2021_05_07_092307) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "chatroom_accounts", force: :cascade do |t|
+    t.bigint "chatroom_id", null: false
+    t.bigint "account_id", null: false
+    t.index ["account_id"], name: "index_chatroom_accounts_on_account_id"
+    t.index ["chatroom_id"], name: "index_chatroom_accounts_on_chatroom_id"
+  end
+
+  create_table "chatrooms", force: :cascade do |t|
+    t.string "name"
+    t.boolean "direct_message", default: false
+  end
+
   create_table "comments", force: :cascade do |t|
     t.text "body"
     t.bigint "post_id", null: false
@@ -125,7 +137,9 @@ ActiveRecord::Schema.define(version: 2021_05_07_092307) do
     t.bigint "account_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.bigint "chatroom_id", null: false
     t.index ["account_id"], name: "index_messages_on_account_id"
+    t.index ["chatroom_id"], name: "index_messages_on_chatroom_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -166,6 +180,8 @@ ActiveRecord::Schema.define(version: 2021_05_07_092307) do
 
   add_foreign_key "accounts_interests", "accounts"
   add_foreign_key "accounts_interests", "interests"
+  add_foreign_key "chatroom_accounts", "accounts"
+  add_foreign_key "chatroom_accounts", "chatrooms"
   add_foreign_key "comments", "accounts"
   add_foreign_key "comments", "posts"
   add_foreign_key "dislikes", "accounts"
@@ -176,6 +192,7 @@ ActiveRecord::Schema.define(version: 2021_05_07_092307) do
   add_foreign_key "likes", "accounts"
   add_foreign_key "likes", "posts"
   add_foreign_key "messages", "accounts"
+  add_foreign_key "messages", "chatrooms"
   add_foreign_key "taggings", "posts"
   add_foreign_key "taggings", "tags"
 end

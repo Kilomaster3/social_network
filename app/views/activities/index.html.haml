@@ -13,7 +13,7 @@
       - elsif activity.trackable_type == 'Post'
         = link_to activity.owner.full_name, account_profile_path(activity.owner) if activity.owner
         created post
-        = link_to 'Post', post_path(activity.trackable)
+        = link_to 'Post', posts_path(activity.trackable)
         %br
       - elsif activity.trackable_type == 'Comment'
         = link_to activity.owner.full_name, account_profile_path(activity.owner) if activity.owner

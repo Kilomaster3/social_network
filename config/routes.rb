@@ -41,6 +41,12 @@ Rails.application.routes.draw do
 
   resources :activities, only: %i[index]
 
+  resources :chatrooms do
+    resources :messages
+  end
+
+  resources :direct_messages
+
   resources :posts do
     resource :comments
     resources :likes, only: %i[create destroy]
