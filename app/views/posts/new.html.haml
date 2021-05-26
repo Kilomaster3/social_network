@@ -14,5 +14,8 @@
       = f.datetime_select :published_at, discard_year: true, discard_month: true
     = f.file_field :image, class: "inputfile", id: "file"
     %label{for: "file"} Choose a file
+    .mt-1
+      = f.check_box :private
+      %lable Make post private
     .mt-3
       = f.submit "Create Post", class: 'btn btn-lg btn-primary float-right'

@@ -59,6 +59,7 @@ Rails.application.routes.draw do
       get :most_comments
       get :most_likes
       get :friends_post
+      get :private_post
     end
   end
 

@@ -17,7 +17,7 @@
                       = message.created_at
 .row.justify-content-center
   .col-6
-    = simple_form_for(Message.new) do |form|
+    = simple_form_for(Message.new, remote: true) do |form|
       .input-group
       = form.text_field :account_id, hidden: true, value: current_account.id
       = form.text_field :chatroom_id, hidden: true, value: @chatroom.id

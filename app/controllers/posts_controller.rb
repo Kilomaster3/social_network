@@ -4,7 +4,7 @@ class PostsController < AccountBaseAuthController
   before_action :find_post, only: %i[show edit update destroy]
 
   def index
-    @posts = Post.paginate(page: params[:page], per_page: 4).includes(:account, :taggings, :tags, :comments).order('created_at desc')
+    @posts = Post.paginate(page: params[:page], per_page: 4).includes(:account, :taggings, :tags, :comments).order('created_at desc').where.not(private: true)
     authorize @posts
   end
 
@@ -67,6 +67,11 @@ class PostsController < AccountBaseAuthController
     render action: :index
   end
 
+  def private_post
+    @posts = Post.paginate(page: params[:page], per_page: 4).private_post
+    render action: :index
+  end
+
   private
 
     def find_post
@@ -75,7 +80,7 @@ class PostsController < AccountBaseAuthController
     end
 
     def post_params
-      params.require(:post).permit(:title, :content, :image, :published_at, :status,
+      params.require(:post).permit(:title, :content, :image, :published_at, :status, :private,
                                    tags_attributes: [:name]).merge(account: current_account)
     end
 end

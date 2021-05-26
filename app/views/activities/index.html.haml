@@ -1,22 +1,29 @@
 = render partial: 'public/menu', locals: { current_page: :resent_activity }
 .container
   .main-body
-    %h2.text-center.mb-4 Resent Activity
+    %h2.text-center.mb-4 Recent Activity
+    - if @activities.empty?
+      %h5 There are no recent activity
+    - else
     - @activities.each do |activity|
-      .activity
-      - if activity.trackable_type == 'Like'
-        - like = @likes.select { |like| like.id == activity.trackable_id }.first
-        = link_to activity.owner.full_name, account_profile_path(activity.owner) if activity.owner
-        liked
-        = link_to 'Post', post_path(like.post_id)
-        %br
-      - elsif activity.trackable_type == 'Post'
-        = link_to activity.owner.full_name, account_profile_path(activity.owner) if activity.owner
-        created post
-        = link_to 'Post', posts_path(activity.trackable)
-        %br
-      - elsif activity.trackable_type == 'Comment'
-        = link_to activity.owner.full_name, account_profile_path(activity.owner) if activity.owner
-        added comment to
-        = link_to 'Post', post_path(activity.trackable)
-        %br
+      %ul.mail_list.list-group.list-unstyled
+      %li.list-group-item
+        %small.lead
+          %p{style: 'color: black; text-decoration: none;'}
+            - if activity.trackable_type == 'Like'
+              = link_to activity.owner.full_name, account_profile_path(activity.owner), {style: 'color: black; text-decoration: none;'} if activity.owner
+              liked
+              = link_to 'Post', posts_path(activity.trackable)
+              %br
+            - elsif activity.trackable_type == 'Post'
+              = link_to activity.owner.full_name, account_profile_path(activity.owner), {style: 'color: black; text-decoration: none;'} if activity.owner
+              created post
+              = link_to 'Post', posts_path(activity.trackable)
+              %br
+            - elsif activity.trackable_type == 'Comment'
+              = link_to activity.owner.full_name, account_profile_path(activity.owner), {style: 'color: black; text-decoration: none;'} if activity.owner
+              added comment to
+              = link_to 'Post', post_path(activity.trackable)
+              %br
+.pagination.pagination-primary.m-b-0
+  = will_paginate @activities

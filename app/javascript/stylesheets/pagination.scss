@@ -1,7 +1,7 @@
 .pagination > li > a, .pagination > li > span {
-  background-color: #ccc;
+  background-color: #F5F5F5;
   padding: 8px 16px;
-  color: #fff;
+  color: #87CEFA;
   text-decoration: none;
 }
 
@@ -11,6 +11,6 @@
 }
 
 .pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus {
-  background-color: #FFD700;
+  background-color: #DCDCDC;
   text-decoration: none;
 }

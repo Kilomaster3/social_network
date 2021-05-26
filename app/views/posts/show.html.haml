@@ -1,5 +1,43 @@
-.col-md-8.offset-2
-  %h1= @post.title
-  %p= @post.content
-= button_to "Like #{@post.likes.count}", post_likes_path(@post), method: :post
-= button_to "Dislike #{@post.dislikes.count}", post_dislike_index_path(@post), method: :post
+.container
+  .row
+    .col-sm-12
+      .panel.panel-white.post
+        .post-heading
+          - if policy(@post).destroy?
+            = link_to 'Delete', post_path(@post), method: :delete, class: ' btn fa fa-times', style: 'margin-left: 60%; color: black; text-decoration: none;'
+          .pull-left.image
+            %img.img-circle.avatar{alt: "user profile image", src: "https://bootdey.com/img/Content/avatar/avatar1.png"}/
+          .pull-left.meta
+            .title.h5
+              %a{href: account_profile_path(@post.account), style: 'text-decoration: none;'}
+                %b= @post.account.full_name
+              create post
+            %h6.text-muted.time #{time_ago_in_words(@post.created_at)} ago
+        .post-image
+          = link_to(image_tag(@post.image.thumb.url, alt: 'Image'), post.image.url, target: '_blank') if @post.image?
+        .post-description
+          %h4.card-title= @post.title
+          %p.card-text= truncate(@post.content, length: 60)
+          %p
+            %small
+              Tags: #{raw @post.tags.map(&:name).map { |tag| link_to tag, tag_path(tag) , style: 'color: black; text-decoration: none;'}.join(', ') }
+          .stats
+            %a.btn.btn-default.like-button#like_button{id: @post.id}
+              %i.fa.fa-thumbs-up.icon#like_count{id: @post.id}
+                = @post.likes.count
+            %a.btn.btn-default.dislike-button#dislike_button{id: @post.id}
+              %i.fa.fa-thumbs-down.icon#dislike_count{id: @post.id}
+                = @post.dislikes.count
+            - if policy(@post).edit?
+              %a.btn.btn-default.stat-item{href: edit_post_path(@post)}
+                %i.fa.fa-pencil.icon
+                  Edit
+        .post-footer
+          - @post.comments.each do |comment|
+            .row
+              .col-sm-3
+                %img.img-circle{alt: "", src: "https://bootdey.com/img/Content/avatar/avatar6.png", width: "30"}/
+                %p.card-text= comment.account.full_name
+                %br/
+              .col-sm-9
+                %p.card-text= comment.body

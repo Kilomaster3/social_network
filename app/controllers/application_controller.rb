@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
   helper_method :resource_name, :resource, :devise_mapping, :resource_class
+  protect_from_forgery with: :exception
 
   def resource_name
     :account
