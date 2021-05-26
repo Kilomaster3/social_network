@@ -32,7 +32,7 @@ Account.create(
   password_confirmation: '12345678',
   confirmed_at: Time.now.utc,
   latitude: rand(53.8924818..53.9025719),
-  longitude: rand(27.5782749..27.5474400),
+  longitude: rand(27.5474400..27.5782749),
   role: :admin
 )
 
