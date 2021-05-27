@@ -2,7 +2,7 @@
   .row
     .col-lg-6.mt-4
       %h2
-        Edit Account #{link_to "Back to Main Page", root_path, class: 'float-right btn btn-secondary'}
+        Edit Account
       = form_for(resource, as: resource_name, url: account_profile_path(resource_name), html: { method: :put }) do |f|
         = render "devise/shared/error_messages", resource: resource
         .form-group.mb-3
@@ -24,5 +24,3 @@
             Currently waiting confirmation for: #{resource.unconfirmed_email}
         .form-group.mt-4
           = f.submit "Update", class: 'btn btn-success btn-lg'
-        %p.mt-2
-          What to close your account?#{link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: 'ms-1'}

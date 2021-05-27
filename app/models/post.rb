@@ -20,6 +20,8 @@ class Post < ApplicationRecord
   scope :published, -> { where.not(published_at: nil).where('published_at <= ?', Time.zone.now) }
   scope :scheduled, -> { where.not(published_at: nil).where('published_at > ?', Time.zone.now) }
 
+  scope :private_post, -> { where(private: true) }
+
   attr_accessor :status
 
   include PublicActivity::Model

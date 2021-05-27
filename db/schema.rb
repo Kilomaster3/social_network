@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_05_24_084704) do
+ActiveRecord::Schema.define(version: 2021_05_27_152336) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -151,6 +151,7 @@ ActiveRecord::Schema.define(version: 2021_05_24_084704) do
     t.string "image"
     t.datetime "published_at"
     t.string "status"
+    t.boolean "private", default: false
   end
 
   create_table "relationships", force: :cascade do |t|

@@ -2,8 +2,11 @@
 
 class MessagesController < AccountBaseAuthController
   def index
-    @message = Message.new
     @messages = Message.order('created_at DESC')
+  end
+
+  def new
+    @message = Message.new
   end
 
   def create

@@ -34,7 +34,7 @@ class AccountInterestsController < AccountBaseAuthController
         full_name_path: full_name_path,
         interests: interests }
     end
-    render json: data.select { |d| d[:interests] >= 40 && d[:interests] < 60 }
+    render json: data.select { |d| d[:interests] >= 40 }
   end
 
   private
