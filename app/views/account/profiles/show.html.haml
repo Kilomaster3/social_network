@@ -43,7 +43,7 @@
         .stats
           %a{href: "#{following_account_profile_path(@account)}"}
             %strong#following.stat
-              = @account.following.count
+              = @account.friends.count
             Friends
             %a{href: "#{followers_account_profile_path(@account)}"}
               %strong#followers.stat

@@ -34,7 +34,7 @@ class Account::ProfilesController < AccountBaseAuthController
 
   def following
     @account = Account.find(params[:id])
-    @accounts = @account.following.paginate(page: params[:page], per_page: 6)
+    @accounts = @account.friends.paginate(page: params[:page], per_page: 6)
     render 'account/follows/show_friends'
   end
 

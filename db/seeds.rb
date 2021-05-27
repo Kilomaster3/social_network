@@ -21,6 +21,16 @@
       account_id: account.id
     )
   end
+
+  # Generate friends posts
+  5.times do
+    Post.create(
+      title: Faker::DcComics.hero,
+      content: Faker::DcComics.title,
+      account_id: account.id,
+      private: true
+    )
+  end
 end
 
 # Generate admin account

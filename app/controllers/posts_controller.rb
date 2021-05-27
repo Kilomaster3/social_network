@@ -4,7 +4,8 @@ class PostsController < AccountBaseAuthController
   before_action :find_post, only: %i[show edit update destroy]
 
   def index
-    @posts = Post.paginate(page: params[:page], per_page: 4).includes(:account, :taggings, :tags, :comments).order('created_at desc').where.not(private: true)
+    @posts = Post.paginate(page: params[:page], per_page: 4).includes(:account, :taggings, :tags, :comments)
+                 .order('created_at desc').where(private: false)
     authorize @posts
   end
 
@@ -63,12 +64,7 @@ class PostsController < AccountBaseAuthController
 
   def friends_post
     @posts = Post.paginate(page: params[:page],
-                           per_page: 4).where(account_id: current_account.following.pluck(:id)).includes(:account, :comments, :taggings, :tags)
-    render action: :index
-  end
-
-  def private_post
-    @posts = Post.paginate(page: params[:page], per_page: 4).private_post
+                           per_page: 4).where(account_id: current_account.following.pluck(:id)).includes(:account, :comments, :taggings, :tags).private_post
     render action: :index
   end
 
