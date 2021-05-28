@@ -30,6 +30,11 @@ class Account < ApplicationRecord
   has_many :chatroom_accounts
   has_many :chatrooms, through: :chatroom_accounts
 
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Callbacks
+
+  searchkick
+
   scope :last_seen, -> { where('last_seen_at > ?', 7.days.ago) }
 
   def self.online
@@ -79,5 +84,21 @@ class Account < ApplicationRecord
   def friends
     friends_ids = following.pluck(:id) & followers.pluck(:id)
     Account.where(id: friends_ids)
+  end
+
+  def followers_without_friend
+    ids = followers.pluck(:id) - following.pluck(:id)
+    Account.where(id: ids)
+  end
+
+  def self.search_account(query)
+    __elasticsearch__.search({
+                               query: {
+                                 multi_match: {
+                                   query: query,
+                                   fields: %w[first_name last_name]
+                                 }
+                               }
+                             })
   end
 end

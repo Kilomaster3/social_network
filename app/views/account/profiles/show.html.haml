@@ -47,6 +47,6 @@
             Friends
             %a{href: "#{followers_account_profile_path(@account)}"}
               %strong#followers.stat
-                = @account.followers.count
+                = @account.followers_without_friend.count
               Followers
 = render 'account/form/follow_form', account: @account if current_account
