@@ -11,11 +11,11 @@
     .mt-1
       = f.select :status, ['Publish write now', 'Publish via'], selected: status_for(@post)
     .published-field
-      = f.datetime_select :published_at, discard_year: true, discard_month: true
-    = f.file_field :image, class: "inputfile", id: "file"
-    %label{for: "file"} Choose a file
-    .mt-1
+      = f.datetime_select :published_at, discard_year: true, discard_month: true, discard_minute: true
+    .mt-3
       = f.check_box :private
-      %lable Make post private
+      %lable Only for friends
+    = f.file_field :image, class: "inputfile", id: "file"
+    %label{for: "file"} Add Photo
     .mt-3
       = f.submit "Create Post", class: 'btn btn-lg btn-primary float-right'

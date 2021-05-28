@@ -1,8 +1,10 @@
+# frozen_string_literal: true
+
 module AccountInterests
   extend ActiveSupport::Concern
 
   def online
-    @account_online = Account.where('last_seen_at > ?', 1.minutes.ago)
+    @account_online = Account.where('last_seen_at > ?', 1.minute.ago)
 
     data = @account_online.map do |account|
       full_name_path = "<a href='#{account_profile_path(account)}'>#{account.full_name}</a>"

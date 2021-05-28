@@ -30,7 +30,6 @@ class Account < ApplicationRecord
   has_many :chatroom_accounts
   has_many :chatrooms, through: :chatroom_accounts
 
-  # scope :online, ->{ where('last_seen_at > ?', 40.minutes.ago) }
   scope :last_seen, -> { where('last_seen_at > ?', 7.days.ago) }
 
   def self.online
@@ -75,5 +74,10 @@ class Account < ApplicationRecord
 
   def following?(other_user)
     following.include?(other_user)
+  end
+
+  def friends
+    friends_ids = following.pluck(:id) & followers.pluck(:id)
+    Account.where(id: friends_ids)
   end
 end
