@@ -3,6 +3,7 @@
 class MessagesController < AccountBaseAuthController
   def index
     @messages = Message.order('created_at DESC')
+    @accounts = Account.paginate(page: params[:page], per_page: 4).where.not(id: current_account.id)
   end
 
   def new

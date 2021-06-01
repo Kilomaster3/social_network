@@ -1,6 +1,19 @@
 = render partial: 'public/menu', locals: { current_page: :messenger }
 .container
   .main-body
-    %h2.text-center.mb-4 Messenger
-    - (Account.all - [current_account]).each do |account|
-      %li= link_to account.full_name, direct_message_path(account.id), data: {behavior: "chatroom-link", chatroom_id: "" }
+    .row
+      %h2.text-center.mb-4 Messenger
+      = render 'account_search/form'
+      - @accounts.each do |account|
+        .col-md-4.mb-3
+          .card
+            .card-body
+              .d-flex.flex-column.align-items-center.text-center
+                %img.rounded-circle{alt: "Admin", src: "https://bootdey.com/img/Content/avatar/avatar7.png", width: "150"}/
+                .mt-3
+                  %h4
+                    = link_to account.full_name, account_profile_path(account)
+                    = render partial: 'account/online', locals: {account: account}
+                  = link_to 'Write Message', direct_message_path(account.id), class: 'btn btn-outline-primary'
+.pagination.justify-content-center
+  = will_paginate @accounts

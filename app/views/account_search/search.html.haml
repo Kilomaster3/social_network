@@ -1,0 +1,15 @@
+- unless @accounts.nil?
+  - if @accounts.empty?
+    %h2 No posts found matching your query.
+  - else
+    %h2 Search results
+    %table{style: "width: 100%;"}
+      %thead
+        %tr
+          %th Account
+      %tbody
+        - @accounts.each do |account|
+          %tr
+            %td= account.first_name + ' ' + account.last_name
+            %td= link_to 'View', direct_message_path(account.id)
+      %tbody
