@@ -41,11 +41,11 @@
                   - else
                     = interest.name
         .stats
-          %a{href: "#{following_account_profile_path(@account)}"}
+          %a{href: "#{following_account_profile_path(@account)}", style: 'text-decoration: none;'}
             %strong#following.stat
               = @account.friends.count
             Friends
-            %a{href: "#{followers_account_profile_path(@account)}"}
+            %a{href: "#{followers_account_profile_path(@account)}", style: 'text-decoration: none;'}
               %strong#followers.stat
                 = @account.followers_without_friend.count
               Followers

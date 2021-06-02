@@ -48,6 +48,6 @@ class Account::ProfilesController < AccountBaseAuthController
 
     def account_params
       params.require(:account).permit(:email, :first_name, :last_name, :avatar, { interest_ids: [] },
-                                      :interest_ids)
+                                      :interest_ids, :connection, :max_connection)
     end
 end
