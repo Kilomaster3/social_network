@@ -56,7 +56,7 @@
                   .col-sm-9
                     %p.card-text= comment.body
                   #reply_id
-                    = link_to 'Reply', new_post_comments_path(post.id, parent_id: comment.id), remote: true, class: 'lnk-rep'
+                    = link_to 'Reply', new_post_comments_path(post.id, parent_id: comment.id), remote: true
             .row
               .col-sm-3
                 %img.pull-right{src: "https://bootdey.com/img/Content/avatar/avatar3.png", width: "30"}/
