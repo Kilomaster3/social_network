@@ -18,6 +18,9 @@ Layout/IndentationConsistency:
 Lint/Debugger:
   AutoCorrect: False
 
+Lint/MissingSuper:
+  Enabled: false
+
 Style/ClassAndModuleChildren:
   Exclude:
     - test/test_helper.rb
@@ -42,7 +45,6 @@ Metrics/AbcSize:
     - app/controllers/account/omniauth_callbacks_controller.rb
     - app/controllers/account_interests_controller.rb
     - app/controllers/public_controller.rb
-    - app/controllers/concerns/account_interests.rb
 
 Metrics/BlockLength:
   IgnoredMethods: ['describe', 'context']

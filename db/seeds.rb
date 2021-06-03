@@ -2,7 +2,7 @@
 
 # Generate accounts
 10.times do
-  account = Account.create(
+  account = Account.create!(
     first_name: Faker::Name.first_name,
     last_name: Faker::Name.last_name,
     email: Faker::Internet.email,
@@ -10,7 +10,9 @@
     password_confirmation: '123456',
     confirmed_at: Time.now.utc,
     latitude: rand(53.8924818..53.9025719),
-    longitude: rand(27.5474400..27.5782749)
+    longitude: rand(27.5474400..27.5782749),
+    connection: rand(0..100),
+    max_connection: rand(0..100)
   )
 
   # Generate posts

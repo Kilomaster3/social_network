@@ -3,22 +3,28 @@
     .col-lg-6.mt-4
       %h2
         Edit Account
-      = form_for(resource, as: resource_name, url: account_profile_path(resource_name), html: { method: :put }) do |f|
+      = form_for(current_account, url: account_profile_path, html: { method: :put }) do |f|
         = render "devise/shared/error_messages", resource: resource
         .form-group.mb-3
           .row
             .col-sm-4
               = f.file_field :avatar
               = image_tag @account.avatar.url(:thumb) if @account.avatar?
-        .form-group.mb-3.is-valid
+        .form-group.mb-3
           = f.label :first_name
-          = f.text_field :first_name, autofocus: true, class: 'form-control'
+          = f.text_field :first_name, class: 'form-control'
         .form-group.mb-3
           = f.label :last_name
-          = f.text_field :last_name, autofocus: true, class: 'form-control'
+          = f.text_field :last_name, class: 'form-control'
         .form-group.mb-3
           = f.label :email
-          = f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control'
+          = f.email_field :email, autocomplete: "email", class: 'form-control'
+        .form-group.mb-3
+          = f.label :connection
+          = f.number_field :connection, step: :any, max: 100, class: 'form-control'
+        .form-group.mb-3
+          = f.label :max_connection
+          = f.number_field :max_connection, step: :any, max: 100, class: 'form-control'
         - if devise_mapping.confirmable? && resource.pending_reconfirmation?
           %div
             Currently waiting confirmation for: #{resource.unconfirmed_email}
