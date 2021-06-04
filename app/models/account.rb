@@ -8,18 +8,20 @@ class Account < ApplicationRecord
          :confirmable, :omniauthable, omniauth_providers: [:google_oauth2]
 
   has_one_attached :avatar
-  has_many :posts
+  has_many :posts, dependent: :destroy
   has_many :likes, dependent: :destroy
-  has_many :dislikes
-  has_many :comments
+  has_many :dislikes, dependent: :destroy
+  has_many :comments, dependent: :destroy
   mount_uploader :avatar, AvatarUploader
   has_many :active_relationships, class_name: 'Relationship',
                                   foreign_key: 'follower_id',
-                                  dependent: :destroy
+                                  dependent: :destroy,
+                                  inverse_of: :follower
 
   has_many :passive_relationships, class_name: 'Relationship',
                                    foreign_key: 'followed_id',
-                                   dependent: :destroy
+                                   dependent: :destroy,
+                                   inverse_of: :followed
 
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
@@ -27,7 +29,7 @@ class Account < ApplicationRecord
   has_many :accounts_interests, dependent: :destroy
   has_many :interests, through: :accounts_interests
 
-  has_many :chatroom_accounts
+  has_many :chatroom_accounts, dependent: :destroy
   has_many :chatrooms, through: :chatroom_accounts
 
   include Elasticsearch::Model
@@ -36,6 +38,9 @@ class Account < ApplicationRecord
   searchkick
 
   scope :last_seen, -> { where('last_seen_at > ?', 7.days.ago) }
+
+  validates :first_name, presence: true, length: { maximum: 25 }
+  validates :last_name, presence: true, length: { maximum: 25 }
 
   def self.online
     ids = ActionCable.server.pubsub.redis_connection_for_subscriptions.smembers 'online'
@@ -48,6 +53,7 @@ class Account < ApplicationRecord
 
   enum role: { account: 0, admin: 1 }
 
+  # rubocop:disable Rails/FindBy
   def self.from_omniauth(access_token)
     data = access_token.info
     account = Account.where(email: data['email']).first
@@ -60,13 +66,14 @@ class Account < ApplicationRecord
     end
     account
   end
+  # rubocop:enable Rails/FindBy
 
   def admin?
     role == 'admin'
   end
 
   def account?
-    role == 'account'
+    role == 'accounts'
   end
 
   def follow(other_user)

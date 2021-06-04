@@ -32,6 +32,9 @@ class Post < ApplicationRecord
 
   searchkick
 
+  validates :title, presence: true, length: 2..180
+  validates :content, presence: true, length: 2..180
+
   mappings dynamic: false do
     indexes :title, type: :text, analyzer: 'english'
     indexes :content, type: :text, analyzer: 'english'

@@ -3,7 +3,7 @@
     .col-lg-6.mt-4
       %h2
         Edit Account
-      = form_for(current_account, url: account_profile_path, html: { method: :put }) do |f|
+      = form_for(current_account, url: accounts_profile_path, html: { method: :put }) do |f|
         = render "devise/shared/error_messages", resource: resource
         .form-group.mb-3
           .row

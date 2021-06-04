@@ -9,7 +9,7 @@
                 %img.rounded-circle{alt: "Admin", src: "https://bootdey.com/img/Content/avatar/avatar7.png", width: "150"}/
                 .mt-3
                   %h4
-                    = link_to account.full_name, account_profile_path(account)
-                    = render partial: 'account/online', locals: {account: account}
+                    = link_to account.full_name, accounts_profile_path(account)
+                    = render partial: 'accounts/online', locals: {account: account}
                   = link_to 'Write Message', messages_path, class: 'btn btn-outline-primary'
 = will_paginate @accounts

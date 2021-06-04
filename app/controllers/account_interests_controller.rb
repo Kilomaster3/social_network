@@ -44,11 +44,11 @@ class AccountInterestsController < AccountBaseAuthController
 
   private
 
-  def find_user
-    @account = current_account
-  end
+    def find_user
+      @account = current_account
+    end
 
-  def account_params
-    params.require(:account).permit(interest_ids: [])
-  end
+    def account_params
+      params.require(:account).permit(interest_ids: [])
+    end
 end

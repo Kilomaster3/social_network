@@ -12,7 +12,7 @@
                 - if policy(@account).update?
                   = link_to "Update Interests", account_interests_path, class: 'btn btn-outline-primary'
                 - if policy(@account).edit?
-                  = link_to "Edit account", edit_account_profile_path(@account), class: 'btn btn-outline-primary'
+                  = link_to "Edit accounts", edit_accounts_profile_path(@account), class: 'btn btn-outline-primary'
       .col-md-8
         - if @account != current_account
           = "Interests match: #{@interests_match_percentage} %"
@@ -41,12 +41,12 @@
                   - else
                     = interest.name
         .stats
-          %a{href: "#{following_account_profile_path(@account)}", style: 'text-decoration: none;'}
+          %a{href: "#{following_accounts_profile_path(@account)}", style: 'text-decoration: none;'}
             %strong#following.stat
               = @account.friends.count
             Friends
-            %a{href: "#{followers_account_profile_path(@account)}", style: 'text-decoration: none;'}
+            %a{href: "#{followers_accounts_profile_path(@account)}", style: 'text-decoration: none;'}
               %strong#followers.stat
                 = @account.followers_without_friend.count
               Followers
-= render 'account/form/follow_form', account: @account if current_account
+= render 'accounts/form/follow_form', account: @account if current_account
