@@ -13,7 +13,7 @@ consumer.subscriptions.create("OnlineChannel", {
     // Called when there's incoming data on the websocket for this channel
     console.log(data)
 
-    let online = document.querySelector("#online-account")
+    let online = document.querySelector("#online-accounts")
     let el = online.querySelector(`[data-id='${data.id}']`)
 
     if (data.status === "online" && el == null) {

@@ -4,7 +4,7 @@ require 'sidekiq/web'
 require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
-  devise_for :accounts, controllers: { omniauth_callbacks: 'account/omniauth_callbacks' }
+  devise_for :accounts, controllers: { omniauth_callbacks: 'accounts/omniauth_callbacks' }
 
   scope '(:locale)', locale: I18n.available_locales.join('|') do
     get '/interests' => 'interests#index', as: :interests_root
@@ -15,8 +15,8 @@ Rails.application.routes.draw do
   resources :dashboard, only: %i[index create]
 
   resources :messages, only: %i[index create]
-  namespace :account do
-    resources :profiles do
+  namespace :accounts do
+    resources :profile do
       member do
         get :following, :followers
       end

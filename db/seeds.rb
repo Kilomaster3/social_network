@@ -3,23 +3,21 @@
 # Generate accounts
 10.times do
   account = Account.create!(
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
+    first_name: Faker::Name.unique.first_name,
+    last_name: Faker::Name.unique.last_name,
     email: Faker::Internet.email,
     password: '123456',
     password_confirmation: '123456',
     confirmed_at: Time.now.utc,
     latitude: rand(53.8924818..53.9025719),
-    longitude: rand(27.5474400..27.5782749),
-    connection: rand(0..100),
-    max_connection: rand(0..100)
+    longitude: rand(27.5474400..27.5782749)
   )
 
   # Generate posts
   5.times do
     Post.create(
-      title: Faker::DcComics.hero,
-      content: Faker::DcComics.title,
+      title: Faker::Lorem.word,
+      content: Faker::Lorem.sentence(word_count: 5, supplemental: false, random_words_to_add: 5),
       account_id: account.id
     )
   end
@@ -27,15 +25,15 @@
   # Generate friends posts
   5.times do
     Post.create(
-      title: Faker::DcComics.hero,
-      content: Faker::DcComics.title,
+      title: Faker::Lorem.word,
+      content: Faker::Lorem.sentence(word_count: 5, supplemental: false, random_words_to_add: 5),
       account_id: account.id,
       private: true
     )
   end
 end
 
-# Generate admin account
+# Generate admin accounts
 Account.create(
   first_name: 'Admin',
   last_name: 'Admin',

@@ -12,7 +12,7 @@ module Maps
       @current_account = Account.where(id: current_account.id)
 
       @current_account.map do |account|
-        full_name_path = "<a href='#{Rails.application.routes.url_helpers.account_profile_path(account)}'>#{account.full_name}</a>"
+        full_name_path = "<a href='#{Rails.application.routes.url_helpers.accounts_profile_path(account)}'>#{account.full_name}</a>"
         { account_id: account.id,
           full_name_path: full_name_path }
       end

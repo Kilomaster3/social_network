@@ -25,7 +25,7 @@
         Menu
       %ul.dropdown-menu{"aria-labelledby" => "dropdownMenuButton1"}
         %li
-          %a.dropdown-item{href: account_profile_path(current_account)} My Account
+          %a.dropdown-item{href: accounts_profile_path(current_account)} My Account
         - if policy(Post).new?
           %li
             %a.dropdown-item{href: new_post_path} Create Post

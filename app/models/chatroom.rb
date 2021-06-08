@@ -11,7 +11,7 @@ class Chatroom < ApplicationRecord
     account_ids = accounts.map(&:id).sort
     name = "DM:#{account_ids.join(':')}"
 
-    if (chatroom = direct_messages.where(name: name).first)
+    if (chatroom = direct_messages.find_by(name: name))
       chatroom
     else
       # create a new chatroom

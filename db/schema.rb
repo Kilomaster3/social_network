@@ -80,12 +80,16 @@ ActiveRecord::Schema.define(version: 2021_06_02_160100) do
   create_table "chatroom_accounts", force: :cascade do |t|
     t.bigint "chatroom_id", null: false
     t.bigint "account_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_chatroom_accounts_on_account_id"
     t.index ["chatroom_id"], name: "index_chatroom_accounts_on_chatroom_id"
   end
 
   create_table "chatrooms", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.boolean "direct_message", default: false
   end
 

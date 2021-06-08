@@ -10,9 +10,9 @@
                 .mt-3
                   %h4
                     = account.full_name
-                  = link_to "Edit Account", edit_account_profile_path(current_account), class: 'btn btn-outline-primary'
+                  = link_to "Edit Account", edit_accounts_profile_path(current_account), class: 'btn btn-outline-primary'
                   = link_to 'Impersonate', masquerade_path(account), class: 'btn btn-outline-primary'
-                  = render partial: 'account/online', locals: {account: account}
+                  = render partial: 'accounts/online', locals: {account: account}
         .col-md-8
           .card.mb-3
             .card-body
@@ -34,11 +34,11 @@
                 .col-sm-9.text-secondary
                   #{raw account.interests.map(&:name).map { |t| t }.join(', ')}
           .stats
-            %a{href: "#{following_account_profile_path(account)}"}
+            %a{href: "#{following_accounts_profile_path(account)}"}
               %strong#following.stat
                 = account.following.count
               Friends
-            %a{href: "#{followers_account_profile_path(account)}"}
+            %a{href: "#{followers_accounts_profile_path(account)}"}
               %strong#followers.stat
                 = account.followers.count
               Followers
