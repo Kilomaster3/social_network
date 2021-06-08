@@ -1,11 +1,15 @@
-Your Weekly Notification is here! 😺
+Your weekly notification is here!
 \=============================================
 
 INTERESTING INFO
 - @posts.each do |post|
-  = post.title
-  %br/
-  = post.content
+  .post-description
+    %h4= post.title
+    %p= truncate(post.content, length: 60)
+
+- @requests_to_friends.each do |friend|
+  %div
+    %h4= friend.full_name
 
 
 \===============================================

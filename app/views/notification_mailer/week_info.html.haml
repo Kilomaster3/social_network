@@ -1,13 +1,16 @@
 %body
-  %h1 Your weekly notification is here! 😺
+  %h1 Your weekly notification is here!
   %h3
-    INTERESTING INFO
+    We have collected the most interesting posts for this week!
   %p
     - @posts.each do |post|
-      = post.title
-      %br/
-      = post.content
-    🐈
+      %div
+        %h4= post.title
+        %p= truncate(post.content, length: 60)
+  %p
+    - @requests_to_friends.each do |friend|
+      %div
+        %h4= "#{friend.full_name} starts follow you"
   %br/
   %br/
   %br/

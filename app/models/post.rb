@@ -15,7 +15,7 @@ class Post < ApplicationRecord
 
   scope :search_last_post, -> { where('created_at > ?', 24.hours.ago).order(id: :asc) }
   scope :most_comments, -> { joins(:comments).group('posts.id').having('count(comments.id) > ?', 1) }
-  scope :most_likes, -> { joins(:likes).group('posts.id').having('count(likes.id) > ?', 1) }
+  scope :most_likes, -> { joins(:likes).group('posts.id').order('count(likes.id) desc') }
 
   scope :published, -> { where.not(published_at: nil).where('published_at <= ?', Time.zone.now) }
   scope :scheduled, -> { where.not(published_at: nil).where('published_at > ?', Time.zone.now) }
