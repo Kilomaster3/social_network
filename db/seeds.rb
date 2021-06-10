@@ -2,7 +2,7 @@
 
 # Generate accounts
 10.times do
-  account = Account.create!(
+  account = Account.create(
     first_name: Faker::Name.unique.first_name,
     last_name: Faker::Name.unique.last_name,
     email: Faker::Internet.email,
