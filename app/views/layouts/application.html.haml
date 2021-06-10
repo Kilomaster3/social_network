@@ -16,7 +16,7 @@
     = render 'shared/nav'
     - if account_masquerade?
       %nav
-        = link_to "Reverse masquerade", back_masquerade_path(current_account)
+        = link_to "Back to Admin Page", back_masquerade_path(current_account), class: 'btn btn-primary'
     - if notice
       %p.notice.alert.alert-success{role: "alert"}= notice
     - elsif alert

@@ -11,7 +11,6 @@ module Accounts
       @account = Account.find_by(id: params[:id])
       @interests_percentage = (@account.interests & current_account.interests).count.to_f / (@account.interests |
         current_account.interests).count * 100
-      @interests_match_percentage = @interests_percentage.round(0)
     end
 
     def new

@@ -7,6 +7,8 @@ INTERESTING INFO
     %h4= post.title
     %p= truncate(post.content, length: 60)
 
+
+You also have new followers
 - @requests_to_friends.each do |friend|
   %div
     %h4= friend.full_name

@@ -20,7 +20,7 @@
               - if policy(post).destroy?
                 = link_to 'Delete', post_path(post), method: :delete, class: ' btn fa fa-times', style: 'margin-left: 60%; color: black; text-decoration: none;'
               .pull-left.image
-                %img.img-circle.avatar{alt: "user profile image", src: "https://bootdey.com/img/Content/avatar/avatar1.png"}/
+                %img.img-circle.avatar{alt: "user profile image", src: "https://bootdey.com/img/Content/avatar/avatar7.png"}/
               .pull-left.meta
                 .title.h5
                   %a{href: accounts_profile_path(post.account), style: 'text-decoration: none;'}
@@ -50,14 +50,12 @@
               - post.comments.each do |comment|
                 .row
                   .col-sm-3
-                    %img.img-circle{alt: "", src: "https://bootdey.com/img/Content/avatar/avatar6.png", width: "30"}/
                     %p.card-text= comment.account.full_name
                     %br/
                   .col-sm-9
                     %p.card-text= comment.body
             .row
               .col-sm-3
-                %img.pull-right{src: "https://bootdey.com/img/Content/avatar/avatar3.png", width: "30"}/
               .col-sm-9
                 .input
                   %form{action: ""}

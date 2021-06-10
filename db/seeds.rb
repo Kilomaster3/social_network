@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 # Generate accounts
-10.times do
+15.times do
   account = Account.create(
     first_name: Faker::Name.unique.first_name,
     last_name: Faker::Name.unique.last_name,
@@ -50,7 +50,7 @@ accounts = Account.all
 
 # Generate Followers
 accounts.each_with_index do |account, index|
-  3.times do |time|
+  5.times do |time|
     followed = accounts[index + time + 1]
 
     next unless followed

@@ -16,6 +16,7 @@
       = f.check_box :private
       %lable Only for friends
     = f.file_field :image, class: "inputfile", id: "file"
+    = image_tag @post.image.url(:thumb) if @post.image?
     %label{for: "file"} Add Photo
     .mt-3
       = f.submit "Create Post", class: 'btn btn-lg btn-primary float-right'

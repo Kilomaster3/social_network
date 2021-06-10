@@ -8,7 +8,10 @@
           .card
             .card-body
               .d-flex.flex-column.align-items-center.text-center
-                %img.rounded-circle{alt: "Admin", src: "https://bootdey.com/img/Content/avatar/avatar7.png", width: "150"}/
+                - if possibile_friend.avatar?
+                  = link_to(image_tag(possibile_friend.avatar.thumb.url, alt: 'Image'), possibile_friend.avatar.url, target: '_blank')
+                - else
+                  %img.rounded-circle{alt: "Admin", src: "https://bootdey.com/img/Content/avatar/avatar7.png", width: "150"}/
                 .mt-3
                   %h4
                     %a.profile-link{href: accounts_profile_path(possibile_friend), style: 'color: black; text-decoration: none;'}
