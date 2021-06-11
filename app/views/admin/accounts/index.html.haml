@@ -6,7 +6,10 @@
           .card
             .card-body
               .d-flex.flex-column.align-items-center.text-center
-                %img.rounded-circle{alt: "Admin", src: "https://bootdey.com/img/Content/avatar/avatar7.png", width: "150"}/
+                - if account.avatar?
+                  = link_to(image_tag(account.avatar.thumb.url, alt: 'Image'), account.avatar.url, target: '_blank')
+                - else
+                  %img.rounded-circle{alt: "Admin", src: "https://bootdey.com/img/Content/avatar/avatar7.png", width: "150"}/
                 .mt-3
                   %h4
                     = link_to account.full_name, accounts_profile_path(account), style: 'text-decoration: none; color: black;'
@@ -42,6 +45,5 @@
               %strong#followers.stat
                 = account.followers_without_friend.count
               Followers
-    = link_to "Back to Main Page", root_path, class: 'float-right btn btn-secondary'
 .pagination.justify-content-center
   = will_paginate @accounts

@@ -4,7 +4,7 @@ require 'sidekiq/web'
 require 'sidekiq/cron/web'
 
 Rails.application.routes.draw do
-  devise_for :accounts, controllers: { omniauth_callbacks: 'accounts/omniauth_callbacks' }
+  devise_for :accounts, controllers: { omniauth_callbacks: 'accounts/omniauth_callbacks', masquerades: "admin/masquerades" }
 
   scope '(:locale)', locale: I18n.available_locales.join('|') do
     get '/interests' => 'interests#index', as: :interests_root
