@@ -8,7 +8,7 @@ class Message < ApplicationRecord
 
   def broadcast
     cable_ready['chat_channel'].insert_adjacent_html(
-      selector: '.chat',
+      selector: '.message-content',
       position: 'afterbegin',
       html: "<class = 'row no-gutters' class='col' class='message-content'>
               <p class='mb-1'>#{body}</p>
