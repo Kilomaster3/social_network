@@ -11,5 +11,5 @@
         - @accounts.each do |account|
           %tr
             %td= account.first_name + ' ' + account.last_name
-            %td= link_to 'View', direct_message_path(account.id)
+            %td= link_to 'View', direct_message_path(account.id), class: 'btn btn-primary'
       %tbody

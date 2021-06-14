@@ -4,7 +4,7 @@ class PostsController < AccountBaseAuthController
   before_action :find_post, only: %i[show edit update destroy]
 
   def index
-    @posts = Post.paginate(page: params[:page], per_page: 4).includes(:account, :taggings, :tags, :comments)
+    @posts = Post.paginate(page: params[:page], per_page: 4).includes(:account, :taggings, :tags, comments: :account)
                  .order('created_at desc').where(private: false)
     authorize @posts
   end
@@ -53,7 +53,7 @@ class PostsController < AccountBaseAuthController
   end
 
   def most_comments
-    @posts = Post.paginate(page: params[:page], per_page: 4).most_comments.includes(:account, :taggings, :tags)
+    @posts = Post.paginate(page: params[:page], per_page: 4).most_comments.includes(:account, :taggings, :tags, comments: :account)
     render action: :index
   end
 
