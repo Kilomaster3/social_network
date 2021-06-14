@@ -11,7 +11,7 @@ class DislikesController < AccountBaseAuthController
 
   def create
     if dislike_already_state?
-      render json: { error: 'Already Taken' }, status: :unprocessable_entity
+      flash.now[:alert] = 'Already Taken'
     else
       @post.dislikes.create(account_id: current_account.id)
       render json: { dislikes_count: @post.dislikes.count }
@@ -29,11 +29,11 @@ class DislikesController < AccountBaseAuthController
 
   private
 
-    def find_post
-      @post = Post.find(params[:post_id])
-    end
+  def find_post
+    @post = Post.find(params[:post_id])
+  end
 
-    def find_dislike
-      @dislike = @post.dislikes.find(params[:id])
-    end
+  def find_dislike
+    @dislike = @post.dislikes.find(params[:id])
+  end
 end

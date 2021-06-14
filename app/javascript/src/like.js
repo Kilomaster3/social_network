@@ -12,7 +12,6 @@ $(document).on('turbolinks:load', function() {
         "X-CSRF-Token": document.getElementsByName('csrf-token')[0].content
       },
       success: (data) => {
-        alert('Like added')
         let counter = $('#like_count_' + postId)[0];
         $(counter).text(data.likes_count)
       },

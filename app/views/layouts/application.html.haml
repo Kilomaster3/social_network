@@ -17,10 +17,8 @@
     - if account_masquerade?
       %nav
         = link_to "Back to Admin Page", back_masquerade_path(current_account), class: 'btn btn-primary'
-    - if notice
-      %p.notice.alert.alert-success{role: "alert"}= notice
-    - elsif alert
-      %p.alert.alert-danger{role: "alert"}= alert
+    .flash_wrapper
+      = render 'layouts/messages'
     .container
       = yield
     = render 'shared/footer'
