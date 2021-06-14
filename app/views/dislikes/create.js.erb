@@ -1,0 +1,6 @@
+$('.flash_wrapper').html("<%= escape_javascript(render 'layouts/messages') %>");
+$(function() {
+  setTimeout(function(){
+    $('.alert').slideUp(500);
+  }, 1000);
+});
