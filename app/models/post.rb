@@ -14,7 +14,7 @@ class Post < ApplicationRecord
   accepts_nested_attributes_for :tags, reject_if: proc { |att| att[:name].blank? }
 
   scope :search_last_post, -> { where('created_at > ?', 24.hours.ago).order(id: :asc) }
-  scope :most_comments, -> { joins(:comments).group('posts.id').having('count(comments.id) > ?', 1) }
+  scope :most_comments, -> { joins(:comments).group('posts.id').order('count(comments.id) desc') }
   scope :most_likes, -> { joins(:likes).group('posts.id').order('count(likes.id) desc') }
 
   scope :published, -> { where.not(published_at: nil).where('published_at <= ?', Time.zone.now) }

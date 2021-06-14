@@ -12,18 +12,17 @@
           %p{style: 'color: black; text-decoration: none;'}
             - if activity.trackable_type == 'Like'
               = link_to activity.owner.full_name, accounts_profile_path(activity.owner), {style: 'color: black; text-decoration: none;'} if activity.owner
-              liked
-              = link_to 'Post', posts_path(activity.trackable)
+              = "#{time_ago_in_words(activity.created_at)} liked"
+              = link_to 'Post', posts_path(activity.trackable), style: 'text-decoration: none;'
               %br
             - elsif activity.trackable_type == 'Post'
               = link_to activity.owner.full_name, accounts_profile_path(activity.owner), {style: 'color: black; text-decoration: none;'} if activity.owner
-              created post
-              = link_to 'Post', posts_path(activity.trackable)
+              = "#{time_ago_in_words(activity.created_at)} ago created"
+              = link_to 'Post', posts_path(activity.trackable), style: 'text-decoration: none; margin-left: 7px'
               %br
             - elsif activity.trackable_type == 'Comment'
               = link_to activity.owner.full_name, accounts_profile_path(activity.owner), {style: 'color: black; text-decoration: none;'} if activity.owner
-              added comment to
-              = link_to 'Post', post_path(activity.trackable)
-              %br
+              = "#{time_ago_in_words(activity.created_at)} added comment to"
+              = link_to 'Post', posts_path(activity.trackable), style: 'text-decoration: none; margin-left: 7px'
 .pagination.justify-content-center
   = will_paginate @activities
