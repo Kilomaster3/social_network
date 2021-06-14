@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 # Generate accounts
-10.times do
+15.times do
   account = Account.create(
-    first_name: Faker::Name.first_name,
-    last_name: Faker::Name.last_name,
+    first_name: Faker::Name.unique.first_name,
+    last_name: Faker::Name.unique.last_name,
     email: Faker::Internet.email,
     password: '123456',
     password_confirmation: '123456',
@@ -16,8 +16,8 @@
   # Generate posts
   5.times do
     Post.create(
-      title: Faker::DcComics.hero,
-      content: Faker::DcComics.title,
+      title: Faker::Lorem.word,
+      content: Faker::Lorem.sentence(word_count: 5, supplemental: false, random_words_to_add: 5),
       account_id: account.id
     )
   end
@@ -25,15 +25,15 @@
   # Generate friends posts
   5.times do
     Post.create(
-      title: Faker::DcComics.hero,
-      content: Faker::DcComics.title,
+      title: Faker::Lorem.word,
+      content: Faker::Lorem.sentence(word_count: 5, supplemental: false, random_words_to_add: 5),
       account_id: account.id,
       private: true
     )
   end
 end
 
-# Generate admin account
+# Generate admin accounts
 Account.create(
   first_name: 'Admin',
   last_name: 'Admin',
@@ -50,7 +50,7 @@ accounts = Account.all
 
 # Generate Followers
 accounts.each_with_index do |account, index|
-  3.times do |time|
+  5.times do |time|
     followed = accounts[index + time + 1]
 
     next unless followed

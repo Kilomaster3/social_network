@@ -1,6 +1,3 @@
-%p
-  %strong Name:
-  = @chatroom.name
 .row.justify-content-center
   .col-6
     #messages.col
@@ -14,7 +11,7 @@
                     = message.body
                   .text-right
                     %small
-                      = message.created_at
+                      = message.account.full_name
 .row.justify-content-center
   .col-6
     = simple_form_for(Message.new, remote: true) do |form|

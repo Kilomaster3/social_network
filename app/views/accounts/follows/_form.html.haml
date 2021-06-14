@@ -1,0 +1,15 @@
+.container
+  .main-body
+    .row
+      - @accounts.each do |account|
+        .col-md-4.mb-3
+          .card
+            .card-body
+              .d-flex.flex-column.align-items-center.text-center
+                %img.rounded-circle{alt: "Admin", src: "https://bootdey.com/img/Content/avatar/avatar7.png", width: "150"}/
+                .mt-3
+                  %h4
+                    = link_to account.full_name, accounts_profile_path(account), style: 'color: black; text-decoration: none;'
+                    = render partial: 'accounts/online', locals: {account: account}
+                  = link_to 'Write Message', direct_message_path(account.id), class: 'btn btn-outline-primary'
+= will_paginate @accounts

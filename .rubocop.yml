@@ -15,15 +15,9 @@ AllCops:
 Layout/IndentationConsistency:
   EnforcedStyle: indented_internal_methods
 
-Lint/Debugger:
-  AutoCorrect: False
-
 Style/ClassAndModuleChildren:
   Exclude:
     - test/test_helper.rb
-    - app/controllers/account/profiles_controller.rb
-    - app/controllers/account/omniauth_callbacks_controller.rb
-    - app/policies/admin/account_policy.rb
 
 Style/Documentation:
   Enabled: false
@@ -39,10 +33,11 @@ Metrics/AbcSize:
   Max: 20
   Exclude:
     - db/migrate/*
-    - app/controllers/account/omniauth_callbacks_controller.rb
-    - app/controllers/account_interests_controller.rb
-    - app/controllers/public_controller.rb
-    - app/controllers/concerns/account_interests.rb
+    - app/services/maps/*
+
+Lint/MissingSuper:
+  Exclude:
+    - app/services/**/*
 
 Metrics/BlockLength:
   IgnoredMethods: ['describe', 'context']
@@ -51,7 +46,7 @@ Metrics/BlockLength:
     - config/routes.rb
     - config/**/*
     - test/**/*
-    - db/seeds/**/*
+    - db/seeds.rb
 
 Layout/LineLength:
   Max: 140
@@ -86,28 +81,16 @@ Rails:
 Rails/BulkChangeTable:
   Enabled: false
 
-Rails/HasAndBelongsToMany:
-  Enabled: false
-
 Rails/OutputSafety:
   Exclude:
     - test/**/*
     - spec/**/*
 
-Rails/InverseOf:
-  Enabled: false
-
-Rails/HasManyOrHasOneDependent:
-  Enabled: false
-
-Rails/SkipsModelValidations:
-  Enabled: false
-
-Rails/FilePath:
-  Enabled: false
-
-Rails/FindBy:
-  Enabled: false
-
 Rails/NotNullColumn:
   Enabled: false
+
+RSpec/ExampleLength:
+  Enabled: false
+
+RSpec/MultipleExpectations:
+  Max: 2

@@ -64,7 +64,8 @@ class PostsController < AccountBaseAuthController
 
   def friends_post
     @posts = Post.paginate(page: params[:page],
-                           per_page: 4).where(account_id: current_account.following.pluck(:id)).includes(:account, :comments, :taggings, :tags).private_post
+                           per_page: 4).where(account_id: current_account.following.pluck(:id))
+                 .includes(:account, :comments, :taggings, :tags).private_post
     render action: :index
   end
 

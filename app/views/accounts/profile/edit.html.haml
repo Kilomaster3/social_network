@@ -1,0 +1,32 @@
+.container
+  .row
+    .col-lg-6.mt-4
+      %h2
+        Edit Account
+      = form_for(current_account, url: accounts_profile_path, html: { method: :put }) do |f|
+        = render "devise/shared/error_messages", resource: resource
+        .form-group.mb-3
+          .row
+            .col-sm-4
+              = f.file_field :avatar, class: "inputfile", id: "file"
+              %label{for: "file"} Update Photo
+        .form-group.mb-3
+          = f.label :first_name
+          = f.text_field :first_name, class: 'form-control'
+        .form-group.mb-3
+          = f.label :last_name
+          = f.text_field :last_name, class: 'form-control'
+        .form-group.mb-3
+          = f.label :email
+          = f.email_field :email, autocomplete: "email", class: 'form-control'
+        .form-group.mb-3
+          = f.label :connection
+          = f.number_field :connection, step: :any, max: 100, class: 'form-control'
+        .form-group.mb-3
+          = f.label :max_connection
+          = f.number_field :max_connection, step: :any, max: 100, class: 'form-control'
+        - if devise_mapping.confirmable? && resource.pending_reconfirmation?
+          %div
+            Currently waiting confirmation for: #{resource.unconfirmed_email}
+        .form-group.mt-4
+          = f.submit "Update", class: 'btn btn-primary btn-lg'

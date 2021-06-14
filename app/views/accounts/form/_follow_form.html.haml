@@ -1,0 +1,6 @@
+- unless current_account?(@account)
+  #follow_form
+    - if current_account.following?(@account)
+      = render 'accounts/form/unfollow'
+    - else
+      = render 'accounts/form/follow'

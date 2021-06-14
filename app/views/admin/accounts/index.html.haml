@@ -6,13 +6,16 @@
           .card
             .card-body
               .d-flex.flex-column.align-items-center.text-center
-                %img.rounded-circle{alt: "Admin", src: "https://bootdey.com/img/Content/avatar/avatar7.png", width: "150"}/
+                - if account.avatar?
+                  = link_to(image_tag(account.avatar.thumb.url, alt: 'Image'), account.avatar.url, target: '_blank')
+                - else
+                  %img.rounded-circle{alt: "Admin", src: "https://bootdey.com/img/Content/avatar/avatar7.png", width: "150"}/
                 .mt-3
                   %h4
-                    = account.full_name
-                  = link_to "Edit Account", edit_account_profile_path(current_account), class: 'btn btn-outline-primary'
+                    = link_to account.full_name, accounts_profile_path(account), style: 'text-decoration: none; color: black;'
+                  = link_to "Edit Account", edit_accounts_profile_path(current_account), class: 'btn btn-outline-primary'
                   = link_to 'Impersonate', masquerade_path(account), class: 'btn btn-outline-primary'
-                  = render partial: 'account/online', locals: {account: account}
+                  = render partial: 'accounts/online', locals: {account: account}
         .col-md-8
           .card.mb-3
             .card-body
@@ -34,14 +37,13 @@
                 .col-sm-9.text-secondary
                   #{raw account.interests.map(&:name).map { |t| t }.join(', ')}
           .stats
-            %a{href: "#{following_account_profile_path(account)}"}
+            %a{href: "#{following_accounts_profile_path(account)}", style: 'text-decoration: none;'}
               %strong#following.stat
-                = account.following.count
+                = account.friends.count
               Friends
-            %a{href: "#{followers_account_profile_path(account)}"}
+            %a{href: "#{followers_accounts_profile_path(account)}", style: 'text-decoration: none;'}
               %strong#followers.stat
-                = account.followers.count
+                = account.followers_without_friend.count
               Followers
-    = link_to "Back to Main Page", root_path, class: 'float-right btn btn-secondary'
 .pagination.justify-content-center
   = will_paginate @accounts

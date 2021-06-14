@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_06_02_080245) do
+
+ActiveRecord::Schema.define(version: 2021_06_02_160100) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,6 +37,8 @@ ActiveRecord::Schema.define(version: 2021_06_02_080245) do
     t.float "latitude"
     t.float "longitude"
     t.integer "role", default: 0
+    t.integer "connection"
+    t.integer "max_connection"
     t.index ["confirmation_token"], name: "index_accounts_on_confirmation_token", unique: true
     t.index ["email"], name: "index_accounts_on_email", unique: true
     t.index ["reset_password_token"], name: "index_accounts_on_reset_password_token", unique: true
@@ -78,12 +81,16 @@ ActiveRecord::Schema.define(version: 2021_06_02_080245) do
   create_table "chatroom_accounts", force: :cascade do |t|
     t.bigint "chatroom_id", null: false
     t.bigint "account_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["account_id"], name: "index_chatroom_accounts_on_account_id"
     t.index ["chatroom_id"], name: "index_chatroom_accounts_on_chatroom_id"
   end
 
   create_table "chatrooms", force: :cascade do |t|
     t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.boolean "direct_message", default: false
   end
 
